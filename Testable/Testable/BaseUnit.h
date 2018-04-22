@@ -8,7 +8,7 @@ protected:
 	int getDamage();
 
 private:
-	int life;
-	int damage;
+	int _life;
+	int _damage;
 };
 #endif

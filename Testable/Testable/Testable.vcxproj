@@ -123,13 +123,20 @@
   <ItemGroup>
     <ClCompile Include="BaseUnit.cpp" />
     <ClCompile Include="GameContext.cpp" />
+    <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="InfantryUnit.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseUnit.h" />
     <ClInclude Include="GameContext.h" />
+    <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="InfantryUnit.h" />
+    <ClInclude Include="Sprite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="unit.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

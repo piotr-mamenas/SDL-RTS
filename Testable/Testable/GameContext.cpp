@@ -4,10 +4,22 @@
 #include "BaseUnit.h"
 #include "InfantryUnit.h"
 #include "GameContext.h"
+#include "GraphicsEngine.h"
 
-bool GameContext::Init() 
+#define GAME_NAME "C++ RTS"
+
+GameContext::GameContext(int screenWidth, int screenHeight, bool isMinimized) 
+{
+	_screenWidth = screenWidth;
+	_screenHeight = screenHeight;
+	
+	init(isMinimized);
+}
+
+bool GameContext::init(bool isMinimized) 
 {
 	bool success = true;
+	GraphicsEngine* graphicsEngine = NULL;
 
 	gameWindow = NULL;
 	mainSurface = NULL;
@@ -18,7 +30,16 @@ bool GameContext::Init()
 	}
 	else
 	{
-		gameWindow = SDL_CreateWindow("Window", SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN, SDL_WINDOW_OPENGL);
+		if (isMinimized) 
+		{
+			gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN, SDL_WINDOW_OPENGL);
+		}
+		else
+		{
+			gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN, SDL_WINDOW_OPENGL);
+		}
+
+		
 		if (gameWindow == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -27,12 +48,13 @@ bool GameContext::Init()
 		else
 		{
 			mainSurface = SDL_GetWindowSurface(gameWindow);
+			graphicsEngine = new GraphicsEngine(gameWindow, mainSurface);
 		}
 	}
 	return success;
 }
 
-void GameContext::Close()
+void GameContext::close()
 {
 	SDL_FreeSurface(mainSurface);
 	mainSurface = NULL;
@@ -43,9 +65,7 @@ void GameContext::Close()
 	SDL_Quit();
 }
 
-bool GameContext::SetBrush()
+void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 {
-	bool success = true;
-
-	return true;
+	graphicsEngine->drawScene();
 }

@@ -6,10 +6,10 @@ BaseUnit::BaseUnit()
 
 int BaseUnit::getLife() 
 {
-	return life;
+	return _life;
 }
 
 int BaseUnit::getDamage() 
 {
-	return damage;
+	return _damage;
 }
