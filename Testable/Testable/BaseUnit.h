@@ -10,6 +10,9 @@ protected:
 
 	Sprite* _unitSprite;
 
+	unsigned int _mapPositionX;
+	unsigned int _mapPositionY;
+
 	int _currentLife;
 	int _damage;
 	int _maxLife;

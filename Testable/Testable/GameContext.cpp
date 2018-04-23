@@ -1,10 +1,12 @@
 #include <iostream>
+#include <list>
 #include <SDL.h>
 
 #include "BaseUnit.h"
 #include "InfantryUnit.h"
 #include "GameContext.h"
 #include "GraphicsEngine.h"
+#include "Player.h"
 
 #define GAME_NAME "C++ RTS"
 
@@ -67,10 +69,12 @@ void GameContext::close()
 
 void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 {
-	for (BaseUnit unit : _units)
+	for (Player player : _players)
 	{
-		graphicsEngine -> addToScene(unit.getSprite());
+		for (BaseUnit unit : player.getUnits())
+		{
+			graphicsEngine -> addToScene(unit.getSprite());
+		}
 	}
-
 	graphicsEngine -> drawScene();
 }

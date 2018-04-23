@@ -6,6 +6,7 @@
 #include <list>
 
 #include "GraphicsEngine.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -14,10 +15,10 @@ class GameContext
 private:
 	SDL_Window* gameWindow = NULL;
 	SDL_Surface* mainSurface = NULL;
+	list<Player> _players;
 	int _screenWidth;
 	int _screenHeight;
 	int _windowStatus;
-	list<BaseUnit> _units;
 
 	void _updateGraphics(GraphicsEngine* graphicsEngine);
 public:

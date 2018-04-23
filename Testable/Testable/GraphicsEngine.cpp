@@ -35,4 +35,3 @@ void GraphicsEngine::_drawSprite(SDL_Surface* screen, Sprite* sprite)
 
 	SDL_BlitSurface(blittedImage, NULL, screen, NULL);
 }
-
