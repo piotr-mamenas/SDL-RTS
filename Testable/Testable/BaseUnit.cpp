@@ -4,12 +4,7 @@ BaseUnit::BaseUnit()
 {
 }
 
-int BaseUnit::getLife() 
+Sprite* BaseUnit::getSprite() 
 {
-	return _life;
-}
-
-int BaseUnit::getDamage() 
-{
-	return _damage;
+	return _unitSprite;
 }

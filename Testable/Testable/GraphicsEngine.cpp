@@ -16,9 +16,14 @@ void GraphicsEngine::drawScene()
 	_drawUnits();
 }
 
+void GraphicsEngine::addToScene(Sprite* sprite)
+{
+	_unitImages.push_back(sprite);
+}
+
 void GraphicsEngine::_drawUnits()
 {
-	for (Sprite* unit : _unitImages) 
+	for (Sprite* unit : _unitImages)
 	{
 		_drawSprite(_gameScreen, unit);
 	}
@@ -26,7 +31,8 @@ void GraphicsEngine::_drawUnits()
 
 void GraphicsEngine::_drawSprite(SDL_Surface* screen, Sprite* sprite)
 {
-	SDL_Surface* blittedImage = sprite->_getImage();
+	SDL_Surface* blittedImage = sprite -> _getImage();
 
 	SDL_BlitSurface(blittedImage, NULL, screen, NULL);
 }
+

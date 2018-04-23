@@ -67,5 +67,10 @@ void GameContext::close()
 
 void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 {
-	graphicsEngine->drawScene();
+	for (BaseUnit unit : _units)
+	{
+		graphicsEngine -> addToScene(unit.getSprite());
+	}
+
+	graphicsEngine -> drawScene();
 }

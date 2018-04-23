@@ -19,6 +19,7 @@ private:
 
 public:
 	GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen);
+	void addToScene(Sprite* sprite);
 	void drawScene();
 };
 
