@@ -18,5 +18,7 @@ protected:
 	int _maxLife;
 public:
 	Sprite* getSprite();
+	unsigned int getPositionX();
+	unsigned int getPositionY();
 };
 #endif

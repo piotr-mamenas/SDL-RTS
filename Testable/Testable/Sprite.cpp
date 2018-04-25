@@ -7,7 +7,7 @@ Sprite::Sprite(SDL_Surface* sprite)
 	_spriteImage = sprite;
 }
 
-SDL_Surface* Sprite::_getImage()
+SDL_Surface* Sprite::getImage()
 {
 	return _spriteImage;
 }

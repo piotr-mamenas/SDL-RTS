@@ -11,7 +11,7 @@ private:
 	SDL_Surface* _spriteImage;
 public:
 	Sprite(SDL_Surface* sprite);
-	SDL_Surface* _getImage();
+	SDL_Surface* getImage();
 };
 
 #endif

@@ -74,7 +74,9 @@ void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 		for (BaseUnit unit : player.getUnits())
 		{
 			graphicsEngine -> addToScene(unit.getSprite());
+			// get coordinates
 		}
+		graphicsEngine -> drawScene(player.getUnits());
 	}
-	graphicsEngine -> drawScene();
+	
 }
