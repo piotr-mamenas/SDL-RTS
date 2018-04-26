@@ -7,9 +7,7 @@ class BaseUnit
 {
 protected:
 	BaseUnit();
-
-	Sprite* _unitSprite;
-
+	unsigned int _id;
 	unsigned int _mapPositionX;
 	unsigned int _mapPositionY;
 
@@ -17,7 +15,6 @@ protected:
 	int _damage;
 	int _maxLife;
 public:
-	Sprite* getSprite();
 	unsigned int getPositionX();
 	unsigned int getPositionY();
 };

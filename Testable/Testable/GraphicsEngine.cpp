@@ -1,19 +1,22 @@
 #include "GraphicsEngine.h"
 #include "Sprite.h"
 #include "BaseUnit.h"
+#include "GameAssetManager.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
 #include <list>
+#include <map>
 #include <stdexcept>
 
 using namespace std;
 
-GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen)
+GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, GameAssetManager* assetManager)
 {
 	_gameWindow = gameWindow;
 	_gameScreen = gameScreen;
+	_gameAssetManager = assetManager;
 
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags)) 
@@ -38,9 +41,9 @@ void GraphicsEngine::_drawUnits(list<BaseUnit> units)
 	{
 		unsigned int positionX = unit.getPositionX();
 		unsigned int positionY = unit.getPositionY();
-		Sprite* unitSprite = unit.getSprite();
+		//Sprite* unitSprite = unit.getSprite();
 
-		_drawSprite(_gameScreen, unitSprite, positionX, positionY);
+		//_drawSprite(_gameScreen, unitSprite, positionX, positionY);
 	}
 }
 
@@ -49,28 +52,4 @@ void GraphicsEngine::_drawSprite(SDL_Surface* screen, Sprite* sprite, unsigned i
 	SDL_Surface* blittedImage = sprite -> getImage();
 
 	SDL_BlitSurface(blittedImage, NULL, screen, NULL);
-}
-
-SDL_Surface* GraphicsEngine::_loadSurface(string path)
-{
-	SDL_Surface* optimizedSurface = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-	}
-	else
-	{
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface(loadedSurface, _gameScreen -> format, NULL);
-		if (optimizedSurface == NULL)
-		{
-			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	return optimizedSurface;
 }

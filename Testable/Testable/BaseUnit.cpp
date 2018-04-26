@@ -4,11 +4,6 @@ BaseUnit::BaseUnit()
 {
 }
 
-Sprite* BaseUnit::getSprite()
-{
-	return _unitSprite;
-}
-
 unsigned int BaseUnit::getPositionX()
 {
 	return _mapPositionX;

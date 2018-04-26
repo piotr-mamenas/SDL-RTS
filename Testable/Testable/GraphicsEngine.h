@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include "BaseUnit.h"
+#include "GameAssetManager.h"
 
 #include <SDL.h>
 #include <list>
@@ -17,10 +18,10 @@ private:
 	list<Sprite*> _unitImages;
 	SDL_Window* _gameWindow;
 	SDL_Surface* _gameScreen;
-	SDL_Surface* _loadSurface(std::string path);
+	GameAssetManager* _gameAssetManager;
 
 public:
-	GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen);
+	GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, GameAssetManager* assetManager);
 	void addToScene(Sprite* sprite);
 	void drawScene(list<BaseUnit> units);
 };

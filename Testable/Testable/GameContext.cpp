@@ -6,6 +6,7 @@
 #include "InfantryUnit.h"
 #include "GameContext.h"
 #include "GraphicsEngine.h"
+#include "GameAssetManager.h"
 #include "Player.h"
 
 #define GAME_NAME "C++ RTS"
@@ -22,6 +23,7 @@ bool GameContext::init(bool isMinimized)
 {
 	bool success = true;
 	GraphicsEngine* graphicsEngine = NULL;
+	GameAssetManager* gameAssetManager = NULL;
 
 	gameWindow = NULL;
 	mainSurface = NULL;
@@ -50,7 +52,9 @@ bool GameContext::init(bool isMinimized)
 		else
 		{
 			mainSurface = SDL_GetWindowSurface(gameWindow);
-			graphicsEngine = new GraphicsEngine(gameWindow, mainSurface);
+			gameAssetManager = new GameAssetManager(mainSurface);
+			graphicsEngine = new GraphicsEngine(gameWindow, mainSurface, gameAssetManager);
+
 		}
 	}
 	return success;
@@ -73,7 +77,7 @@ void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 	{
 		for (BaseUnit unit : player.getUnits())
 		{
-			graphicsEngine -> addToScene(unit.getSprite());
+			//graphicsEngine -> addToScene(unit.getSprite());
 			// get coordinates
 		}
 		graphicsEngine -> drawScene(player.getUnits());
