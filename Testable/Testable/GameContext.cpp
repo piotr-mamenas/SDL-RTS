@@ -42,7 +42,6 @@ bool GameContext::init(bool isMinimized)
 		{
 			gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN, SDL_WINDOW_OPENGL);
 		}
-
 		
 		if (gameWindow == NULL)
 		{
@@ -54,6 +53,18 @@ bool GameContext::init(bool isMinimized)
 			mainSurface = SDL_GetWindowSurface(gameWindow);
 			gameAssetManager = new GameAssetManager(mainSurface);
 			graphicsEngine = new GraphicsEngine(gameWindow, mainSurface, gameAssetManager);
+
+			BaseUnit* infantry = new InfantryUnit(50, 60);
+			BaseUnit* infantry2 = new InfantryUnit(12, 92);
+			BaseUnit* infantry3 = new InfantryUnit(30, 155);
+
+			list<BaseUnit*> units;
+			units.push_back(infantry);
+			units.push_back(infantry2);
+			units.push_back(infantry3);
+
+			graphicsEngine->drawScene(units);
+
 
 		}
 	}
@@ -80,7 +91,6 @@ void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
 			//graphicsEngine -> addToScene(unit.getSprite());
 			// get coordinates
 		}
-		graphicsEngine -> drawScene(player.getUnits());
 	}
 	
 }

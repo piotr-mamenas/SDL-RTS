@@ -25,7 +25,7 @@ GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, 
 	}
 }
 
-void GraphicsEngine::drawScene(list<BaseUnit> units)
+void GraphicsEngine::drawScene(list<BaseUnit*> units)
 {
 	_drawUnits(units);
 }
@@ -35,21 +35,24 @@ void GraphicsEngine::addToScene(Sprite* sprite)
 	_unitImages.push_back(sprite);
 }
 
-void GraphicsEngine::_drawUnits(list<BaseUnit> units)
+void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 {
-	for (BaseUnit unit : units)
+	for (BaseUnit* unit : units)
 	{
-		unsigned int positionX = unit.getPositionX();
-		unsigned int positionY = unit.getPositionY();
-		//Sprite* unitSprite = unit.getSprite();
+		unsigned int unitId = unit -> getId();
+		unsigned int unitPositionX = unit -> getPositionX();
+		unsigned int unitPositionY = unit -> getPositionY();
 
-		//_drawSprite(_gameScreen, unitSprite, positionX, positionY);
+		SDL_Surface* unitImage = _gameAssetManager -> getUnitImage(unitId);
+		_drawImage(_gameScreen, unitImage, unitPositionX, unitPositionY);
 	}
 }
 
-void GraphicsEngine::_drawSprite(SDL_Surface* screen, Sprite* sprite, unsigned int positionX, unsigned int positionY)
+void GraphicsEngine::_drawImage(SDL_Surface* screen, SDL_Surface* image, unsigned int positionX, unsigned int positionY)
 {
-	SDL_Surface* blittedImage = sprite -> getImage();
+	SDL_Rect unitPosition;
+	unitPosition.x = positionX;
+	unitPosition.y = positionY;
 
-	SDL_BlitSurface(blittedImage, NULL, screen, NULL);
+	SDL_BlitSurface(image, NULL, screen, &unitPosition);
 }

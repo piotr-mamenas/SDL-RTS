@@ -23,7 +23,7 @@ void GameAssetManager::_loadGameResources()
 	string path;
 
 	map<unsigned int, SDL_Surface*> units;
-	ifstream infile("Logic/unit_images.dat");
+	ifstream infile("unit_images.dat");
 
 	while (infile >> id >> path) 
 	{

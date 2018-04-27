@@ -12,7 +12,7 @@ int main(int argc, char * argv[])
 	bool isMinimized = true;
 	GameContext* context = new GameContext(640,480,isMinimized);
 	
-	bool isGameInitialized = context -> init(true);
+	bool isGameInitialized = context -> init(false);
 	if (!isGameInitialized) 
 	{
 		printf("Failed to initialize Game Engine!\n");

@@ -6,7 +6,7 @@
 class InfantryUnit : public BaseUnit
 {
 public:
-	InfantryUnit();
+	InfantryUnit(unsigned int initialPositionX, unsigned int initialPositionY);
 };
 
 #endif
