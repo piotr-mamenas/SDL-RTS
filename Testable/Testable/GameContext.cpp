@@ -21,9 +21,6 @@ GameContext::GameContext(int screenWidth, int screenHeight, bool isWindowMode)
 bool GameContext::init() 
 {
 	bool success = true;
-	GraphicsEngine* graphicsEngine = NULL;
-	GameAssetManager* gameAssetManager = NULL;
-
 	_gameWindow = NULL;
 	_mainSurface = NULL;
 
@@ -50,8 +47,8 @@ bool GameContext::init()
 		else
 		{
 			_mainSurface = SDL_GetWindowSurface(_gameWindow);
-			gameAssetManager = new GameAssetManager(_mainSurface);
-			graphicsEngine = new GraphicsEngine(_gameWindow, _mainSurface, gameAssetManager);
+			_gameAssetManager = new GameAssetManager(_mainSurface);
+			_graphicsEngine = new GraphicsEngine(_gameWindow, _mainSurface, _gameAssetManager);
 
 			BaseUnit* infantry = new InfantryUnit(50, 60);
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
@@ -62,7 +59,7 @@ bool GameContext::init()
 			units.push_back(infantry2);
 			units.push_back(infantry3);
 
-			graphicsEngine -> drawScene(units);
+			_graphicsEngine -> drawScene(units);
 
 			SDL_Event e;
 			bool quit = false;
@@ -86,6 +83,8 @@ bool GameContext::init()
 
 void GameContext::close()
 {
+	delete _gameAssetManager;
+
 	SDL_FreeSurface(_mainSurface);
 	_mainSurface = NULL;
 

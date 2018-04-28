@@ -17,6 +17,11 @@ GameAssetManager::GameAssetManager(SDL_Surface* gameScreen)
 	_loadGameResources();
 }
 
+GameAssetManager::~GameAssetManager() 
+{
+	_releaseGameResources();
+}
+
 void GameAssetManager::_loadGameResources()
 {
 	unsigned id;
@@ -55,6 +60,15 @@ SDL_Surface* GameAssetManager::_loadSurface(string path)
 	}
 
 	return optimizedSurface;
+}
+
+void GameAssetManager::_releaseGameResources()
+{
+	std::map<unsigned int, SDL_Surface*>::iterator unitIterator;
+	for(unitIterator = _units.begin(); unitIterator != _units.end(); unitIterator++)
+	{
+		SDL_FreeSurface(unitIterator -> second);
+	}
 }
 
 SDL_Surface* GameAssetManager::getUnitImage(int unitId)

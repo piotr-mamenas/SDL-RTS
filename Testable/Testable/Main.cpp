@@ -17,7 +17,7 @@ int main(int argc, char * argv[])
 	{
 		printf("Failed to initialize Game Engine!\n");
 	}
-	context->close();
+	context -> close();
 
 	return 0;
 }

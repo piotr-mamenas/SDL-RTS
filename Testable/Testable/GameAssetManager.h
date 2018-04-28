@@ -15,11 +15,13 @@ class GameAssetManager
 private:
 	SDL_Surface* _loadSurface(std::string path);
 	void _loadGameResources();
+	void _releaseGameResources();
 	SDL_Surface* _gameScreen;
 	map<unsigned int, SDL_Surface*> _units;
 
 public:
 	GameAssetManager(SDL_Surface* gameScreen);
+	~GameAssetManager();
 	SDL_Surface* getUnitImage(int unitId);
 };
 
