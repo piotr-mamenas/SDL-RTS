@@ -46,6 +46,7 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 		SDL_Surface* unitImage = _gameAssetManager -> getUnitImage(unitId);
 		_drawImage(_gameScreen, unitImage, unitPositionX, unitPositionY);
 	}
+	SDL_UpdateWindowSurface(_gameWindow);
 }
 
 void GraphicsEngine::_drawImage(SDL_Surface* screen, SDL_Surface* image, unsigned int positionX, unsigned int positionY)

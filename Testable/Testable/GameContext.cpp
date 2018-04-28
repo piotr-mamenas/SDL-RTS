@@ -11,22 +11,21 @@
 
 #define GAME_NAME "C++ RTS"
 
-GameContext::GameContext(int screenWidth, int screenHeight, bool isMinimized) 
+GameContext::GameContext(int screenWidth, int screenHeight, bool isWindowMode) 
 {
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
-	
-	init(isMinimized);
+	_isWindowMode = isWindowMode;
 }
 
-bool GameContext::init(bool isMinimized) 
+bool GameContext::init() 
 {
 	bool success = true;
 	GraphicsEngine* graphicsEngine = NULL;
 	GameAssetManager* gameAssetManager = NULL;
 
-	gameWindow = NULL;
-	mainSurface = NULL;
+	_gameWindow = NULL;
+	_mainSurface = NULL;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -34,25 +33,25 @@ bool GameContext::init(bool isMinimized)
 	}
 	else
 	{
-		if (isMinimized) 
+		if (_isWindowMode) 
 		{
-			gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN, SDL_WINDOW_OPENGL);
+			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
 		}
 		else
 		{
-			gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_FULLSCREEN, SDL_WINDOW_OPENGL);
+			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_FULLSCREEN);
 		}
 		
-		if (gameWindow == NULL)
+		if (_gameWindow == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			success = false;
 		}
 		else
 		{
-			mainSurface = SDL_GetWindowSurface(gameWindow);
-			gameAssetManager = new GameAssetManager(mainSurface);
-			graphicsEngine = new GraphicsEngine(gameWindow, mainSurface, gameAssetManager);
+			_mainSurface = SDL_GetWindowSurface(_gameWindow);
+			gameAssetManager = new GameAssetManager(_mainSurface);
+			graphicsEngine = new GraphicsEngine(_gameWindow, _mainSurface, gameAssetManager);
 
 			BaseUnit* infantry = new InfantryUnit(50, 60);
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
@@ -63,9 +62,23 @@ bool GameContext::init(bool isMinimized)
 			units.push_back(infantry2);
 			units.push_back(infantry3);
 
-			graphicsEngine->drawScene(units);
+			graphicsEngine -> drawScene(units);
 
-
+			SDL_Event e;
+			bool quit = false;
+			while (!quit) {
+				while (SDL_PollEvent(&e)) {
+					if (e.type == SDL_QUIT) {
+						quit = true;
+					}
+					if (e.type == SDL_KEYDOWN) {
+						quit = true;
+					}
+					if (e.type == SDL_MOUSEBUTTONDOWN) {
+						quit = true;
+					}
+				}
+			}
 		}
 	}
 	return success;
@@ -73,24 +86,11 @@ bool GameContext::init(bool isMinimized)
 
 void GameContext::close()
 {
-	SDL_FreeSurface(mainSurface);
-	mainSurface = NULL;
+	SDL_FreeSurface(_mainSurface);
+	_mainSurface = NULL;
 
-	SDL_DestroyWindow(gameWindow);
-	gameWindow = NULL;
+	SDL_DestroyWindow(_gameWindow);
+	_gameWindow = NULL;
 
 	SDL_Quit();
-}
-
-void GameContext::_updateGraphics(GraphicsEngine* graphicsEngine)
-{
-	for (Player player : _players)
-	{
-		for (BaseUnit unit : player.getUnits())
-		{
-			//graphicsEngine -> addToScene(unit.getSprite());
-			// get coordinates
-		}
-	}
-	
 }

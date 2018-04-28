@@ -13,17 +13,17 @@ using namespace std;
 class GameContext
 {
 private:
-	SDL_Window* gameWindow = NULL;
-	SDL_Surface* mainSurface = NULL;
+	SDL_Window* _gameWindow = NULL;
+	SDL_Surface* _mainSurface = NULL;
 	list<Player> _players;
 	int _screenWidth;
 	int _screenHeight;
 	int _windowStatus;
+	bool _isWindowMode;
 
-	void _updateGraphics(GraphicsEngine* graphicsEngine);
 public:
 	GameContext(int screenWidth, int screenHeight, bool isMinimized);
-	bool init(bool isMinized);
+	bool init();
 	void close();
 };
 

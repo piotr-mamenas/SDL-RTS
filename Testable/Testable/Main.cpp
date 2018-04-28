@@ -9,10 +9,10 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {
-	bool isMinimized = true;
-	GameContext* context = new GameContext(640,480,isMinimized);
+	bool isWindowMode = true;
+	GameContext* context = new GameContext(640,480,isWindowMode);
 	
-	bool isGameInitialized = context -> init(false);
+	bool isGameInitialized = context -> init();
 	if (!isGameInitialized) 
 	{
 		printf("Failed to initialize Game Engine!\n");
