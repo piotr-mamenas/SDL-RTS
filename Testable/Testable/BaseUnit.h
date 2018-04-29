@@ -14,6 +14,8 @@ protected:
 	int _currentLife;
 	int _damage;
 	int _maxLife;
+
+	bool _isAlive;
 protected:
 	int _unitWidth;
 	int _unitHeight;
@@ -21,6 +23,7 @@ public:
 	unsigned int getId();
 	unsigned int getPositionX();
 	unsigned int getPositionY();
+	bool isAlive();
 	void handleEvent(SDL_Event* e);
 };
 #endif

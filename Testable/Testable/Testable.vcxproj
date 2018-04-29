@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="BaseUnit.cpp" />
     <ClCompile Include="GameContext.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="InfantryUnit.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="BaseUnit.h" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="InfantryUnit.h" />
     <ClInclude Include="Player.h" />

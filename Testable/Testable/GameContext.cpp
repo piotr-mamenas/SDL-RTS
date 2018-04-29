@@ -8,8 +8,12 @@
 #include "GraphicsEngine.h"
 #include "GameAssetManager.h"
 #include "Player.h"
+#include "GameTimer.h"
 
 #define GAME_NAME "C++ RTS"
+
+const int SCREEN_FPS = 60;
+const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 GameContext::GameContext(int screenWidth, int screenHeight, bool isWindowMode) 
 {
@@ -59,12 +63,18 @@ bool GameContext::init()
 			units.push_back(infantry2);
 			units.push_back(infantry3);
 
-			_graphicsEngine -> drawScene(units);
-
 			SDL_Event e;
 			bool quit = false;
+			
+			GameTimer fpsTimer;
+			GameTimer capTimer;
+			int countedFrames = 0;
+			fpsTimer.start();
+
 			while (!quit) 
 			{
+				capTimer.start();
+
 				while (SDL_PollEvent(&e)) 
 				{
 					if (e.type == SDL_QUIT) 
@@ -76,6 +86,13 @@ bool GameContext::init()
 					{
 						unit->handleEvent(&e);
 					}
+				}
+				_graphicsEngine->drawScene(units);
+
+				int frameTicks = capTimer.getTicks();
+				if (frameTicks < SCREEN_TICKS_PER_FRAME)
+				{
+					SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 				}
 			}
 		}

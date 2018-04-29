@@ -6,6 +6,7 @@ BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY)
 {
 	_mapPositionX = initialPositionX;
 	_mapPositionY = initialPositionY;
+	_isAlive = true;
 }
 
 unsigned int BaseUnit::getPositionX()
@@ -48,6 +49,12 @@ void BaseUnit::handleEvent(SDL_Event* e)
 				break;
 			case SDL_MOUSEBUTTONDOWN:
 				printf("Mouse Down Unit: %d\n", _id);
+				_currentLife = _currentLife - 5;
+				if (_currentLife <= 0)
+				{
+					_isAlive = false;
+				}
+
 				break;
 			case SDL_MOUSEBUTTONUP:
 				printf("Mouse Up Unit: %d\n", _id);
@@ -55,4 +62,9 @@ void BaseUnit::handleEvent(SDL_Event* e)
 			}
 		}
 	}
+}
+
+bool BaseUnit::isAlive()
+{
+	return _isAlive;
 }

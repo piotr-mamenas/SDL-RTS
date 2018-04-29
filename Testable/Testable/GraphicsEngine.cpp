@@ -39,12 +39,15 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 {
 	for (BaseUnit* unit : units)
 	{
-		unsigned int unitId = unit -> getId();
-		unsigned int unitPositionX = unit -> getPositionX();
-		unsigned int unitPositionY = unit -> getPositionY();
+		if (unit -> isAlive())
+		{
+			unsigned int unitId = unit -> getId();
+			unsigned int unitPositionX = unit -> getPositionX();
+			unsigned int unitPositionY = unit -> getPositionY();
 
-		SDL_Surface* unitImage = _gameAssetManager -> getUnitImage(unitId);
-		_drawImage(_gameScreen, unitImage, unitPositionX, unitPositionY);
+			SDL_Surface* unitImage = _gameAssetManager -> getUnitImage(unitId);
+			_drawImage(_gameScreen, unitImage, unitPositionX, unitPositionY);
+		}
 	}
 	SDL_UpdateWindowSurface(_gameWindow);
 }
