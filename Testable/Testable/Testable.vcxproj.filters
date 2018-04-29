@@ -28,6 +28,12 @@
     <Filter Include="Resource Files\Logic">
       <UniqueIdentifier>{86b5e6d2-d9d6-452f-acb2-47cd83b904ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Controls">
+      <UniqueIdentifier>{4f3a2df1-0d8f-4466-be69-2cd508d719a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controls">
+      <UniqueIdentifier>{00cfd9eb-9675-4012-8aa2-cc3f323d85a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,6 +60,9 @@
     <ClCompile Include="GameAssetManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="UserControl.cpp">
+      <Filter>Source Files\Controls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameContext.h">
@@ -76,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="GameAssetManager.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="UserControl.h">
+      <Filter>Header Files\Controls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
