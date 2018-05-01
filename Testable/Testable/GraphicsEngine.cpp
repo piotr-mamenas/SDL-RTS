@@ -27,6 +27,7 @@ GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, 
 
 void GraphicsEngine::drawScene(list<BaseUnit*> units)
 {
+	SDL_FillRect(_gameScreen, NULL, 0x000000);
 	_drawUnits(units);
 }
 
@@ -39,7 +40,8 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 {
 	for (BaseUnit* unit : units)
 	{
-		if (unit -> isAlive())
+		bool unitAlive = unit -> isAlive();
+		if (unitAlive)
 		{
 			unsigned int unitId = unit -> getId();
 			unsigned int unitPositionX = unit -> getPositionX();

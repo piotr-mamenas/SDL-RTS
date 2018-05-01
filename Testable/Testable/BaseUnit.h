@@ -24,6 +24,6 @@ public:
 	unsigned int getPositionX();
 	unsigned int getPositionY();
 	bool isAlive();
-	void handleEvent(SDL_Event* e);
+	void handleEvent(int clickPositionX, int clickPositionY, int eventType);
 };
 #endif

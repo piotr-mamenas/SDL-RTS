@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY) 
+BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY)
 {
 	_mapPositionX = initialPositionX;
 	_mapPositionY = initialPositionY;
@@ -14,7 +14,7 @@ unsigned int BaseUnit::getPositionX()
 	return _mapPositionX;
 }
 
-unsigned int BaseUnit::getPositionY() 
+unsigned int BaseUnit::getPositionY()
 {
 	return _mapPositionY;
 }
@@ -24,29 +24,24 @@ unsigned int BaseUnit::getId()
 	return _id;
 }
 
-void BaseUnit::handleEvent(SDL_Event* e)
+void BaseUnit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
 {
-	if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP)
+	if (_isAlive) 
 	{
-		int x, y;
-		bool mouseInside = false;
-		SDL_GetMouseState(&x, &y);
+		bool mouseInside = true;
 
-		if (x < _mapPositionX || 
-			x > _mapPositionX + _unitWidth ||
-			y < _mapPositionY ||
-			y > _mapPositionY + _unitHeight)
+		if (clickPositionX < _mapPositionX ||
+			clickPositionX > _mapPositionX + _unitWidth ||
+			clickPositionY < _mapPositionY ||
+			clickPositionY > _mapPositionY + _unitHeight)
 		{
 			mouseInside = false;
 		}
 
 		if (mouseInside)
 		{
-			switch (e -> type)
+			switch (eventType)
 			{
-			case SDL_MOUSEMOTION:
-				printf("Mouse Over Unit: %d\n", _id);
-				break;
 			case SDL_MOUSEBUTTONDOWN:
 				printf("Mouse Down Unit: %d\n", _id);
 				_currentLife = _currentLife - 5;

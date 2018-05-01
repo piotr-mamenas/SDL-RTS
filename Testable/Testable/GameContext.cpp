@@ -73,26 +73,32 @@ bool GameContext::init()
 
 			while (!quit) 
 			{
-				capTimer.start();
-
 				while (SDL_PollEvent(&e)) 
 				{
+					capTimer.start();
 					if (e.type == SDL_QUIT) 
 					{
 						quit = true;
 					}
 
-					for (BaseUnit* unit : units)
+					if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 					{
-						unit->handleEvent(&e);
-					}
-				}
-				_graphicsEngine->drawScene(units);
+						int clickPositionX = 0;
+						int clickPositionY = 0;
+						SDL_GetMouseState(&clickPositionX, &clickPositionY);
 
-				int frameTicks = capTimer.getTicks();
-				if (frameTicks < SCREEN_TICKS_PER_FRAME)
-				{
-					SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+						for (BaseUnit* unit : units)
+						{
+							unit -> handleEvent(clickPositionX, clickPositionY, e.type);
+						}
+					}
+					_graphicsEngine->drawScene(units);
+
+					int frameTicks = capTimer.getTicks();
+					if (frameTicks < SCREEN_TICKS_PER_FRAME)
+					{
+						SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+					}
 				}
 			}
 		}
