@@ -22,7 +22,7 @@ private:
 public:
 	GameAssetManager(SDL_Surface* gameScreen);
 	~GameAssetManager();
-	Sprite* getUnitImage(int unitId);
+	Sprite* getUnitSprite(int unitId);
 };
 
 #endif

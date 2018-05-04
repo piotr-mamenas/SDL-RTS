@@ -73,7 +73,7 @@ void GameAssetManager::_releaseGameResources()
 	}
 }
 
-Sprite* GameAssetManager::getUnitImage(int unitId)
+Sprite* GameAssetManager::getUnitSprite(int unitId)
 {
 	map<unsigned int , Sprite*>::iterator unitIterator = _units.find(unitId);
 	if (unitIterator != _units.end()) 

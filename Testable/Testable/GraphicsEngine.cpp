@@ -47,7 +47,7 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 			unsigned int unitPositionX = unit -> getPositionX();
 			unsigned int unitPositionY = unit -> getPositionY();
 
-			Sprite* unitSprite = _gameAssetManager -> getUnitImage(unitId);
+			Sprite* unitSprite = _gameAssetManager -> getUnitSprite(unitId);
 			_drawImage(_gameScreen, unitSprite -> getImage(), unitPositionX, unitPositionY);
 		}
 	}
