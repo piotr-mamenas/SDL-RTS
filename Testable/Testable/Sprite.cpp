@@ -2,9 +2,9 @@
 
 #include <SDL.h>
 
-Sprite::Sprite(SDL_Surface* sprite)
+Sprite::Sprite(SDL_Surface* spriteImage)
 {
-	_spriteImage = sprite;
+	_spriteImage = spriteImage;
 }
 
 SDL_Surface* Sprite::getImage()

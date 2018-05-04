@@ -123,12 +123,16 @@
   <ItemGroup>
     <ClCompile Include="BaseUnit.cpp" />
     <ClCompile Include="GameContext.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="GameScenario.cpp" />
+    <ClCompile Include="GameTerrain.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
     <ClCompile Include="InfantryUnit.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GameAssetManager.cpp" />
+    <ClCompile Include="SceneGenerator.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="UserControl.cpp" />
   </ItemGroup>
@@ -136,10 +140,14 @@
     <ClInclude Include="BaseUnit.h" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
+    <ClInclude Include="GameMap.h" />
+    <ClInclude Include="GameScenario.h" />
+    <ClInclude Include="GameTerrain.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicsEngine.h" />
     <ClInclude Include="InfantryUnit.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SceneGenerator.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="UserControl.h" />
   </ItemGroup>

@@ -16,7 +16,7 @@ protected:
 	int _maxLife;
 
 	bool _isAlive;
-protected:
+
 	int _unitWidth;
 	int _unitHeight;
 public:

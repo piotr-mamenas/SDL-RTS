@@ -17,12 +17,12 @@ private:
 	void _loadGameResources();
 	void _releaseGameResources();
 	SDL_Surface* _gameScreen;
-	map<unsigned int, SDL_Surface*> _units;
+	map<unsigned int, Sprite*> _units;
 
 public:
 	GameAssetManager(SDL_Surface* gameScreen);
 	~GameAssetManager();
-	SDL_Surface* getUnitImage(int unitId);
+	Sprite* getUnitImage(int unitId);
 };
 
 #endif

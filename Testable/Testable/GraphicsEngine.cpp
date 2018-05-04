@@ -47,8 +47,8 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 			unsigned int unitPositionX = unit -> getPositionX();
 			unsigned int unitPositionY = unit -> getPositionY();
 
-			SDL_Surface* unitImage = _gameAssetManager -> getUnitImage(unitId);
-			_drawImage(_gameScreen, unitImage, unitPositionX, unitPositionY);
+			Sprite* unitSprite = _gameAssetManager -> getUnitImage(unitId);
+			_drawImage(_gameScreen, unitSprite -> getImage(), unitPositionX, unitPositionY);
 		}
 	}
 	SDL_UpdateWindowSurface(_gameWindow);

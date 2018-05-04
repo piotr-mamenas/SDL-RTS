@@ -34,6 +34,12 @@
     <Filter Include="Header Files\Controls">
       <UniqueIdentifier>{00cfd9eb-9675-4012-8aa2-cc3f323d85a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Environment">
+      <UniqueIdentifier>{c5c7a47a-d995-46ac-820d-85d79196fb8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Environment">
+      <UniqueIdentifier>{e873e0d5-d877-4f3c-8a41-e7025764325e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -66,6 +72,18 @@
     <ClCompile Include="GameTimer.cpp">
       <Filter>Source Files\Controls</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScenario.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTerrain.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameContext.h">
@@ -94,6 +112,18 @@
     </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>Header Files\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTerrain.h">
+      <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScenario.h">
+      <Filter>Header Files\Environment</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

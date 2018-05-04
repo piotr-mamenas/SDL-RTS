@@ -27,13 +27,14 @@ void GameAssetManager::_loadGameResources()
 	unsigned id;
 	string path;
 
-	map<unsigned int, SDL_Surface*> units;
+	map<unsigned int, Sprite*> units;
 	ifstream infile("unit_images.dat");
 
 	while (infile >> id >> path) 
 	{
 		SDL_Surface* optimizedSurface = _loadSurface(path);
-		units.insert(pair<unsigned int, SDL_Surface*>(id, optimizedSurface));
+		Sprite* sprite = new Sprite(optimizedSurface);
+		units.insert(pair<unsigned int, Sprite*>(id, sprite));
 	}
 	_units = units;
 }
@@ -64,16 +65,17 @@ SDL_Surface* GameAssetManager::_loadSurface(string path)
 
 void GameAssetManager::_releaseGameResources()
 {
-	std::map<unsigned int, SDL_Surface*>::iterator unitIterator;
+	std::map<unsigned int, Sprite*>::iterator unitIterator;
 	for(unitIterator = _units.begin(); unitIterator != _units.end(); unitIterator++)
 	{
-		SDL_FreeSurface(unitIterator -> second);
+		Sprite* unitSprite = unitIterator -> second;
+		SDL_FreeSurface(unitSprite -> getImage() );
 	}
 }
 
-SDL_Surface* GameAssetManager::getUnitImage(int unitId)
+Sprite* GameAssetManager::getUnitImage(int unitId)
 {
-	map<unsigned int , SDL_Surface*>::iterator unitIterator = _units.find(unitId);
+	map<unsigned int , Sprite*>::iterator unitIterator = _units.find(unitId);
 	if (unitIterator != _units.end()) 
 	{
 		return unitIterator -> second;

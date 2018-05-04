@@ -10,7 +10,7 @@ private:
 	int _height;
 	SDL_Surface* _spriteImage;
 public:
-	Sprite(SDL_Surface* sprite);
+	Sprite(SDL_Surface* spriteImage);
 	SDL_Surface* getImage();
 };
 
