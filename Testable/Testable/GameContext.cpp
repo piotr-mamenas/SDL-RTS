@@ -9,6 +9,8 @@
 #include "GameAssetManager.h"
 #include "Player.h"
 #include "GameTimer.h"
+#include "GrassTerrainTile.h"
+#include "GameMap.h"
 
 #define GAME_NAME "C++ RTS"
 
@@ -57,6 +59,8 @@ bool GameContext::init()
 			BaseUnit* infantry = new InfantryUnit(50, 60);
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
 			BaseUnit* infantry3 = new InfantryUnit(30, 155);
+			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
+			GameMap* gameMap = new GameMap(fillTerrain, _mainSurface);
 
 			list<BaseUnit*> units;
 			units.push_back(infantry);
@@ -92,7 +96,7 @@ bool GameContext::init()
 							unit -> handleEvent(clickPositionX, clickPositionY, e.type);
 						}
 					}
-					_graphicsEngine->drawScene(units);
+					_graphicsEngine->drawScene(units, gameMap);
 
 					int frameTicks = capTimer.getTicks();
 					if (frameTicks < SCREEN_TICKS_PER_FRAME)

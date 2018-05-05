@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include "BaseUnit.h"
 #include "GameAssetManager.h"
+#include "GameMap.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -25,9 +26,10 @@ GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, 
 	}
 }
 
-void GraphicsEngine::drawScene(list<BaseUnit*> units)
+void GraphicsEngine::drawScene(list<BaseUnit*> units, GameMap* gameMap)
 {
 	SDL_FillRect(_gameScreen, NULL, 0x000000);
+	_drawGameMap(gameMap);
 	_drawUnits(units);
 }
 
@@ -50,6 +52,21 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 			Sprite* unitSprite = _gameAssetManager -> getUnitSprite(unitId);
 			_drawImage(_gameScreen, unitSprite -> getImage(), unitPositionX, unitPositionY);
 		}
+	}
+	SDL_UpdateWindowSurface(_gameWindow);
+}
+
+void GraphicsEngine::_drawGameMap(GameMap* gameMap)
+{
+	list<BaseTerrain*> mapTerrain = gameMap -> getTerrain();
+	for (BaseTerrain* terrain : gameMap -> getTerrain())
+	{
+		unsigned int terrainId = terrain -> getId();
+		unsigned int terrainPositionX = terrain->getPositionX();
+		unsigned int terrainPositionY = terrain->getPositionY();
+
+		Sprite* terrainSprite = _gameAssetManager-> getTerrainSprite(terrainId);
+		_drawImage(_gameScreen, terrainSprite->getImage(), terrainPositionX, terrainPositionY);
 	}
 	SDL_UpdateWindowSurface(_gameWindow);
 }

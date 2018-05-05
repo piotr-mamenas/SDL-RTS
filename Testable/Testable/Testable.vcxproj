@@ -124,6 +124,8 @@
     <ClCompile Include="BaseUnit.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="GameMapEditor.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScenario.cpp" />
     <ClCompile Include="BaseTerrain.cpp" />
     <ClCompile Include="GameTimer.cpp" />
@@ -142,6 +144,8 @@
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameMap.h" />
+    <ClInclude Include="GameMapEditor.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScenario.h" />
     <ClInclude Include="BaseTerrain.h" />
     <ClInclude Include="GameTimer.h" />

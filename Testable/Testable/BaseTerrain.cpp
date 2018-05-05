@@ -50,3 +50,13 @@ unsigned int BaseTerrain::getPositionY()
 {
 	return _terrainPositionY;
 }
+
+unsigned int BaseTerrain::getWidth()
+{
+	return _terrainWidth;
+}
+
+unsigned int BaseTerrain::getHeight()
+{
+	return _terrainHeight;
+}

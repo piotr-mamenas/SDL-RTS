@@ -24,9 +24,6 @@ GameAssetManager::~GameAssetManager()
 
 void GameAssetManager::_loadGameResources()
 {
-	unsigned int id;
-	string path;
-
 	_terrainSprites = _loadSprite("terrain_images.dat");
 	_unitSprites = _loadSprite("unit_images.dat");
 }

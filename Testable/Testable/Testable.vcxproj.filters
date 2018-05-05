@@ -93,6 +93,12 @@
     <ClCompile Include="GrassTerrainTile.cpp">
       <Filter>Source Files\Environment\GameTerrain</Filter>
     </ClCompile>
+    <ClCompile Include="GameMapEditor.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameContext.h">
@@ -136,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="GrassTerrainTile.h">
       <Filter>Header Files\Environment\GameTerrain</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMapEditor.h">
+      <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

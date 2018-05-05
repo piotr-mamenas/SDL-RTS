@@ -14,6 +14,8 @@ private:
 	list<BaseTerrain*> _mapTerrain;
 public:
 	GameMap();
+	GameMap(BaseTerrain* fillTerrain, SDL_Surface* mapSurface);
+	list<BaseTerrain*> getTerrain();
 };
 
 #endif
