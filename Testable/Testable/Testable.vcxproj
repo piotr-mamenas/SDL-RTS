@@ -125,9 +125,10 @@
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameScenario.cpp" />
-    <ClCompile Include="GameTerrain.cpp" />
+    <ClCompile Include="BaseTerrain.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
+    <ClCompile Include="GrassTerrainTile.cpp" />
     <ClCompile Include="InfantryUnit.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -142,9 +143,10 @@
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameScenario.h" />
-    <ClInclude Include="GameTerrain.h" />
+    <ClInclude Include="BaseTerrain.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="GrassTerrainTile.h" />
     <ClInclude Include="InfantryUnit.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneGenerator.h" />
@@ -152,9 +154,11 @@
     <ClInclude Include="UserControl.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="grasstile.png" />
     <Image Include="unit.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="terrain_images.dat" />
     <None Include="unit_images.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

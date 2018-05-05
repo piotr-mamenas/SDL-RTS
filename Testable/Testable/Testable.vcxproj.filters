@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Environment">
       <UniqueIdentifier>{e873e0d5-d877-4f3c-8a41-e7025764325e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Environment\GameTerrain">
+      <UniqueIdentifier>{789c3090-7aca-4264-8cab-c7c13084df9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Environment\GameTerrain">
+      <UniqueIdentifier>{7ae2fcfa-b2e0-4a6c-86b2-6b52687b87e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -81,8 +87,11 @@
     <ClCompile Include="GameMap.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="GameTerrain.cpp">
-      <Filter>Source Files\Environment</Filter>
+    <ClCompile Include="BaseTerrain.cpp">
+      <Filter>Source Files\Environment\GameTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="GrassTerrainTile.cpp">
+      <Filter>Source Files\Environment\GameTerrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,20 +128,29 @@
     <ClInclude Include="GameMap.h">
       <Filter>Header Files\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="GameTerrain.h">
-      <Filter>Header Files\Environment</Filter>
-    </ClInclude>
     <ClInclude Include="GameScenario.h">
       <Filter>Header Files\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTerrain.h">
+      <Filter>Header Files\Environment\GameTerrain</Filter>
+    </ClInclude>
+    <ClInclude Include="GrassTerrainTile.h">
+      <Filter>Header Files\Environment\GameTerrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="unit.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="grasstile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="unit_images.dat">
+      <Filter>Resource Files\Logic</Filter>
+    </None>
+    <None Include="terrain_images.dat">
       <Filter>Resource Files\Logic</Filter>
     </None>
   </ItemGroup>

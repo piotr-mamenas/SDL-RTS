@@ -24,19 +24,28 @@ GameAssetManager::~GameAssetManager()
 
 void GameAssetManager::_loadGameResources()
 {
-	unsigned id;
+	unsigned int id;
 	string path;
 
-	map<unsigned int, Sprite*> units;
-	ifstream infile("unit_images.dat");
+	_terrainSprites = _loadSprite("terrain_images.dat");
+	_unitSprites = _loadSprite("unit_images.dat");
+}
 
-	while (infile >> id >> path) 
+map<unsigned int, Sprite*> GameAssetManager::_loadSprite(const char* fileName)
+{
+	unsigned int id;
+	string path;
+
+	map<unsigned int, Sprite*> sprites;
+	ifstream spriteFile(fileName);
+
+	while (spriteFile >> id >> path)
 	{
 		SDL_Surface* optimizedSurface = _loadSurface(path);
 		Sprite* sprite = new Sprite(optimizedSurface);
-		units.insert(pair<unsigned int, Sprite*>(id, sprite));
+		sprites.insert(pair<unsigned int, Sprite*>(id, sprite));
 	}
-	_units = units;
+	return sprites;
 }
 
 SDL_Surface* GameAssetManager::_loadSurface(string path)
@@ -66,7 +75,7 @@ SDL_Surface* GameAssetManager::_loadSurface(string path)
 void GameAssetManager::_releaseGameResources()
 {
 	std::map<unsigned int, Sprite*>::iterator unitIterator;
-	for(unitIterator = _units.begin(); unitIterator != _units.end(); unitIterator++)
+	for(unitIterator = _unitSprites.begin(); unitIterator != _unitSprites.end(); unitIterator++)
 	{
 		Sprite* unitSprite = unitIterator -> second;
 		SDL_FreeSurface(unitSprite -> getImage() );
@@ -75,10 +84,20 @@ void GameAssetManager::_releaseGameResources()
 
 Sprite* GameAssetManager::getUnitSprite(int unitId)
 {
-	map<unsigned int , Sprite*>::iterator unitIterator = _units.find(unitId);
-	if (unitIterator != _units.end()) 
+	map<unsigned int, Sprite*>::iterator unitIterator = _unitSprites.find(unitId);
+	if (unitIterator != _unitSprites.end()) 
 	{
 		return unitIterator -> second;
+	}
+	return NULL;
+}
+
+Sprite* GameAssetManager::getTerrainSprite(int terrainId)
+{
+	map<unsigned int, Sprite*>::iterator terrainIterator = _terrainSprites.find(terrainId);
+	if (terrainIterator != _terrainSprites.end())
+	{
+		return terrainIterator -> second;
 	}
 	return NULL;
 }

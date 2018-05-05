@@ -4,10 +4,14 @@
 #include <iostream>
 #include <list>
 
+#include "BaseTerrain.h"
+
 using namespace std;
 
 class GameMap
 {
+private:
+	list<BaseTerrain*> _mapTerrain;
 public:
 	GameMap();
 };
