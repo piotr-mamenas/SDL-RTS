@@ -13,6 +13,6 @@ InfantryUnit::InfantryUnit(unsigned int initialPositionX, unsigned int initialPo
 	_maxLife = _currentLife;
 	_damage = INFANTRY_DAMAGE;
 	_id = INFANTRY_ID;
-	_unitWidth = INFANTRY_WIDTH;
-	_unitHeight = INFANTRY_HEIGHT;
+	_width = INFANTRY_WIDTH;
+	_height = INFANTRY_HEIGHT;
 }

@@ -5,9 +5,18 @@ using namespace std;
 
 class GameObject
 {
-private:
+protected:
+	unsigned int _id;
+	unsigned int _positionX;
+	unsigned int _positionY;
+	unsigned int _width;
+	unsigned int _height;
+
+	GameObject(unsigned int initialPositionX, unsigned int initialPositionY);
 public:
-	GameObject();
+	unsigned int getId();
+	unsigned int getPositionX();
+	unsigned int getPositionY();
 };
 
 #endif

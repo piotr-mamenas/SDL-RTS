@@ -1,12 +1,11 @@
 #include "BaseTerrain.h"
 
 BaseTerrain::BaseTerrain(unsigned int initialPositionX, unsigned int initialPositionY)
+	: GameObject(initialPositionX, initialPositionY)
 {
-	_terrainPositionX = initialPositionX;
-	_terrainPositionY = initialPositionY;
 }
 
-bool BaseTerrain::isBlocked(int positionX, int positionY, int width, int height)
+bool BaseTerrain::isBlocked(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height)
 {
 	if (_isBlocking)
 	{
@@ -36,27 +35,12 @@ bool BaseTerrain::isBlocked(int positionX, int positionY, int width, int height)
 	return true;
 }
 
-unsigned int BaseTerrain::getId()
-{
-	return _id;
-}
-
-unsigned int BaseTerrain::getPositionX()
-{
-	return _terrainPositionX;
-}
-
-unsigned int BaseTerrain::getPositionY()
-{
-	return _terrainPositionY;
-}
-
 unsigned int BaseTerrain::getWidth()
 {
-	return _terrainWidth;
+	return _width;
 }
 
 unsigned int BaseTerrain::getHeight()
 {
-	return _terrainHeight;
+	return _height;
 }

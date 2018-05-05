@@ -4,29 +4,22 @@
 #include <iostream>
 #include <list>
 
+#include "GameObject.h"
+
 using namespace std;
 
-class BaseTerrain
+class BaseTerrain : public GameObject
 {
 protected:
-	unsigned int _id;
-	unsigned int _terrainPositionX;
-	unsigned int _terrainPositionY;
-	unsigned int _terrainWidth;
-	unsigned int _terrainHeight;
-
 	bool _isBlocking;
-	int _blockingXStart;
-	int _blockingYStart;
-	int _blockingXEnd;
-	int _blockingYEnd;
+	unsigned int _blockingXStart;
+	unsigned int _blockingYStart;
+	unsigned int _blockingXEnd;
+	unsigned int _blockingYEnd;
 
 public:
 	BaseTerrain(unsigned int initialPositionX, unsigned int initialPositionY);
-	bool isBlocked(int positionX, int positionY, int width, int height);
-	unsigned int getId();
-	unsigned int getPositionX();
-	unsigned int getPositionY();
+	bool isBlocked(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height);
 	unsigned int getWidth();
 	unsigned int getHeight();
 };

@@ -2,28 +2,20 @@
 #define BASEUNIT_H
 
 #include "Sprite.h"
+#include "GameObject.h"
 
-class BaseUnit
+class BaseUnit : public GameObject
 {
 protected:
 	BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY);
-	unsigned int _id;
-	unsigned int _mapPositionX;
-	unsigned int _mapPositionY;
 
 	int _currentLife;
 	int _damage;
 	int _maxLife;
 
 	bool _isAlive;
-
-	int _unitWidth;
-	int _unitHeight;
 public:
-	unsigned int getId();
-	unsigned int getPositionX();
-	unsigned int getPositionY();
 	bool isAlive();
-	void handleEvent(int clickPositionX, int clickPositionY, int eventType);
+	void handleEvent(unsigned int clickPositionX, unsigned int clickPositionY, int eventType);
 };
 #endif

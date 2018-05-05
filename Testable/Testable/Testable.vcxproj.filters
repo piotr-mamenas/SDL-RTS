@@ -72,9 +72,6 @@
     <ClCompile Include="GameAssetManager.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="UserControl.cpp">
-      <Filter>Source Files\Controls</Filter>
-    </ClCompile>
     <ClCompile Include="GameTimer.cpp">
       <Filter>Source Files\Controls</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="GameAssetManager.h">
       <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="UserControl.h">
-      <Filter>Header Files\Controls</Filter>
     </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>Header Files\Controls</Filter>

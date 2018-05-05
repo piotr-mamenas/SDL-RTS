@@ -1,39 +1,24 @@
 #include "BaseUnit.h"
+#include "GameObject.h"
 
 #include <iostream>
 
-BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY)
+BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY) 
+	: GameObject(initialPositionX, initialPositionY)
 {
-	_mapPositionX = initialPositionX;
-	_mapPositionY = initialPositionY;
 	_isAlive = true;
 }
 
-unsigned int BaseUnit::getPositionX()
-{
-	return _mapPositionX;
-}
-
-unsigned int BaseUnit::getPositionY()
-{
-	return _mapPositionY;
-}
-
-unsigned int BaseUnit::getId()
-{
-	return _id;
-}
-
-void BaseUnit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
+void BaseUnit::handleEvent(unsigned int clickPositionX, unsigned int clickPositionY, int eventType)
 {
 	if (_isAlive) 
 	{
 		bool mouseInside = true;
 
-		if (clickPositionX < _mapPositionX ||
-			clickPositionX > _mapPositionX + _unitWidth ||
-			clickPositionY < _mapPositionY ||
-			clickPositionY > _mapPositionY + _unitHeight)
+		if (clickPositionX < _positionX ||
+			clickPositionX > _positionX + _width ||
+			clickPositionY < _positionY ||
+			clickPositionY > _positionY + _height)
 		{
 			mouseInside = false;
 		}

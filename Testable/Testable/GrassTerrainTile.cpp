@@ -8,7 +8,7 @@
 GrassTerrainTile::GrassTerrainTile(unsigned int initialPositionX, unsigned int initialPositionY)
 	: BaseTerrain(initialPositionX, initialPositionY)
 {
-	_terrainWidth = GRASSTILE_WIDTH;
-	_terrainHeight = GRASSTILE_HEIGHT;
+	_width = GRASSTILE_WIDTH;
+	_height = GRASSTILE_HEIGHT;
 	_id = GRASSTILE_ID;
 }
