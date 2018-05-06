@@ -27,8 +27,8 @@ GameContext::GameContext(int screenWidth, int screenHeight, bool isWindowMode)
 bool GameContext::init() 
 {
 	bool success = true;
+	bool isMapEditorMode = false;
 	_gameWindow = NULL;
-	_mainSurface = NULL;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -38,11 +38,11 @@ bool GameContext::init()
 	{
 		if (_isWindowMode) 
 		{
-			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN);
 		}
 		else
 		{
-			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_FULLSCREEN);
+			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_FULLSCREEN);
 		}
 		
 		if (_gameWindow == NULL)
@@ -52,15 +52,21 @@ bool GameContext::init()
 		}
 		else
 		{
-			_mainSurface = SDL_GetWindowSurface(_gameWindow);
-			_gameAssetManager = new GameAssetManager(_mainSurface);
-			_graphicsEngine = new GraphicsEngine(_gameWindow, _mainSurface, _gameAssetManager);
+			_gameRenderer = SDL_CreateRenderer(_gameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			if (_gameRenderer == NULL)
+			{
+				printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+				success = false;
+			}
+
+			_gameAssetManager = new GameAssetManager(_gameRenderer);
+			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager);
 
 			BaseUnit* infantry = new InfantryUnit(50, 60);
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
 			BaseUnit* infantry3 = new InfantryUnit(30, 155);
 			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
-			GameMap* gameMap = new GameMap(fillTerrain, _mainSurface);
+			GameMap* gameMap = new GameMap(fillTerrain, _screenWidth, _screenHeight);
 
 			list<BaseUnit*> units;
 			units.push_back(infantry);
@@ -96,7 +102,7 @@ bool GameContext::init()
 							unit -> handleEvent(clickPositionX, clickPositionY, e.type);
 						}
 					}
-					_graphicsEngine->drawScene(units, gameMap);
+					_graphicsEngine->refreshScene(units, gameMap);
 
 					int frameTicks = capTimer.getTicks();
 					if (frameTicks < SCREEN_TICKS_PER_FRAME)
@@ -113,11 +119,11 @@ bool GameContext::init()
 void GameContext::close()
 {
 	delete _gameAssetManager;
+	delete _graphicsEngine;
 
-	SDL_FreeSurface(_mainSurface);
-	_mainSurface = NULL;
-
+	SDL_DestroyRenderer(_gameRenderer);
 	SDL_DestroyWindow(_gameWindow);
+	_gameRenderer = NULL;
 	_gameWindow = NULL;
 
 	SDL_Quit();

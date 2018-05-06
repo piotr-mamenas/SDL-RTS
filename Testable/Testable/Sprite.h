@@ -8,10 +8,10 @@ class Sprite
 private:
 	int _width;
 	int _height;
-	SDL_Surface* _spriteImage;
+	SDL_Texture* _spriteTexture;
 public:
-	Sprite(SDL_Surface* spriteImage);
-	SDL_Surface* getImage();
+	Sprite(SDL_Texture* spriteTexture);
+	SDL_Texture* getTexture();
 };
 
 #endif

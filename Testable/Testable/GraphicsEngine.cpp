@@ -13,11 +13,10 @@
 
 using namespace std;
 
-GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, GameAssetManager* assetManager)
+GraphicsEngine::GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager)
 {
-	_gameWindow = gameWindow;
-	_gameScreen = gameScreen;
 	_gameAssetManager = assetManager;
+	_gameRenderer = gameRenderer;
 
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags)) 
@@ -26,16 +25,31 @@ GraphicsEngine::GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, 
 	}
 }
 
-void GraphicsEngine::drawScene(list<BaseUnit*> units, GameMap* gameMap)
+GraphicsEngine::~GraphicsEngine()
 {
-	SDL_FillRect(_gameScreen, NULL, 0x000000);
-	_drawGameMap(gameMap);
-	_drawUnits(units);
+	IMG_Quit();
 }
 
-void GraphicsEngine::addToScene(Sprite* sprite)
+void GraphicsEngine::refreshScene(GameMap* gameMap)
 {
-	_unitImages.push_back(sprite);
+	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
+	SDL_RenderClear(_gameRenderer);
+
+	_drawGameMap(gameMap);
+	
+	SDL_RenderPresent(_gameRenderer);
+}
+
+void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap)
+{
+	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 255);
+	SDL_SetRenderTarget(_gameRenderer, 0);
+	SDL_RenderClear(_gameRenderer);
+
+	_drawGameMap(gameMap);
+	_drawUnits(units);
+
+	SDL_RenderPresent(_gameRenderer);
 }
 
 void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
@@ -50,10 +64,10 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 			unsigned int unitPositionY = unit -> getPositionY();
 
 			Sprite* unitSprite = _gameAssetManager -> getUnitSprite(unitId);
-			_drawImage(_gameScreen, unitSprite -> getImage(), unitPositionX, unitPositionY);
+			_drawTexture(unitSprite -> getTexture(), unitPositionX, unitPositionY);
 		}
 	}
-	SDL_UpdateWindowSurface(_gameWindow);
+	
 }
 
 void GraphicsEngine::_drawGameMap(GameMap* gameMap)
@@ -66,16 +80,15 @@ void GraphicsEngine::_drawGameMap(GameMap* gameMap)
 		unsigned int terrainPositionY = terrain->getPositionY();
 
 		Sprite* terrainSprite = _gameAssetManager-> getTerrainSprite(terrainId);
-		_drawImage(_gameScreen, terrainSprite->getImage(), terrainPositionX, terrainPositionY);
+		_drawTexture(terrainSprite-> getTexture(), terrainPositionX, terrainPositionY);
 	}
-	SDL_UpdateWindowSurface(_gameWindow);
 }
 
-void GraphicsEngine::_drawImage(SDL_Surface* screen, SDL_Surface* image, unsigned int positionX, unsigned int positionY)
+void GraphicsEngine::_drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY)
 {
 	SDL_Rect unitPosition;
 	unitPosition.x = positionX;
 	unitPosition.y = positionY;
-
-	SDL_BlitSurface(image, NULL, screen, &unitPosition);
+	SDL_QueryTexture(texture, NULL, NULL, &unitPosition.w, &unitPosition.h);
+	SDL_RenderCopy(_gameRenderer, texture, NULL, &unitPosition);
 }

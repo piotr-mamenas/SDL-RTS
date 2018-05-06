@@ -14,7 +14,7 @@ class GameContext
 {
 private:
 	SDL_Window* _gameWindow = NULL;
-	SDL_Surface* _mainSurface = NULL;
+	SDL_Renderer* _gameRenderer = NULL;
 	GraphicsEngine* _graphicsEngine = NULL;
 	GameAssetManager* _gameAssetManager = NULL;
 

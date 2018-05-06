@@ -10,9 +10,9 @@
 
 using namespace std;
 
-GameAssetManager::GameAssetManager(SDL_Surface* gameScreen)
+GameAssetManager::GameAssetManager(SDL_Renderer* gameRenderer)
 {
-	_gameScreen = gameScreen;
+	_gameRenderer = gameRenderer;
 
 	_loadGameResources();
 }
@@ -38,18 +38,17 @@ map<unsigned int, Sprite*> GameAssetManager::_loadSprite(const char* fileName)
 
 	while (spriteFile >> id >> path)
 	{
-		SDL_Surface* optimizedSurface = _loadSurface(path);
-		Sprite* sprite = new Sprite(optimizedSurface);
+		SDL_Texture* texture = _loadTexture(path);
+		Sprite* sprite = new Sprite(texture);
 		sprites.insert(pair<unsigned int, Sprite*>(id, sprite));
 	}
 	return sprites;
 }
 
-SDL_Surface* GameAssetManager::_loadSurface(string path)
+SDL_Texture* GameAssetManager::_loadTexture(string path)
 {
-	SDL_Surface* optimizedSurface = NULL;
+	SDL_Texture* loadedTexture = NULL;
 
-	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == NULL)
 	{
@@ -57,16 +56,14 @@ SDL_Surface* GameAssetManager::_loadSurface(string path)
 	}
 	else
 	{
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface(loadedSurface, _gameScreen->format, NULL);
-		if (optimizedSurface == NULL)
+		loadedTexture = SDL_CreateTextureFromSurface(_gameRenderer, loadedSurface);
+		if (loadedTexture == NULL)
 		{
-			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+			printf("Unable to create texture %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
-		SDL_FreeSurface(loadedSurface);
 	}
-
-	return optimizedSurface;
+	SDL_FreeSurface(loadedSurface);
+	return loadedTexture;
 }
 
 void GameAssetManager::_releaseGameResources()
@@ -75,7 +72,14 @@ void GameAssetManager::_releaseGameResources()
 	for(unitIterator = _unitSprites.begin(); unitIterator != _unitSprites.end(); unitIterator++)
 	{
 		Sprite* unitSprite = unitIterator -> second;
-		SDL_FreeSurface(unitSprite -> getImage() );
+		SDL_DestroyTexture(unitSprite -> getTexture() );
+	}
+
+	std::map<unsigned int, Sprite*>::iterator terrainIterator;
+	for (terrainIterator = _terrainSprites.begin(); terrainIterator != _terrainSprites.end(); terrainIterator++)
+	{
+		Sprite* terrainSprite = terrainIterator->second;
+		SDL_DestroyTexture(terrainSprite->getTexture());
 	}
 }
 
@@ -98,3 +102,14 @@ Sprite* GameAssetManager::getTerrainSprite(int terrainId)
 	}
 	return NULL;
 }
+
+Sprite* GameAssetManager::getSprite(GameObject* forObjectStore, unsigned int spriteId)
+{
+	map<unsigned int, Sprite*>::iterator terrainIterator = _terrainSprites.find(spriteId);
+	if (terrainIterator != _terrainSprites.end())
+	{
+		return terrainIterator->second;
+	}
+	return NULL;
+}
+

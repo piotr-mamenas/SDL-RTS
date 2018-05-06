@@ -3,15 +3,19 @@
 #include "GameMap.h"
 #include "GrassTerrainTile.h"
 
-GameMap::GameMap()
+GameMap::GameMap(unsigned int mapWidth, unsigned int mapHeight)
 {
-
+	_mapWidth = mapWidth;
+	_mapHeight = mapHeight;
 }
 
-GameMap::GameMap(BaseTerrain* fillTerrain, SDL_Surface* mapSurface)
+GameMap::GameMap(BaseTerrain* fillTerrain, unsigned int mapWidth, unsigned int mapHeight)
 {
-	unsigned int tileMaxHorizontal = (mapSurface->w) / (fillTerrain->getWidth());
-	unsigned int tileMaxVertical = (mapSurface->h) / (fillTerrain->getHeight());
+	_mapWidth = mapWidth;
+	_mapHeight = mapHeight;
+
+	unsigned int tileMaxHorizontal = (mapWidth) / (fillTerrain->getWidth());
+	unsigned int tileMaxVertical = (mapHeight) / (fillTerrain->getHeight());
 
 	for (unsigned int cntX = 0; cntX < tileMaxHorizontal; cntX++)
 	{

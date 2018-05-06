@@ -2,12 +2,12 @@
 
 #include <SDL.h>
 
-Sprite::Sprite(SDL_Surface* spriteImage)
+Sprite::Sprite(SDL_Texture* spriteTexture)
 {
-	_spriteImage = spriteImage;
+	_spriteTexture = spriteTexture;
 }
 
-SDL_Surface* Sprite::getImage()
+SDL_Texture* Sprite::getTexture()
 {
-	return _spriteImage;
+	return _spriteTexture;
 }

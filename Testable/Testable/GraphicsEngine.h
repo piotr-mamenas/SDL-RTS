@@ -14,18 +14,17 @@ using namespace std;
 class GraphicsEngine
 {
 private:
-	void _drawImage(SDL_Surface* screen, SDL_Surface* image, unsigned int positionX, unsigned int positionY);
+	void _drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY);
 	void _drawUnits(list<BaseUnit*> units);
 	void _drawGameMap(GameMap* gameMap);
-	list<Sprite*> _unitImages;
-	SDL_Window* _gameWindow;
-	SDL_Surface* _gameScreen;
+	SDL_Renderer* _gameRenderer;
 	GameAssetManager* _gameAssetManager;
 
 public:
-	GraphicsEngine(SDL_Window* gameWindow, SDL_Surface* gameScreen, GameAssetManager* assetManager);
-	void addToScene(Sprite* sprite);
-	void drawScene(list<BaseUnit*> units, GameMap* gameMap);
+	GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager);
+	~GraphicsEngine();
+	void refreshScene(list<BaseUnit*> units, GameMap* gameMap);
+	void refreshScene(GameMap* gameMap);
 };
 
 #endif

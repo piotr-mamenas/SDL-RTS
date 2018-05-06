@@ -12,9 +12,11 @@ class GameMap
 {
 private:
 	list<BaseTerrain*> _mapTerrain;
+	unsigned int _mapWidth;
+	unsigned int _mapHeight;
 public:
-	GameMap();
-	GameMap(BaseTerrain* fillTerrain, SDL_Surface* mapSurface);
+	GameMap(unsigned int mapWidth, unsigned int mapHeight);
+	GameMap(BaseTerrain* fillTerrain, unsigned int mapWidth, unsigned int mapHeight);
 	list<BaseTerrain*> getTerrain();
 };
 
