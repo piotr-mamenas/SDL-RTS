@@ -135,7 +135,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GameAssetManager.cpp" />
-    <ClCompile Include="SceneGenerator.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +151,6 @@
     <ClInclude Include="GrassTerrainTile.h" />
     <ClInclude Include="InfantryUnit.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="SceneGenerator.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>

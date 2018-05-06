@@ -22,12 +22,12 @@ private:
 	map<unsigned int, Sprite*> _unitSprites;
 	map<unsigned int, Sprite*> _terrainSprites;
 
+	Sprite* _getUnitSprite(int unitId);
+	Sprite* _getTerrainSprite(int terrainId);
 public:
 	GameAssetManager(SDL_Renderer* gameRenderer);
 	~GameAssetManager();
-	Sprite* getSprite(GameObject* forObjectStore, unsigned int spriteId);
-	Sprite* getUnitSprite(int unitId);
-	Sprite* getTerrainSprite(int terrainId);
+	Sprite* getSprite(unsigned int spriteId);
 };
 
 #endif

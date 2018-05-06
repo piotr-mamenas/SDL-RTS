@@ -3,7 +3,7 @@
 
 #define GRASSTILE_WIDTH 90;
 #define GRASSTILE_HEIGHT 90;
-#define GRASSTILE_ID 1
+#define GRASSTILE_ID 2501
 
 GrassTerrainTile::GrassTerrainTile(unsigned int initialPositionX, unsigned int initialPositionY)
 	: BaseTerrain(initialPositionX, initialPositionY)

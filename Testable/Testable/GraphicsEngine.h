@@ -16,6 +16,7 @@ class GraphicsEngine
 private:
 	void _drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY);
 	void _drawUnits(list<BaseUnit*> units);
+	void _drawGameObject(GameObject* object);
 	void _drawGameMap(GameMap* gameMap);
 	SDL_Renderer* _gameRenderer;
 	GameAssetManager* _gameAssetManager;

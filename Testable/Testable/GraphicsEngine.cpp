@@ -59,12 +59,7 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 		bool unitAlive = unit -> isAlive();
 		if (unitAlive)
 		{
-			unsigned int unitId = unit -> getId();
-			unsigned int unitPositionX = unit -> getPositionX();
-			unsigned int unitPositionY = unit -> getPositionY();
-
-			Sprite* unitSprite = _gameAssetManager -> getUnitSprite(unitId);
-			_drawTexture(unitSprite -> getTexture(), unitPositionX, unitPositionY);
+			_drawGameObject(unit);
 		}
 	}
 	
@@ -73,15 +68,20 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 void GraphicsEngine::_drawGameMap(GameMap* gameMap)
 {
 	list<BaseTerrain*> mapTerrain = gameMap -> getTerrain();
-	for (BaseTerrain* terrain : gameMap -> getTerrain())
+	for (BaseTerrain* terrain : mapTerrain)
 	{
-		unsigned int terrainId = terrain -> getId();
-		unsigned int terrainPositionX = terrain->getPositionX();
-		unsigned int terrainPositionY = terrain->getPositionY();
-
-		Sprite* terrainSprite = _gameAssetManager-> getTerrainSprite(terrainId);
-		_drawTexture(terrainSprite-> getTexture(), terrainPositionX, terrainPositionY);
+		_drawGameObject(terrain);
 	}
+}
+
+void GraphicsEngine::_drawGameObject(GameObject* object)
+{
+	unsigned int objectId = object->getId();
+	unsigned int objectPositionX = object->getPositionX();
+	unsigned int objectPositionY = object->getPositionY();
+
+	Sprite* objectSprite = _gameAssetManager->getSprite(objectId);
+	_drawTexture(objectSprite->getTexture(), objectPositionX, objectPositionY);
 }
 
 void GraphicsEngine::_drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY)
@@ -90,5 +90,6 @@ void GraphicsEngine::_drawTexture(SDL_Texture* texture, unsigned int positionX, 
 	unitPosition.x = positionX;
 	unitPosition.y = positionY;
 	SDL_QueryTexture(texture, NULL, NULL, &unitPosition.w, &unitPosition.h);
+
 	SDL_RenderCopy(_gameRenderer, texture, NULL, &unitPosition);
 }

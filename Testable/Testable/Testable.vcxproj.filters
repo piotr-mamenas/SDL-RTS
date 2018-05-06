@@ -75,9 +75,6 @@
     <ClCompile Include="GameTimer.cpp">
       <Filter>Source Files\Controls</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameScenario.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="GameTimer.h">
       <Filter>Header Files\Controls</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGenerator.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameMap.h">
       <Filter>Header Files\Environment</Filter>

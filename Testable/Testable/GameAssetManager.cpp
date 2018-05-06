@@ -7,6 +7,9 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include "GameObject.h"
+#include "BaseTerrain.h"
+#include "BaseUnit.h"
 
 using namespace std;
 
@@ -83,7 +86,7 @@ void GameAssetManager::_releaseGameResources()
 	}
 }
 
-Sprite* GameAssetManager::getUnitSprite(int unitId)
+Sprite* GameAssetManager::_getUnitSprite(int unitId)
 {
 	map<unsigned int, Sprite*>::iterator unitIterator = _unitSprites.find(unitId);
 	if (unitIterator != _unitSprites.end()) 
@@ -93,7 +96,7 @@ Sprite* GameAssetManager::getUnitSprite(int unitId)
 	return NULL;
 }
 
-Sprite* GameAssetManager::getTerrainSprite(int terrainId)
+Sprite* GameAssetManager::_getTerrainSprite(int terrainId)
 {
 	map<unsigned int, Sprite*>::iterator terrainIterator = _terrainSprites.find(terrainId);
 	if (terrainIterator != _terrainSprites.end())
@@ -103,13 +106,15 @@ Sprite* GameAssetManager::getTerrainSprite(int terrainId)
 	return NULL;
 }
 
-Sprite* GameAssetManager::getSprite(GameObject* forObjectStore, unsigned int spriteId)
+Sprite* GameAssetManager::getSprite(unsigned int spriteId)
 {
-	map<unsigned int, Sprite*>::iterator terrainIterator = _terrainSprites.find(spriteId);
-	if (terrainIterator != _terrainSprites.end())
+	if (spriteId < 2500)
 	{
-		return terrainIterator->second;
+		return _getUnitSprite(spriteId);
 	}
-	return NULL;
+	else
+	{
+		return _getTerrainSprite(spriteId);
+	}
 }
 
