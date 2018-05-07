@@ -16,6 +16,7 @@ private:
 	SDL_Texture * _loadTexture(string path);
 	void _loadGameResources();
 	void _releaseGameResources();
+	void _releaseMap(std::map<unsigned int, Sprite*> spriteMap);
 	map<unsigned int, Sprite*> _loadSprite(const char* fileName);
 
 	SDL_Renderer* _gameRenderer;

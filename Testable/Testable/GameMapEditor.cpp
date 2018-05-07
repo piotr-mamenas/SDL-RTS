@@ -27,7 +27,7 @@ void GameMapEditor::start(GraphicsEngine* graphicsEngine)
 
 			if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 			{
-				graphicsEngine->refreshScene(_editedMap);
+				graphicsEngine->refreshScene(_editedMap,0,0);
 			}
 		}
 	}

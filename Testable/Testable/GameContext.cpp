@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <string>
 #include <SDL.h>
 
 #include "BaseUnit.h"
@@ -60,7 +61,7 @@ bool GameContext::init()
 			}
 
 			_gameAssetManager = new GameAssetManager(_gameRenderer);
-			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager);
+			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
 
 			BaseUnit* infantry = new InfantryUnit(50, 60);
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
@@ -72,6 +73,9 @@ bool GameContext::init()
 			units.push_back(infantry);
 			units.push_back(infantry2);
 			units.push_back(infantry3);
+
+			string playerOneRGB = "FF0000";
+			_currentPlayer = new Player(playerOneRGB, units);
 
 			SDL_Event e;
 			bool quit = false;
@@ -102,11 +106,12 @@ bool GameContext::init()
 							unit -> handleEvent(clickPositionX, clickPositionY, e.type);
 						}
 					}
-					_graphicsEngine->refreshScene(units, gameMap);
+					_graphicsEngine->refreshScene(units, gameMap,0,0);
 
 					int frameTicks = capTimer.getTicks();
 					if (frameTicks < SCREEN_TICKS_PER_FRAME)
 					{
+						// Capped at 20 atm, but VSync is active so can be turned off if necessary
 						SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
 					}
 				}

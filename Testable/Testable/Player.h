@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include <string>
 
 #include "BaseUnit.h"
 
@@ -11,12 +12,14 @@ using namespace std;
 class Player
 {
 private:
-	unsigned char* _color;
-	list<BaseUnit> _units;
+	string _color;
+	list<BaseUnit*> _units;
+	unsigned int _cameraX;
+	unsigned int _cameraY;
 public:
-	Player(unsigned char* color, list<BaseUnit> startingUnits);
-	void addUnit(BaseUnit unit);
-	list<BaseUnit> getUnits();
+	Player(string color, list<BaseUnit*> startingUnits);
+	void addUnit(BaseUnit* unit);
+	list<BaseUnit*> getUnits();
 };
 
 #endif

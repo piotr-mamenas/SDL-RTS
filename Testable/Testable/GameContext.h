@@ -17,8 +17,8 @@ private:
 	SDL_Renderer* _gameRenderer = NULL;
 	GraphicsEngine* _graphicsEngine = NULL;
 	GameAssetManager* _gameAssetManager = NULL;
-
-	list<Player> _players;
+	Player* _currentPlayer = NULL;
+	list<Player*> _players;
 	
 	int _screenWidth;
 	int _screenHeight;

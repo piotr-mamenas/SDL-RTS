@@ -13,10 +13,12 @@
 
 using namespace std;
 
-GraphicsEngine::GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager)
+GraphicsEngine::GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager, unsigned int resolutionX, unsigned int resolutionY)
 {
 	_gameAssetManager = assetManager;
 	_gameRenderer = gameRenderer;
+	_windowResolutionX = resolutionX;
+	_windowResolutionY = resolutionY;
 
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags)) 
@@ -30,8 +32,15 @@ GraphicsEngine::~GraphicsEngine()
 	IMG_Quit();
 }
 
-void GraphicsEngine::refreshScene(GameMap* gameMap)
+void GraphicsEngine::_setCamera(unsigned int cameraX, unsigned int cameraY)
 {
+	_currentPlayerCameraX = cameraX;
+	_currentPlayerCameraY = cameraY;
+}
+
+void GraphicsEngine::refreshScene(GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
+{
+	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
 	SDL_RenderClear(_gameRenderer);
 
@@ -40,8 +49,9 @@ void GraphicsEngine::refreshScene(GameMap* gameMap)
 	SDL_RenderPresent(_gameRenderer);
 }
 
-void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap)
+void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
 {
+	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 255);
 	SDL_SetRenderTarget(_gameRenderer, 0);
 	SDL_RenderClear(_gameRenderer);
@@ -81,7 +91,38 @@ void GraphicsEngine::_drawGameObject(GameObject* object)
 	unsigned int objectPositionY = object->getPositionY();
 
 	Sprite* objectSprite = _gameAssetManager->getSprite(objectId);
-	_drawTexture(objectSprite->getTexture(), objectPositionX, objectPositionY);
+	unsigned int spriteWidth = objectSprite->getWidth();
+	unsigned int spriteHeight = objectSprite->getHeight();
+
+	if (_isInCamera(objectPositionX, objectPositionY, spriteWidth, spriteHeight))
+	{
+		_drawTexture(objectSprite->getTexture(), objectPositionX, objectPositionY);
+	}
+}
+
+bool GraphicsEngine::_isInCamera(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height)
+{
+	if (positionX + width < _currentPlayerCameraX)
+	{
+		return false;
+	}
+
+	if (positionX > _currentPlayerCameraX + _windowResolutionX)
+	{
+		return false;
+	}
+
+	if (positionY > _currentPlayerCameraY + _windowResolutionY)
+	{
+		return false;
+	}
+
+	if (positionY + height < _currentPlayerCameraY)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 void GraphicsEngine::_drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY)

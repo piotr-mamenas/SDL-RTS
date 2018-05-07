@@ -71,18 +71,17 @@ SDL_Texture* GameAssetManager::_loadTexture(string path)
 
 void GameAssetManager::_releaseGameResources()
 {
-	std::map<unsigned int, Sprite*>::iterator unitIterator;
-	for(unitIterator = _unitSprites.begin(); unitIterator != _unitSprites.end(); unitIterator++)
-	{
-		Sprite* unitSprite = unitIterator -> second;
-		SDL_DestroyTexture(unitSprite -> getTexture() );
-	}
+	_releaseMap(_unitSprites);
+	_releaseMap(_terrainSprites);
+}
 
-	std::map<unsigned int, Sprite*>::iterator terrainIterator;
-	for (terrainIterator = _terrainSprites.begin(); terrainIterator != _terrainSprites.end(); terrainIterator++)
+void GameAssetManager::_releaseMap(std::map<unsigned int, Sprite*> spriteMap)
+{
+	std::map<unsigned int, Sprite*>::iterator spriteIterator;
+	for (spriteIterator = spriteMap.begin(); spriteIterator != spriteMap.end(); spriteIterator++)
 	{
-		Sprite* terrainSprite = terrainIterator->second;
-		SDL_DestroyTexture(terrainSprite->getTexture());
+		Sprite* sprite = spriteIterator->second;
+		SDL_DestroyTexture(sprite -> getTexture());
 	}
 }
 
