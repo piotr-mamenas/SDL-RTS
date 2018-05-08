@@ -67,7 +67,7 @@ bool GameContext::init()
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
 			BaseUnit* infantry3 = new InfantryUnit(30, 155);
 			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
-			GameMap* gameMap = new GameMap(fillTerrain, _screenWidth, _screenHeight);
+			GameMap* gameMap = new GameMap(fillTerrain, _screenWidth * 4, _screenHeight * 4);
 
 			list<BaseUnit*> units;
 			units.push_back(infantry);
@@ -75,7 +75,9 @@ bool GameContext::init()
 			units.push_back(infantry3);
 
 			string playerOneRGB = "FF0000";
-			_currentPlayer = new Player(playerOneRGB, units);
+			_currentPlayer = new Player(playerOneRGB, units, _screenWidth, _screenHeight);
+			_currentPlayer->startNewGame(gameMap);
+			_currentPlayer->setCamera(0, 0);
 
 			SDL_Event e;
 			bool quit = false;
@@ -95,18 +97,10 @@ bool GameContext::init()
 						quit = true;
 					}
 
-					if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
-					{
-						int clickPositionX = 0;
-						int clickPositionY = 0;
-						SDL_GetMouseState(&clickPositionX, &clickPositionY);
-
-						for (BaseUnit* unit : units)
-						{
-							unit -> handleEvent(clickPositionX, clickPositionY, e.type);
-						}
-					}
-					_graphicsEngine->refreshScene(units, gameMap,0,0);
+					_currentPlayer->handleInteraction(e, units);
+					std::cout << _currentPlayer->getCameraX() << endl;
+					std::cout << _currentPlayer->getCameraY() << endl;
+					_graphicsEngine->refreshScene(units, gameMap,_currentPlayer->getCameraX(),_currentPlayer->getCameraY());
 
 					int frameTicks = capTimer.getTicks();
 					if (frameTicks < SCREEN_TICKS_PER_FRAME)

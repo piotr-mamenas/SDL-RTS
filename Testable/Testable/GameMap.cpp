@@ -31,3 +31,13 @@ list<BaseTerrain*> GameMap::getTerrain()
 {
 	return _mapTerrain;
 }
+
+unsigned int GameMap::getMapWidth()
+{
+	return _mapWidth;
+}
+
+unsigned int GameMap::getMapHeight()
+{
+	return _mapHeight;
+}

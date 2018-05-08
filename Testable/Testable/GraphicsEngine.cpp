@@ -52,7 +52,7 @@ void GraphicsEngine::refreshScene(GameMap* gameMap, unsigned int cameraX, unsign
 void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
-	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
 	SDL_SetRenderTarget(_gameRenderer, 0);
 	SDL_RenderClear(_gameRenderer);
 

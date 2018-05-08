@@ -18,6 +18,8 @@ public:
 	GameMap(unsigned int mapWidth, unsigned int mapHeight);
 	GameMap(BaseTerrain* fillTerrain, unsigned int mapWidth, unsigned int mapHeight);
 	list<BaseTerrain*> getTerrain();
+	unsigned int getMapWidth();
+	unsigned int getMapHeight();
 };
 
 #endif
