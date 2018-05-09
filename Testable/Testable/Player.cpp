@@ -7,7 +7,8 @@
 #include "Player.h"
 #include "GameMap.h"
 
-#define SCROLLBOX_SIZE_IN_PX 10
+#define SCROLLBOX_SIZE_IN_PX 20
+#define SCROLL_SPEED 3
 
 Player::Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY)
 {
@@ -50,26 +51,26 @@ unsigned int Player::getCameraY()
 
 void Player::_handleScrolling(int mousePositionX, int mousePositionY)
 {
-	if (mousePositionX > _screenResolutionX - SCROLLBOX_SIZE_IN_PX &&
-		_cameraX < _gameMap->getMapWidth() - _screenResolutionX)
+	if (mousePositionX > _screenResolutionX - SCROLLBOX_SIZE_IN_PX 
+		&& _cameraX < _gameMap->getMapWidth() - _screenResolutionX)
 	{
-		_cameraX++;
-	}
-	if (mousePositionX > SCROLLBOX_SIZE_IN_PX && _cameraX > 0)
-	{
-		_cameraX--;
+		_cameraX = _cameraX + SCROLL_SPEED;
 	}
 
-	// Mouse - RIGHT
+	if (mousePositionX < SCROLLBOX_SIZE_IN_PX && _cameraX > 0)
+	{
+		_cameraX = _cameraX - SCROLL_SPEED;
+	}
+
 	if (mousePositionY > _screenResolutionY - SCROLLBOX_SIZE_IN_PX &&
 		_cameraY < _gameMap->getMapHeight() - _screenResolutionY)
 	{
-		_cameraY++;
+		_cameraY = _cameraY + SCROLL_SPEED;
 	}
 
 	if (mousePositionY < SCROLLBOX_SIZE_IN_PX && _cameraY > 0)
 	{
-		_cameraY--;
+		_cameraY = _cameraY - SCROLL_SPEED;
 	}
 }
 

@@ -20,8 +20,6 @@ protected:
 public:
 	BaseTerrain(unsigned int initialPositionX, unsigned int initialPositionY);
 	bool isBlocked(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height);
-	unsigned int getWidth();
-	unsigned int getHeight();
 };
 
 #endif

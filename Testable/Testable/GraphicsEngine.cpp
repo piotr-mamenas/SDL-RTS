@@ -3,6 +3,7 @@
 #include "BaseUnit.h"
 #include "GameAssetManager.h"
 #include "GameMap.h"
+#include "Player.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -72,7 +73,6 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 			_drawGameObject(unit);
 		}
 	}
-	
 }
 
 void GraphicsEngine::_drawGameMap(GameMap* gameMap)
@@ -91,12 +91,12 @@ void GraphicsEngine::_drawGameObject(GameObject* object)
 	unsigned int objectPositionY = object->getPositionY();
 
 	Sprite* objectSprite = _gameAssetManager->getSprite(objectId);
-	unsigned int spriteWidth = objectSprite->getWidth();
-	unsigned int spriteHeight = objectSprite->getHeight();
+	unsigned int spriteWidth = object->getWidth();
+	unsigned int spriteHeight = object->getHeight();
 
 	if (_isInCamera(objectPositionX, objectPositionY, spriteWidth, spriteHeight))
 	{
-		_drawTexture(objectSprite->getTexture(), objectPositionX, objectPositionY);
+		_drawTexture(objectSprite->getTexture(), objectPositionX - _currentPlayerCameraX, objectPositionY - _currentPlayerCameraY);
 	}
 }
 

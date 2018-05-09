@@ -17,6 +17,8 @@ public:
 	unsigned int getId();
 	unsigned int getPositionX();
 	unsigned int getPositionY();
+	unsigned int getWidth();
+	unsigned int getHeight();
 };
 
 #endif

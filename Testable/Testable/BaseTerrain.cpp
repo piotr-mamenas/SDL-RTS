@@ -34,13 +34,3 @@ bool BaseTerrain::isBlocked(unsigned int positionX, unsigned int positionY, unsi
 
 	return true;
 }
-
-unsigned int BaseTerrain::getWidth()
-{
-	return _width;
-}
-
-unsigned int BaseTerrain::getHeight()
-{
-	return _height;
-}

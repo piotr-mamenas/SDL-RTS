@@ -98,8 +98,6 @@ bool GameContext::init()
 					}
 
 					_currentPlayer->handleInteraction(e, units);
-					std::cout << _currentPlayer->getCameraX() << endl;
-					std::cout << _currentPlayer->getCameraY() << endl;
 					_graphicsEngine->refreshScene(units, gameMap,_currentPlayer->getCameraX(),_currentPlayer->getCameraY());
 
 					int frameTicks = capTimer.getTicks();
