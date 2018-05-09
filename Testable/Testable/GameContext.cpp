@@ -89,24 +89,23 @@ bool GameContext::init()
 
 			while (!quit) 
 			{
+				capTimer.start();
 				while (SDL_PollEvent(&e)) 
 				{
-					capTimer.start();
 					if (e.type == SDL_QUIT) 
 					{
 						quit = true;
 					}
-
 					_currentPlayer->handleInteraction(e, units);
-					_graphicsEngine->refreshScene(units, gameMap,_currentPlayer->getCameraX(),_currentPlayer->getCameraY());
-
-					int frameTicks = capTimer.getTicks();
-					if (frameTicks < SCREEN_TICKS_PER_FRAME)
-					{
-						// Capped at 20 atm, but VSync is active so can be turned off if necessary
-						SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
-					}
 				}
+				_graphicsEngine->refreshScene(units, gameMap, _currentPlayer->getCameraX(), _currentPlayer->getCameraY());
+				int frameTicks = capTimer.getTicks();
+				if (frameTicks < SCREEN_TICKS_PER_FRAME)
+				{
+					// Capped at 20 atm, but VSync is active so can be turned off if necessary
+					SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+				}
+				_currentPlayer->scrollCamera();
 			}
 		}
 	}

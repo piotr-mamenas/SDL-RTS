@@ -23,6 +23,7 @@ private:
 	unsigned int _cameraY;
 	unsigned int _screenResolutionX;
 	unsigned int _screenResolutionY;
+	unsigned int _scrollingState;
 public:
 	Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY);
 	void addUnit(BaseUnit* unit);
@@ -31,6 +32,7 @@ public:
 	unsigned int getCameraX();
 	unsigned int getCameraY();
 	void handleInteraction(SDL_Event e, list<BaseUnit*> units);
+	void scrollCamera();
 	void startNewGame(GameMap* gameMap);
 };
 
