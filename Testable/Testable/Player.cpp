@@ -10,21 +10,12 @@
 #define SCROLLBOX_SIZE_IN_PX 20
 #define SCROLL_SPEED 3
 
-enum SCROLLING_STATE {
-	NO_SCROLLING = 0,
-	SCROLLING_RIGHT = 1,
-	SCROLLING_LEFT = 2,
-	SCROLLING_UP = 3,
-	SCROLLING_DOWN = 4
-};
-
 Player::Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY)
 {
 	_units = startingUnits;
 	_color = color;
 	_screenResolutionX = screenResolutionX;
 	_screenResolutionY = screenResolutionY;
-	_scrollingState = NO_SCROLLING;
 }
 
 void Player::addUnit(BaseUnit* unit)
@@ -60,63 +51,73 @@ unsigned int Player::getCameraY()
 
 void Player::scrollCamera()
 {
-	switch (_scrollingState) 
+	if (_scrollingUp)
 	{
-	case SCROLLING_LEFT:
-		_cameraX = _cameraX - SCROLL_SPEED;
-		break;
-	case SCROLLING_RIGHT:
-		_cameraX = _cameraX + SCROLL_SPEED;
-		break;
-	case SCROLLING_UP:
 		_cameraY = _cameraY + SCROLL_SPEED;
-		break;
-	case SCROLLING_DOWN:
-		_cameraY = _cameraY - SCROLL_SPEED;
-		break;
 	}
+
+	if (_scrollingDown)
+	{
+		_cameraY = _cameraY - SCROLL_SPEED;
+	}
+
+	if (_scrollingLeft)
+	{
+		_cameraX = _cameraX - SCROLL_SPEED;
+	}
+
+	if (_scrollingRight)
+	{
+		_cameraX = _cameraX + SCROLL_SPEED;
+	}
+
+	_handleScrolling(_mousePositionX, _mousePositionY);
+}
+
+void Player::_resetScrolling()
+{
+	_scrollingLeft = false;
+	_scrollingRight = false;
+	_scrollingUp = false;
+	_scrollingDown = false;
 }
 
 void Player::_handleScrolling(int mousePositionX, int mousePositionY)
 {
-	_scrollingState = NO_SCROLLING;
+	_resetScrolling();
 
 	if (mousePositionX > _screenResolutionX - SCROLLBOX_SIZE_IN_PX 
 		&& _cameraX < _gameMap->getMapWidth() - _screenResolutionX)
 	{
-		_scrollingState = SCROLLING_RIGHT;
+		_scrollingRight = true;
 	}
 
 	if (mousePositionX < SCROLLBOX_SIZE_IN_PX && _cameraX > 0)
 	{
-		_scrollingState = SCROLLING_LEFT;
+		_scrollingLeft = true;
 	}
 
 	if (mousePositionY > _screenResolutionY - SCROLLBOX_SIZE_IN_PX &&
 		_cameraY < _gameMap->getMapHeight() - _screenResolutionY)
 	{
-		_scrollingState = SCROLLING_UP;
+		_scrollingUp = true;
 	}
 
 	if (mousePositionY < SCROLLBOX_SIZE_IN_PX && _cameraY > 0)
 	{
-		_scrollingState = SCROLLING_DOWN;
+		_scrollingDown = true;
 	}
 }
 
 void Player::handleInteraction(SDL_Event e, list<BaseUnit*> units)
 {
-	int mousePositionX = 0;
-	int mousePositionY = 0;
-	SDL_GetMouseState(&mousePositionX, &mousePositionY);
-
-	_handleScrolling(mousePositionX, mousePositionY);
+	SDL_GetMouseState(&_mousePositionX, &_mousePositionY);
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 	{
 		for (BaseUnit* unit : units)
 		{
-			unit->handleEvent(mousePositionX, mousePositionY, e.type);
+			unit->handleEvent(_mousePositionX, _mousePositionY, e.type);
 		}
 	}
 }

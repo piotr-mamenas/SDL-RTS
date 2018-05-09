@@ -16,6 +16,7 @@ class Player
 {
 private:
 	void _handleScrolling(int mousePositionX, int mousePositionY);
+	void _resetScrolling();
 	string _color;
 	list<BaseUnit*> _units;
 	GameMap* _gameMap;
@@ -23,7 +24,12 @@ private:
 	unsigned int _cameraY;
 	unsigned int _screenResolutionX;
 	unsigned int _screenResolutionY;
-	unsigned int _scrollingState;
+	int _mousePositionX;
+	int _mousePositionY;
+	bool _scrollingLeft;
+	bool _scrollingRight;
+	bool _scrollingUp;
+	bool _scrollingDown;
 public:
 	Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY);
 	void addUnit(BaseUnit* unit);
