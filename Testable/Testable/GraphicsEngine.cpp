@@ -89,14 +89,15 @@ void GraphicsEngine::_drawGameObject(GameObject* object)
 	unsigned int objectId = object->getId();
 	unsigned int objectPositionX = object->getPositionX();
 	unsigned int objectPositionY = object->getPositionY();
+	unsigned int objectWith = object->getWidth();
+	unsigned int objectHeight = object->getHeight();
 
 	Sprite* objectSprite = _gameAssetManager->getSprite(objectId);
-	unsigned int spriteWidth = object->getWidth();
-	unsigned int spriteHeight = object->getHeight();
+	SDL_Rect* spriteClip = objectSprite->getClip(1);
 
-	if (_isInCamera(objectPositionX, objectPositionY, spriteWidth, spriteHeight))
+	if (_isInCamera(objectPositionX, objectPositionY, objectWith, objectHeight))
 	{
-		_drawTexture(objectSprite->getTexture(), objectPositionX - _currentPlayerCameraX, objectPositionY - _currentPlayerCameraY);
+		_drawTexture(objectSprite->getTexture(), spriteClip, objectPositionX - _currentPlayerCameraX, objectPositionY - _currentPlayerCameraY);
 	}
 }
 
@@ -125,12 +126,14 @@ bool GraphicsEngine::_isInCamera(unsigned int positionX, unsigned int positionY,
 	return true;
 }
 
-void GraphicsEngine::_drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY)
+void GraphicsEngine::_drawTexture(SDL_Texture* texture, SDL_Rect* clip, unsigned int positionX, unsigned int positionY)
 {
 	SDL_Rect unitPosition;
 	unitPosition.x = positionX;
 	unitPosition.y = positionY;
-	SDL_QueryTexture(texture, NULL, NULL, &unitPosition.w, &unitPosition.h);
+	//SDL_QueryTexture(texture, NULL, NULL, &unitPosition.w, &unitPosition.h);
+	unitPosition.w = clip->w;
+	unitPosition.h = clip->h;
 
-	SDL_RenderCopy(_gameRenderer, texture, NULL, &unitPosition);
+	SDL_RenderCopy(_gameRenderer, texture, clip, &unitPosition);
 }

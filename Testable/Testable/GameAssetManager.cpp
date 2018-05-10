@@ -34,15 +34,17 @@ void GameAssetManager::_loadGameResources()
 map<unsigned int, Sprite*> GameAssetManager::_loadSprite(const char* fileName)
 {
 	unsigned int id;
+	int sizeX;
+	int sizeY;
 	string path;
 
 	map<unsigned int, Sprite*> sprites;
 	ifstream spriteFile(fileName);
 
-	while (spriteFile >> id >> path)
+	while (spriteFile >> id >> sizeX >> sizeY >> path)
 	{
 		SDL_Texture* texture = _loadTexture(path);
-		Sprite* sprite = new Sprite(texture);
+		Sprite* sprite = new Sprite(texture, sizeX, sizeY);
 		sprites.insert(pair<unsigned int, Sprite*>(id, sprite));
 	}
 	return sprites;

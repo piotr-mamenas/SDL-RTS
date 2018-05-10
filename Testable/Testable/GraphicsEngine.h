@@ -14,7 +14,7 @@ using namespace std;
 class GraphicsEngine
 {
 private:
-	void _drawTexture(SDL_Texture* texture, unsigned int positionX, unsigned int positionY);
+	void _drawTexture(SDL_Texture* texture, SDL_Rect* clip, unsigned int positionX, unsigned int positionY);
 	void _drawUnits(list<BaseUnit*> units);
 	void _drawGameObject(GameObject* object);
 	void _drawGameMap(GameMap* gameMap);

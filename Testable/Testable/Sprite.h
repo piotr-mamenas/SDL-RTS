@@ -1,20 +1,26 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <map>
+
 #include <SDL.h>
+
+using namespace std;
 
 class Sprite
 {
 private:
-	unsigned int _width;
-	unsigned int _height;
+	int _spriteSheetWidth;
+	int _spriteSheetHeight;
 	SDL_Texture* _spriteTexture;
-public:
-	Sprite(SDL_Texture* spriteTexture);
-	SDL_Texture* getTexture();
+	map<int,SDL_Rect*> _clips;
 
-	unsigned int getWidth();
-	unsigned int getHeight();
+public:
+	Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight);
+	SDL_Texture* getTexture();
+	int getSpriteSheetWidth();
+	int getSpriteSheetHeight();
+	SDL_Rect* getClip(int clipId);
 };
 
 #endif
