@@ -88,24 +88,24 @@ void GameAssetManager::_releaseMap(std::map<unsigned int, Sprite*> spriteMap)
 	}
 }
 
-Sprite* GameAssetManager::_getUnitSprite(int unitId)
+Sprite* GameAssetManager::_findSprite(int spriteId, map<unsigned int, Sprite*> sprites)
 {
-	map<unsigned int, Sprite*>::iterator unitIterator = _unitSprites.find(unitId);
-	if (unitIterator != _unitSprites.end()) 
+	map<unsigned int, Sprite*>::iterator spriteIterator = sprites.find(spriteId);
+	if (spriteIterator != sprites.end())
 	{
-		return unitIterator -> second;
+		return spriteIterator->second;
 	}
 	return NULL;
 }
 
+Sprite* GameAssetManager::_getUnitSprite(int unitId)
+{
+	return _findSprite(unitId, _unitSprites);
+}
+
 Sprite* GameAssetManager::_getTerrainSprite(int terrainId)
 {
-	map<unsigned int, Sprite*>::iterator terrainIterator = _terrainSprites.find(terrainId);
-	if (terrainIterator != _terrainSprites.end())
-	{
-		return terrainIterator -> second;
-	}
-	return NULL;
+	return _findSprite(terrainId, _terrainSprites);
 }
 
 Sprite* GameAssetManager::getSprite(unsigned int spriteId)

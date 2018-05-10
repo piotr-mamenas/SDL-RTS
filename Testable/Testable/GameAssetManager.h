@@ -18,11 +18,11 @@ private:
 	void _releaseGameResources();
 	void _releaseMap(std::map<unsigned int, Sprite*> spriteMap);
 	map<unsigned int, Sprite*> _loadSprite(const char* fileName);
-
 	SDL_Renderer* _gameRenderer;
 	map<unsigned int, Sprite*> _unitSprites;
 	map<unsigned int, Sprite*> _terrainSprites;
 
+	Sprite* _findSprite(int spriteId, map<unsigned int, Sprite*> sprites);
 	Sprite* _getUnitSprite(int unitId);
 	Sprite* _getTerrainSprite(int terrainId);
 public:
