@@ -67,18 +67,17 @@ bool GameContext::init()
 			BaseUnit* infantry2 = new InfantryUnit(12, 92);
 			BaseUnit* infantry3 = new InfantryUnit(30, 155);
 			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
-			GameMap* gameMap = new GameMap(fillTerrain, _screenWidth * 4, _screenHeight * 4);
+			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980);
 
 			list<BaseUnit*> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);
 			units.push_back(infantry3);
 
-			string playerOneRGB = "FF0000";
-			_currentPlayer = new Player(playerOneRGB, units, _screenWidth, _screenHeight);
+			string playerOneRGBColor = "FF0000";
+			_currentPlayer = new Player(playerOneRGBColor, units, _screenWidth, _screenHeight);
 			_currentPlayer->startNewGame(gameMap);
 			_currentPlayer->setCamera(0, 0);
-
 			SDL_Event e;
 			bool quit = false;
 			

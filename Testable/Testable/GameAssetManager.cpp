@@ -59,6 +59,7 @@ SDL_Texture* GameAssetManager::_loadTexture(string path)
 	}
 	else
 	{
+		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0));
 		loadedTexture = SDL_CreateTextureFromSurface(_gameRenderer, loadedSurface);
 		if (loadedTexture == NULL)
 		{

@@ -1,14 +1,15 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <algorithm>
 
 #include <SDL.h>
 
 #include "Player.h"
 #include "GameMap.h"
 
-#define SCROLLBOX_SIZE_IN_PX 20
-#define SCROLL_SPEED 3
+#define SCROLLBOX_SIZE_IN_PX 30
+#define SCROLL_SPEED 8
 
 Player::Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY)
 {
@@ -119,5 +120,15 @@ void Player::handleInteraction(SDL_Event e, list<BaseUnit*> units)
 		{
 			unit->handleEvent(_mousePositionX, _mousePositionY, e.type);
 		}
+	}
+}
+
+void Player::setPlayerHostile(Player* player)
+{
+	bool isPlayerAlreadyHostile = find(_hostilePlayers.begin(), _hostilePlayers.end(), player) != _hostilePlayers.end();
+
+	if (!isPlayerAlreadyHostile)
+	{
+		_hostilePlayers.push_back(player);
 	}
 }

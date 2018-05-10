@@ -19,6 +19,7 @@ private:
 	void _resetScrolling();
 	string _color;
 	list<BaseUnit*> _units;
+	list<Player*> _hostilePlayers;
 	GameMap* _gameMap;
 	unsigned int _cameraX;
 	unsigned int _cameraY;
@@ -34,12 +35,15 @@ public:
 	Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY);
 	void addUnit(BaseUnit* unit);
 	list<BaseUnit*> getUnits();
+
 	void setCamera(unsigned int cameraX, unsigned int cameraY);
 	unsigned int getCameraX();
 	unsigned int getCameraY();
 	void handleInteraction(SDL_Event e, list<BaseUnit*> units);
 	void scrollCamera();
+
 	void startNewGame(GameMap* gameMap);
+	void setPlayerHostile(Player* player);
 };
 
 #endif
