@@ -11,7 +11,7 @@
 #define SCROLLBOX_SIZE_IN_PX 30
 #define SCROLL_SPEED 8
 
-Player::Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY)
+Player::Player(string color, list<BaseUnit*> startingUnits, int screenResolutionX, int screenResolutionY)
 {
 	_units = startingUnits;
 	_color = color;
@@ -19,6 +19,12 @@ Player::Player(string color, list<BaseUnit*> startingUnits, unsigned int screenR
 	_screenResolutionY = screenResolutionY;
 }
 
+Player::Player(string color, int screenResolutionX, int screenResolutionY)
+{
+	_color = color;
+	_screenResolutionX;
+	_screenResolutionY;
+}
 void Player::addUnit(BaseUnit* unit)
 {
 	_units.push_back(unit);
@@ -34,18 +40,18 @@ void Player::startNewGame(GameMap* gameMap)
 	_gameMap = gameMap;
 }
 
-void Player::setCamera(unsigned int cameraX, unsigned int cameraY)
+void Player::setCamera(int cameraX, int cameraY)
 {
 	_cameraX = cameraX;
 	_cameraY = cameraY;
 }
 
-unsigned int Player::getCameraX()
+int Player::getCameraX()
 {
 	return _cameraX;
 }
 
-unsigned int Player::getCameraY()
+int Player::getCameraY()
 {
 	return _cameraY;
 }

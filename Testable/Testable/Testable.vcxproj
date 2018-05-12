@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseUnit.h" />
+    <ClInclude Include="C:\Users\corpseRott\Downloads\json.hpp" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameMap.h" />

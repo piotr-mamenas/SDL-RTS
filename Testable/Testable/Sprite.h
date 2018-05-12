@@ -13,7 +13,7 @@ private:
 	int _spriteSheetWidth;
 	int _spriteSheetHeight;
 	SDL_Texture* _spriteTexture;
-	map<int,SDL_Rect*> _clips;
+	map<int,SDL_Rect> _clips;
 
 public:
 	Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight);

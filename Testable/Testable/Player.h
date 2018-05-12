@@ -21,10 +21,10 @@ private:
 	list<BaseUnit*> _units;
 	list<Player*> _hostilePlayers;
 	GameMap* _gameMap;
-	unsigned int _cameraX;
-	unsigned int _cameraY;
-	unsigned int _screenResolutionX;
-	unsigned int _screenResolutionY;
+	int _cameraX;
+	int _cameraY;
+	int _screenResolutionX;
+	int _screenResolutionY;
 	int _mousePositionX;
 	int _mousePositionY;
 	bool _scrollingLeft;
@@ -32,13 +32,14 @@ private:
 	bool _scrollingUp;
 	bool _scrollingDown;
 public:
-	Player(string color, list<BaseUnit*> startingUnits, unsigned int screenResolutionX, unsigned int screenResolutionY);
+	Player(string color, list<BaseUnit*> startingUnits, int screenResolutionX, int screenResolutionY);
+	Player(string color, int screenResolutionX, int screenResolutionY);
 	void addUnit(BaseUnit* unit);
 	list<BaseUnit*> getUnits();
 
-	void setCamera(unsigned int cameraX, unsigned int cameraY);
-	unsigned int getCameraX();
-	unsigned int getCameraY();
+	void setCamera(int cameraX, int cameraY);
+	int getCameraX();
+	int getCameraY();
 	void handleInteraction(SDL_Event e, list<BaseUnit*> units);
 	void scrollCamera();
 

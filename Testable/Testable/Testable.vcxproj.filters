@@ -46,6 +46,9 @@
     <Filter Include="Header Files\Environment\GameTerrain">
       <UniqueIdentifier>{7ae2fcfa-b2e0-4a6c-86b2-6b52687b87e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Maps">
+      <UniqueIdentifier>{5d2bd242-185e-476b-ae79-6ea99c5fba8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -135,6 +138,9 @@
       <Filter>Header Files\Environment</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\corpseRott\Downloads\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

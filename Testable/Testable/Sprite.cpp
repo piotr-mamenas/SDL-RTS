@@ -31,13 +31,13 @@ Sprite::Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight)
 		{
 			clipCounter++;
 
-			SDL_Rect* spriteClip = new SDL_Rect();
-			spriteClip->w = spriteWidth;
-			spriteClip->h = spriteHeight;
-			spriteClip->x = cntX * spriteWidth;
-			spriteClip->y = cntY * spriteHeight;
+			SDL_Rect spriteClip;
+			spriteClip.w = spriteWidth;
+			spriteClip.h = spriteHeight;
+			spriteClip.x = cntX * spriteWidth;
+			spriteClip.y = cntY * spriteHeight;
 
-			_clips.insert(pair<int, SDL_Rect*>(clipCounter, spriteClip));
+			_clips.insert(pair<int, SDL_Rect>(clipCounter, spriteClip));
 		}
 	}
 }
@@ -59,10 +59,9 @@ int Sprite::getSpriteSheetHeight()
 
 SDL_Rect* Sprite::getClip(int clipId)
 {
-	map<int, SDL_Rect*>::iterator clipIterator = _clips.find(clipId);
+	map<int, SDL_Rect>::iterator clipIterator = _clips.find(clipId);
 	if (clipIterator != _clips.end())
 	{
-		return clipIterator->second;
+		return &clipIterator->second;
 	}
-	return NULL;
 }

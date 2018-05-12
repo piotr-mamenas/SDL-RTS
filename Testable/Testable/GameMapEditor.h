@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include <string>
 
 #include "GameMap.h"
 #include "GraphicsEngine.h"
@@ -13,11 +14,14 @@ class GameMapEditor
 {
 private:
 	GameMap* _editedMap;
-	unsigned int _defaultMapWidth;
-	unsigned int _defaultMapHeight;
+	int _defaultMapWidth;
+	int _defaultMapHeight;
+	int _selectedBrushId;
 public:
-	GameMapEditor(unsigned int defaultMapWidth, unsigned int defaultMapHeight);
-	void start(GraphicsEngine* graphicsEngine);
+	GameMapEditor(int defaultMapWidth, int defaultMapHeight);
+	void loadMap(string mapName);
+	void saveMap();
+	void start(GraphicsEngine* graphicsEngine, int screenWidth, int screenHeight);
 };
 
 #endif
