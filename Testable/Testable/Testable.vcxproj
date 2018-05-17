@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseUnit.h" />
-    <ClInclude Include="C:\Users\corpseRott\Downloads\json.hpp" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameMap.h" />
@@ -159,6 +158,7 @@
     <Image Include="unit.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="skirmish_map.json" />
     <None Include="terrain_images.dat" />
     <None Include="unit_images.dat" />
   </ItemGroup>

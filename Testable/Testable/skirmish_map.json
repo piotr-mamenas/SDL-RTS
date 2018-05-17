@@ -1,0 +1,26 @@
+{
+  "mapDefinition": {
+    "tiles": [
+      {
+        "id": 1,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "objects": [
+      {
+        "id": 1,
+        "x": 0,
+        "y": 0
+      }
+    ],
+    "blockingTerrain": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0 
+      }
+    ]
+  }
+}

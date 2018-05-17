@@ -1,14 +1,20 @@
-#include <SDL.h>
-
+#include <iostream>
+#include <fstream>
 #include <exception>
 
 #include "GameMap.h"
 #include "GrassTerrainTile.h"
 #include "BaseUnit.h"
 
+#include <nlohmann/json.hpp>
+#include <SDL.h>
+
 #define MAX_TILE_SIZE 90
 
+const string MAPFILE_FORMAT = "json";
+
 using namespace std;
+using json = nlohmann::json;
 
 GameMap::GameMap(unsigned int mapWidth, unsigned int mapHeight)
 {
@@ -82,4 +88,18 @@ unsigned int GameMap::getMapWidth()
 unsigned int GameMap::getMapHeight()
 {
 	return _mapHeight;
+}
+
+void GameMap::loadMap(string mapName)
+{
+	string mapFilename = mapName + MAPFILE_FORMAT;
+
+	ifstream mapFile(mapFilename);
+
+	json map;
+	mapFile >> map;
+
+	auto tiles = map["mapDefinition"]["tiles"];
+
+	cout << tiles <<endl;
 }

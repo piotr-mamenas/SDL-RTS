@@ -140,9 +140,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\corpseRott\Downloads\json.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="unit.png">
@@ -158,6 +155,9 @@
     </None>
     <None Include="terrain_images.dat">
       <Filter>Resource Files\Logic</Filter>
+    </None>
+    <None Include="skirmish_map.json">
+      <Filter>Resource Files\Maps</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include <string>
 
 #include "BaseTerrain.h"
 #include "BaseUnit.h"
@@ -29,6 +30,7 @@ public:
 	void addUnit(BaseUnit* unit);
 	void placeTile(BaseTerrain* tile);
 	void placeObject(BaseTerrain* object);
+	void loadMap(string mapName);
 	unsigned int getMapWidth();
 	unsigned int getMapHeight();
 };

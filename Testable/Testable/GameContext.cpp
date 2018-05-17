@@ -68,7 +68,7 @@ bool GameContext::init()
 			BaseUnit* infantry3 = new InfantryUnit(30, 155);
 			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
 			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980);
-
+			gameMap->loadMap("skirmish_map");
 			list<BaseUnit*> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);
