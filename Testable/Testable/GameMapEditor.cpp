@@ -2,7 +2,7 @@
 
 #include "GameMapEditor.h"
 #include "GraphicsEngine.h"
-#include "GrassTerrainTile.h"
+#include "Terrain.h"
 #include "GameTimer.h"
 #include "Player.h"
 

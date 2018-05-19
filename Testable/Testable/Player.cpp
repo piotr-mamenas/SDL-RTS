@@ -5,13 +5,14 @@
 
 #include <SDL.h>
 
+#include "Unit.h"
 #include "Player.h"
 #include "GameMap.h"
 
 #define SCROLLBOX_SIZE_IN_PX 30
 #define SCROLL_SPEED 8
 
-Player::Player(string color, list<BaseUnit*> startingUnits, int screenResolutionX, int screenResolutionY)
+Player::Player(string color, list<Unit*> startingUnits, int screenResolutionX, int screenResolutionY)
 {
 	_units = startingUnits;
 	_color = color;
@@ -25,12 +26,12 @@ Player::Player(string color, int screenResolutionX, int screenResolutionY)
 	_screenResolutionX;
 	_screenResolutionY;
 }
-void Player::addUnit(BaseUnit* unit)
+void Player::addUnit(Unit* unit)
 {
 	_units.push_back(unit);
 }
 
-list<BaseUnit*> Player::getUnits()
+list<Unit*> Player::getUnits()
 {
 	return _units;
 }
@@ -116,13 +117,13 @@ void Player::_handleScrolling(int mousePositionX, int mousePositionY)
 	}
 }
 
-void Player::handleInteraction(SDL_Event e, list<BaseUnit*> units)
+void Player::handleInteraction(SDL_Event e, list<Unit*> units)
 {
 	SDL_GetMouseState(&_mousePositionX, &_mousePositionY);
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 	{
-		for (BaseUnit* unit : units)
+		for (Unit* unit : units)
 		{
 			unit->handleEvent(_mousePositionX, _mousePositionY, e.type);
 		}

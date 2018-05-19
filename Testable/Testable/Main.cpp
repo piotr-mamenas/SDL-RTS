@@ -1,8 +1,6 @@
 #include <iostream>
 #include <SDL.h>
 
-#include "BaseUnit.h"
-#include "InfantryUnit.h"
 #include "GameContext.h"
 
 using namespace std;

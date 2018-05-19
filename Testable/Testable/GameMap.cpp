@@ -3,8 +3,8 @@
 #include <exception>
 
 #include "GameMap.h"
-#include "GrassTerrainTile.h"
-#include "BaseUnit.h"
+#include "Terrain.h"
+#include "Unit.h"
 
 #include <nlohmann/json.hpp>
 #include <SDL.h>
@@ -22,7 +22,7 @@ GameMap::GameMap(unsigned int mapWidth, unsigned int mapHeight)
 	_mapHeight = mapHeight;
 }
 
-GameMap::GameMap(BaseTerrain* templateTerrain, unsigned int mapWidth, unsigned int mapHeight)
+GameMap::GameMap(Terrain* templateTerrain, unsigned int mapWidth, unsigned int mapHeight)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
@@ -40,7 +40,7 @@ GameMap::GameMap(BaseTerrain* templateTerrain, unsigned int mapWidth, unsigned i
 	_fillMapWithTerrain(templateTerrain);
 }
 
-void GameMap::_fillMapWithTerrain(BaseTerrain* templateTerrain)
+void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
 {
 	unsigned int tileMaxHorizontal = (_mapWidth) / (templateTerrain->getWidth());
 	unsigned int tileMaxVertical = (_mapHeight) / (templateTerrain->getHeight());
@@ -49,13 +49,13 @@ void GameMap::_fillMapWithTerrain(BaseTerrain* templateTerrain)
 	{
 		for (unsigned int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
-			BaseTerrain* terrainTile = new GrassTerrainTile(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight());
+			Terrain* terrainTile = new Terrain(1,cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight());
 			_mapTerrain.push_back(terrainTile);
 		}
 	}
 }
 
-list<BaseTerrain*> GameMap::getTerrain()
+list<Terrain*> GameMap::getTerrain()
 {
 	return _mapTerrain;
 }
@@ -65,17 +65,17 @@ void GameMap::getUnits(SDL_Rect* containingBox)
 
 }
 
-void GameMap::addUnit(BaseUnit* unit)
+void GameMap::addUnit(Unit* unit)
 {
 
 }
 
-void GameMap::placeTile(BaseTerrain* tile)
+void GameMap::placeTile(Terrain* tile)
 {
 	
 }
 
-void GameMap::placeObject(BaseTerrain* object)
+void GameMap::placeObject(Terrain* object)
 {
 
 }
@@ -92,14 +92,33 @@ unsigned int GameMap::getMapHeight()
 
 void GameMap::loadMap(string mapName)
 {
-	string mapFilename = mapName + MAPFILE_FORMAT;
-
+	string mapFilename = mapName + string(".") + MAPFILE_FORMAT;
+	cout << mapFilename << endl;
 	ifstream mapFile(mapFilename);
 
-	json map;
-	mapFile >> map;
+	try
+	{
+		json map;
+		mapFile >> map;
 
-	auto tiles = map["mapDefinition"]["tiles"];
-
-	cout << tiles <<endl;
+		for (auto& element : map)
+		{
+			cout << element << endl;
+			cout << element["tiles"];
+			for (auto& tile : element["tiles"])
+			{
+				int terrainId = tile["terrainId"].get<int>();
+				int positionX = tile["positionX"].get<int>();
+				int positionY = tile["positionY"].get<int>();
+				_mapTerrain.push_back(new Terrain(terrainId, positionX, positionY));
+			}
+		}
+	}
+	catch (json::parse_error& e)
+	{
+		// output exception information
+		std::cout << "message: " << e.what() << '\n'
+			<< "exception id: " << e.id << '\n'
+			<< "byte position of error: " << e.byte << std::endl;
+	}
 }

@@ -3,14 +3,13 @@
 #include <string>
 #include <SDL.h>
 
-#include "BaseUnit.h"
-#include "InfantryUnit.h"
+#include "Unit.h"
+#include "Terrain.h"
 #include "GameContext.h"
 #include "GraphicsEngine.h"
 #include "GameAssetManager.h"
 #include "Player.h"
 #include "GameTimer.h"
-#include "GrassTerrainTile.h"
 #include "GameMap.h"
 
 #define GAME_NAME "C++ RTS"
@@ -63,13 +62,13 @@ bool GameContext::init()
 			_gameAssetManager = new GameAssetManager(_gameRenderer);
 			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
 
-			BaseUnit* infantry = new InfantryUnit(50, 60);
-			BaseUnit* infantry2 = new InfantryUnit(12, 92);
-			BaseUnit* infantry3 = new InfantryUnit(30, 155);
-			BaseTerrain* fillTerrain = new GrassTerrainTile(0,0);
+			Unit* infantry = new Unit(1, 50, 60);
+			Unit* infantry2 = new Unit(1, 12, 92);
+			Unit* infantry3 = new Unit(1, 30, 155);
+			Terrain* fillTerrain = new Terrain(1,0,0);
 			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980);
 			gameMap->loadMap("skirmish_map");
-			list<BaseUnit*> units;
+			list<Unit*> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);
 			units.push_back(infantry3);

@@ -6,19 +6,19 @@ using namespace std;
 class GameObject
 {
 protected:
-	unsigned int _id;
-	unsigned int _positionX;
-	unsigned int _positionY;
-	unsigned int _width;
-	unsigned int _height;
+	int _spriteId;
+	int _positionX;
+	int _positionY;
+	int _width;
+	int _height;
 
-	GameObject(unsigned int initialPositionX, unsigned int initialPositionY);
+	GameObject(int spriteId, int initialPositionX, int initialPositionY);
 public:
-	unsigned int getId();
-	unsigned int getPositionX();
-	unsigned int getPositionY();
-	unsigned int getWidth();
-	unsigned int getHeight();
+	int getSpriteId();
+	int getPositionX();
+	int getPositionY();
+	int getWidth();
+	int getHeight();
 };
 
 #endif

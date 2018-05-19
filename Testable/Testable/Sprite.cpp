@@ -64,4 +64,5 @@ SDL_Rect* Sprite::getClip(int clipId)
 	{
 		return &clipIterator->second;
 	}
+	return NULL;
 }

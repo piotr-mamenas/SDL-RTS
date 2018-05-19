@@ -121,35 +121,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseUnit.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameMapEditor.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScenario.cpp" />
-    <ClCompile Include="BaseTerrain.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="GraphicsEngine.cpp" />
-    <ClCompile Include="GrassTerrainTile.cpp" />
-    <ClCompile Include="InfantryUnit.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GameAssetManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseUnit.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameMapEditor.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScenario.h" />
-    <ClInclude Include="BaseTerrain.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicsEngine.h" />
-    <ClInclude Include="GrassTerrainTile.h" />
-    <ClInclude Include="InfantryUnit.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
@@ -159,8 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="skirmish_map.json" />
-    <None Include="terrain_images.dat" />
-    <None Include="unit_images.dat" />
+    <None Include="sprites.json" />
+    <None Include="terrain.json" />
+    <None Include="units.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

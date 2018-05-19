@@ -5,13 +5,17 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <string>
 #include <fstream>
 #include <string>
 #include "GameObject.h"
-#include "BaseTerrain.h"
-#include "BaseUnit.h"
+#include "Terrain.h"
+#include "Unit.h"
+
+#include <nlohmann/json.hpp>
 
 using namespace std;
+using json = nlohmann::json;
 
 GameAssetManager::GameAssetManager(SDL_Renderer* gameRenderer)
 {
@@ -27,27 +31,44 @@ GameAssetManager::~GameAssetManager()
 
 void GameAssetManager::_loadGameResources()
 {
-	_terrainSprites = _loadSprite("terrain_images.dat");
-	_unitSprites = _loadSprite("unit_images.dat");
+	_sprites = _loadSprite("sprites.json");
 }
 
-map<unsigned int, Sprite*> GameAssetManager::_loadSprite(const char* fileName)
+map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 {
-	unsigned int id;
-	int sizeX;
-	int sizeY;
+	int spriteId;
+	int spriteWidth;
+	int spriteHeight;
 	string path;
 
-	map<unsigned int, Sprite*> sprites;
-	ifstream spriteFile(fileName);
-
-	while (spriteFile >> id >> sizeX >> sizeY >> path)
+	map<int, Sprite*> spriteMap;
+	try
 	{
-		SDL_Texture* texture = _loadTexture(path);
-		Sprite* sprite = new Sprite(texture, sizeX, sizeY);
-		sprites.insert(pair<unsigned int, Sprite*>(id, sprite));
+		ifstream spriteFile(fileName);
+		json sprites;
+		spriteFile >> sprites;
+
+		for (auto& sprite : sprites)
+		{
+			spriteId = sprite["id"].get<int>();
+			spriteWidth = sprite["width"].get<int>();
+			spriteHeight = sprite["height"].get<int>();
+			path = sprite["spriteSheetImage"].get<string>();
+
+			SDL_Texture* texture = _loadTexture(path);
+			Sprite* sprite = new Sprite(texture, spriteWidth, spriteHeight);
+			spriteMap.insert(pair<int, Sprite*>(spriteId, sprite));
+		}
+		return spriteMap;
 	}
-	return sprites;
+	catch (json::parse_error& e)
+	{
+		cout << "message: " << e.what() << '\n'
+			<< "exception id: " << e.id << '\n'
+			<< "byte position of error: " << e.byte << endl;
+
+		return spriteMap;
+	}
 }
 
 SDL_Texture* GameAssetManager::_loadTexture(string path)
@@ -74,13 +95,12 @@ SDL_Texture* GameAssetManager::_loadTexture(string path)
 
 void GameAssetManager::_releaseGameResources()
 {
-	_releaseMap(_unitSprites);
-	_releaseMap(_terrainSprites);
+	_releaseMap(_sprites);
 }
 
-void GameAssetManager::_releaseMap(std::map<unsigned int, Sprite*> spriteMap)
+void GameAssetManager::_releaseMap(std::map<int, Sprite*> spriteMap)
 {
-	std::map<unsigned int, Sprite*>::iterator spriteIterator;
+	std::map<int, Sprite*>::iterator spriteIterator;
 	for (spriteIterator = spriteMap.begin(); spriteIterator != spriteMap.end(); spriteIterator++)
 	{
 		Sprite* sprite = spriteIterator->second;
@@ -88,35 +108,13 @@ void GameAssetManager::_releaseMap(std::map<unsigned int, Sprite*> spriteMap)
 	}
 }
 
-Sprite* GameAssetManager::_findSprite(int spriteId, map<unsigned int, Sprite*> sprites)
+Sprite* GameAssetManager::getSprite(int spriteId)
 {
-	map<unsigned int, Sprite*>::iterator spriteIterator = sprites.find(spriteId);
-	if (spriteIterator != sprites.end())
+	map<int, Sprite*>::iterator spriteIterator = _sprites.find(spriteId);
+	if (spriteIterator != _sprites.end())
 	{
 		return spriteIterator->second;
 	}
 	return NULL;
-}
-
-Sprite* GameAssetManager::_getUnitSprite(int unitId)
-{
-	return _findSprite(unitId, _unitSprites);
-}
-
-Sprite* GameAssetManager::_getTerrainSprite(int terrainId)
-{
-	return _findSprite(terrainId, _terrainSprites);
-}
-
-Sprite* GameAssetManager::getSprite(unsigned int spriteId)
-{
-	if (spriteId < 2500)
-	{
-		return _getUnitSprite(spriteId);
-	}
-	else
-	{
-		return _getTerrainSprite(spriteId);
-	}
 }
 

@@ -57,12 +57,6 @@
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BaseUnit.cpp">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="InfantryUnit.cpp">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
@@ -84,28 +78,22 @@
     <ClCompile Include="GameMap.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="BaseTerrain.cpp">
-      <Filter>Source Files\Environment\GameTerrain</Filter>
-    </ClCompile>
-    <ClCompile Include="GrassTerrainTile.cpp">
-      <Filter>Source Files\Environment\GameTerrain</Filter>
-    </ClCompile>
     <ClCompile Include="GameMapEditor.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Source Files\Environment\GameTerrain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameContext.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseUnit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="InfantryUnit.h">
-      <Filter>Header Files\Units</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsEngine.h">
       <Filter>Header Files\Graphics</Filter>
@@ -128,17 +116,17 @@
     <ClInclude Include="GameScenario.h">
       <Filter>Header Files\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="BaseTerrain.h">
-      <Filter>Header Files\Environment\GameTerrain</Filter>
-    </ClInclude>
-    <ClInclude Include="GrassTerrainTile.h">
-      <Filter>Header Files\Environment\GameTerrain</Filter>
-    </ClInclude>
     <ClInclude Include="GameMapEditor.h">
       <Filter>Header Files\Environment</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\Environment\GameTerrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,14 +138,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="unit_images.dat">
-      <Filter>Resource Files\Logic</Filter>
-    </None>
-    <None Include="terrain_images.dat">
-      <Filter>Resource Files\Logic</Filter>
-    </None>
     <None Include="skirmish_map.json">
       <Filter>Resource Files\Maps</Filter>
+    </None>
+    <None Include="sprites.json">
+      <Filter>Resource Files\Logic</Filter>
+    </None>
+    <None Include="units.json">
+      <Filter>Resource Files\Logic</Filter>
+    </None>
+    <None Include="terrain.json">
+      <Filter>Resource Files\Logic</Filter>
     </None>
   </ItemGroup>
 </Project>

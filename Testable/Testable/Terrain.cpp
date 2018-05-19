@@ -1,11 +1,11 @@
-#include "BaseTerrain.h"
+#include "Terrain.h"
 
-BaseTerrain::BaseTerrain(unsigned int initialPositionX, unsigned int initialPositionY)
-	: GameObject(initialPositionX, initialPositionY)
+Terrain::Terrain(int terrainId, int initialPositionX, int initialPositionY)
+	: GameObject(terrainId, initialPositionX, initialPositionY)
 {
 }
 
-bool BaseTerrain::isBlocked(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height)
+bool Terrain::isBlocked(int positionX, int positionY, int width, int height)
 {
 	if (_isBlocking)
 	{

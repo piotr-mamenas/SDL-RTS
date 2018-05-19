@@ -2,9 +2,9 @@
   "mapDefinition": {
     "tiles": [
       {
-        "id": 1,
-        "x": 0,
-        "y": 0
+        "terrainId": 1,
+        "positionX": 0,
+        "positionY": 0
       }
     ],
     "objects": [
@@ -14,7 +14,7 @@
         "y": 0
       }
     ],
-    "blockingTerrain": [
+    "blocking": [
       {
         "x": 0,
         "y": 0,

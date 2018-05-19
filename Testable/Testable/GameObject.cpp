@@ -1,32 +1,33 @@
 #include "GameObject.h"
 
-GameObject::GameObject(unsigned int initialPositionX, unsigned int initialPositionY)
+GameObject::GameObject(int spriteId, int initialPositionX, int initialPositionY)
 {
+	_spriteId = spriteId;
 	_positionX = initialPositionX;
 	_positionY = initialPositionY;
 }
 
-unsigned int GameObject::getPositionX()
+int GameObject::getPositionX()
 {
 	return _positionX;
 }
 
-unsigned int GameObject::getPositionY()
+int GameObject::getPositionY()
 {
 	return _positionY;
 }
 
-unsigned int GameObject::getWidth()
+int GameObject::getWidth()
 {
 	return _width;
 }
 
-unsigned int GameObject::getHeight()
+int GameObject::getHeight()
 {
 	return _height;
 }
 
-unsigned int GameObject::getId() 
+int GameObject::getSpriteId()
 {
-	return _id;
+	return _spriteId;
 }

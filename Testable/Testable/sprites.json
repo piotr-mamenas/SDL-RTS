@@ -1,0 +1,16 @@
+{
+  "sprites": [
+    {
+      "id": 1,
+      "width": 90,
+      "height": 90,
+      "spriteSheetImage": "grasstile.png"
+    },
+    {
+      "id": 2,
+      "width": 16,
+      "height": 16,
+      "spriteSheetImage":  "unit.png" 
+    }
+  ]
+}

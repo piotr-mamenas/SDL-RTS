@@ -7,7 +7,7 @@
 
 #include <SDL.h>
 
-#include "BaseUnit.h"
+#include "Unit.h"
 #include "GameMap.h"
 
 using namespace std;
@@ -18,7 +18,7 @@ private:
 	void _handleScrolling(int mousePositionX, int mousePositionY);
 	void _resetScrolling();
 	string _color;
-	list<BaseUnit*> _units;
+	list<Unit*> _units;
 	list<Player*> _hostilePlayers;
 	GameMap* _gameMap;
 	int _cameraX;
@@ -32,15 +32,15 @@ private:
 	bool _scrollingUp;
 	bool _scrollingDown;
 public:
-	Player(string color, list<BaseUnit*> startingUnits, int screenResolutionX, int screenResolutionY);
+	Player(string color, list<Unit*> startingUnits, int screenResolutionX, int screenResolutionY);
 	Player(string color, int screenResolutionX, int screenResolutionY);
-	void addUnit(BaseUnit* unit);
-	list<BaseUnit*> getUnits();
+	void addUnit(Unit* unit);
+	list<Unit*> getUnits();
 
 	void setCamera(int cameraX, int cameraY);
 	int getCameraX();
 	int getCameraY();
-	void handleInteraction(SDL_Event e, list<BaseUnit*> units);
+	void handleInteraction(SDL_Event e, list<Unit*> units);
 	void scrollCamera();
 
 	void startNewGame(GameMap* gameMap);

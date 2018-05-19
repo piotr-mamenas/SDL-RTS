@@ -1,9 +1,10 @@
 #include "GraphicsEngine.h"
 #include "Sprite.h"
-#include "BaseUnit.h"
+#include "Unit.h"
 #include "GameAssetManager.h"
 #include "GameMap.h"
 #include "Player.h"
+#include "Terrain.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -50,7 +51,7 @@ void GraphicsEngine::refreshScene(GameMap* gameMap, unsigned int cameraX, unsign
 	SDL_RenderPresent(_gameRenderer);
 }
 
-void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
+void GraphicsEngine::refreshScene(list<Unit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
@@ -63,9 +64,9 @@ void GraphicsEngine::refreshScene(list<BaseUnit*> units, GameMap* gameMap, unsig
 	SDL_RenderPresent(_gameRenderer);
 }
 
-void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
+void GraphicsEngine::_drawUnits(list<Unit*> units)
 {
-	for (BaseUnit* unit : units)
+	for (Unit* unit : units)
 	{
 		bool unitAlive = unit -> isAlive();
 		if (unitAlive)
@@ -77,8 +78,8 @@ void GraphicsEngine::_drawUnits(list<BaseUnit*> units)
 
 void GraphicsEngine::_drawGameMap(GameMap* gameMap)
 {
-	list<BaseTerrain*> mapTerrain = gameMap -> getTerrain();
-	for (BaseTerrain* terrain : mapTerrain)
+	list<Terrain*> mapTerrain = gameMap -> getTerrain();
+	for (Terrain* terrain : mapTerrain)
 	{
 		_drawGameObject(terrain);
 	}
@@ -86,13 +87,13 @@ void GraphicsEngine::_drawGameMap(GameMap* gameMap)
 
 void GraphicsEngine::_drawGameObject(GameObject* object)
 {
-	unsigned int objectId = object->getId();
+	unsigned int spriteId = object->getSpriteId();
 	unsigned int objectPositionX = object->getPositionX();
 	unsigned int objectPositionY = object->getPositionY();
 	unsigned int objectWith = object->getWidth();
 	unsigned int objectHeight = object->getHeight();
 
-	Sprite* objectSprite = _gameAssetManager->getSprite(objectId);
+	Sprite* objectSprite = _gameAssetManager->getSprite(spriteId);
 	SDL_Rect* spriteClip = objectSprite->getClip(1);
 
 	if (_isInCamera(objectPositionX, objectPositionY, objectWith, objectHeight))

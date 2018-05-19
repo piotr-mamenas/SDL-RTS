@@ -1,0 +1,10 @@
+{
+  "terrain": [
+    {
+      "terrainId": 1,
+      "spriteId": 1,
+      "terrainWidth": 90,
+      "terrainHeight": 90
+    }
+  ]
+}

@@ -1,15 +1,17 @@
-#include "BaseUnit.h"
+#include "Unit.h"
 #include "GameObject.h"
 
 #include <iostream>
+#include <string>
 
-BaseUnit::BaseUnit(unsigned int initialPositionX, unsigned int initialPositionY) 
-	: GameObject(initialPositionX, initialPositionY)
+Unit::Unit(int unitId, int initialPositionX, int initialPositionY) 
+	: GameObject(unitId, initialPositionX, initialPositionY)
 {
+	_unitId = unitId;
 	_isAlive = true;
 }
 
-void BaseUnit::handleEvent(unsigned int clickPositionX, unsigned int clickPositionY, int eventType)
+void Unit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
 {
 	if (_isAlive) 
 	{
@@ -28,7 +30,6 @@ void BaseUnit::handleEvent(unsigned int clickPositionX, unsigned int clickPositi
 			switch (eventType)
 			{
 			case SDL_MOUSEBUTTONDOWN:
-				printf("Mouse Down Unit: %d\n", _id);
 				_currentLife = _currentLife - 5;
 				if (_currentLife <= 0)
 				{
@@ -37,14 +38,13 @@ void BaseUnit::handleEvent(unsigned int clickPositionX, unsigned int clickPositi
 
 				break;
 			case SDL_MOUSEBUTTONUP:
-				printf("Mouse Up Unit: %d\n", _id);
 				break;
 			}
 		}
 	}
 }
 
-bool BaseUnit::isAlive()
+bool Unit::isAlive()
 {
 	return _isAlive;
 }

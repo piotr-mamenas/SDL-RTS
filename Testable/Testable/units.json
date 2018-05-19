@@ -1,0 +1,12 @@
+{
+  "units": [
+    {
+      "unitId": 1, 
+      "spriteId": 2,
+      "maxLife": 40,
+      "unitWidth": 16,
+      "unitHeight": 16,
+      "damage": 6
+    }
+  ]
+}
