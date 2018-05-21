@@ -16,13 +16,13 @@ const string MAPFILE_FORMAT = "json";
 using namespace std;
 using json = nlohmann::json;
 
-GameMap::GameMap(unsigned int mapWidth, unsigned int mapHeight)
+GameMap::GameMap(int mapWidth, int mapHeight)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
 }
 
-GameMap::GameMap(Terrain* templateTerrain, unsigned int mapWidth, unsigned int mapHeight)
+GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
@@ -42,12 +42,12 @@ GameMap::GameMap(Terrain* templateTerrain, unsigned int mapWidth, unsigned int m
 
 void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
 {
-	unsigned int tileMaxHorizontal = (_mapWidth) / (templateTerrain->getWidth());
-	unsigned int tileMaxVertical = (_mapHeight) / (templateTerrain->getHeight());
+	int tileMaxHorizontal = (_mapWidth) / (templateTerrain->getWidth());
+	int tileMaxVertical = (_mapHeight) / (templateTerrain->getHeight());
 
-	for (unsigned int cntX = 0; cntX < tileMaxHorizontal; cntX++)
+	for (int cntX = 0; cntX < tileMaxHorizontal; cntX++)
 	{
-		for (unsigned int cntY = 0; cntY < tileMaxVertical; cntY++)
+		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
 			Terrain* terrainTile = new Terrain(1,cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight());
 			_mapTerrain.push_back(terrainTile);
@@ -80,12 +80,12 @@ void GameMap::placeObject(Terrain* object)
 
 }
 
-unsigned int GameMap::getMapWidth()
+int GameMap::getMapWidth()
 {
 	return _mapWidth;
 }
 
-unsigned int GameMap::getMapHeight()
+int GameMap::getMapHeight()
 {
 	return _mapHeight;
 }

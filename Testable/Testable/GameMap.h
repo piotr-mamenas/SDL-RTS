@@ -20,19 +20,19 @@ private:
 	list<Terrain*> _mapObjects;
 	list<Unit*> _preplacedMapUnits;
 	list<SDL_Rect*> _blockedArea;
-	unsigned int _mapWidth;
-	unsigned int _mapHeight;
+	int _mapWidth;
+	int _mapHeight;
 public:
-	GameMap(unsigned int mapWidth, unsigned int mapHeight);
-	GameMap(Terrain* templateTerrain, unsigned int mapWidth, unsigned int mapHeight);
+	GameMap(int mapWidth, int mapHeight);
+	GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight);
 	void getUnits(SDL_Rect* containingBox);
 	list<Terrain*> getTerrain();
 	void addUnit(Unit* unit);
 	void placeTile(Terrain* tile);
 	void placeObject(Terrain* object);
 	void loadMap(string mapName);
-	unsigned int getMapWidth();
-	unsigned int getMapHeight();
+	int getMapWidth();
+	int getMapHeight();
 };
 
 #endif

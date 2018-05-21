@@ -1,8 +1,10 @@
 #include "GameObject.h"
 
-GameObject::GameObject(int spriteId, int initialPositionX, int initialPositionY)
+using json = nlohmann::json;
+
+GameObject::GameObject(int objectId, int initialPositionX, int initialPositionY)
 {
-	_spriteId = spriteId;
+	_id = objectId;
 	_positionX = initialPositionX;
 	_positionY = initialPositionY;
 }

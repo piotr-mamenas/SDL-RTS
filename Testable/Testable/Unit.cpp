@@ -3,17 +3,19 @@
 
 #include <iostream>
 #include <string>
+#include <nlohmann\json.hpp>
 
-Unit::Unit(int unitId, int initialPositionX, int initialPositionY) 
+using json = nlohmann::json;
+
+Unit::Unit(int unitId, int initialPositionX, int initialPositionY)
 	: GameObject(unitId, initialPositionX, initialPositionY)
 {
-	_unitId = unitId;
 	_isAlive = true;
 }
 
 void Unit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
 {
-	if (_isAlive) 
+	if (_isAlive)
 	{
 		bool mouseInside = true;
 
@@ -44,7 +46,19 @@ void Unit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
 	}
 }
 
+void Unit::deserializeFrom(json json)
+{
+	_id = json.at("id").get<int>();
+	_spriteId = json.at("spriteId").get<int>();
+	_currentLife = json.at("maxLife");
+	_maxLife = json.at("maxLife");
+	_width = json.at("width");
+	_height = json.at("height");
+	_damage = json.at("damage");
+}
+
 bool Unit::isAlive()
 {
 	return _isAlive;
 }
+

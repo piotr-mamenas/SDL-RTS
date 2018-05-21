@@ -121,6 +121,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConfigurationManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameMap.cpp" />
@@ -136,6 +137,8 @@
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigurationManager.h" />
+    <ClInclude Include="SerializationHelper.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="GameAssetManager.h" />
     <ClInclude Include="GameContext.h" />

@@ -61,6 +61,7 @@ bool GameContext::init()
 
 			_gameAssetManager = new GameAssetManager(_gameRenderer);
 			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
+			_gameConfiguration = new ConfigurationManager(true);
 
 			Unit* infantry = new Unit(1, 50, 60);
 			Unit* infantry2 = new Unit(1, 12, 92);

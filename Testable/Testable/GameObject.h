@@ -3,9 +3,14 @@
 
 using namespace std;
 
+#include "nlohmann\json.hpp"
+
+using json = nlohmann::json;
+
 class GameObject
 {
 protected:
+	int _id;
 	int _spriteId;
 	int _positionX;
 	int _positionY;
@@ -19,6 +24,7 @@ public:
 	int getPositionY();
 	int getWidth();
 	int getHeight();
+	virtual void deserializeFrom(json json) {};
 };
 
 #endif
