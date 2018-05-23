@@ -104,12 +104,12 @@ void GameMap::loadMap(string mapName)
 		for (auto& element : map)
 		{
 			cout << element << endl;
-			cout << element["tiles"];
-			for (auto& tile : element["tiles"])
+			cout << element.at("tiles");
+			for (auto& tile : element.at("tiles"))
 			{
-				int terrainId = tile["terrainId"].get<int>();
-				int positionX = tile["positionX"].get<int>();
-				int positionY = tile["positionY"].get<int>();
+				int terrainId = tile.at("terrainId").get<int>();
+				int positionX = tile.at("positionX").get<int>();
+				int positionY = tile.at("positionY").get<int>();
 				_mapTerrain.push_back(new Terrain(terrainId, positionX, positionY));
 			}
 		}

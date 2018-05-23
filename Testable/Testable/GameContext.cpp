@@ -61,7 +61,7 @@ bool GameContext::init()
 
 			_gameAssetManager = new GameAssetManager(_gameRenderer);
 			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
-			_gameConfiguration = new ConfigurationManager(true);
+			_gameRuleSet = new RuleSetManager(true);
 
 			Unit* infantry = new Unit(1, 50, 60);
 			Unit* infantry2 = new Unit(1, 12, 92);
@@ -69,6 +69,7 @@ bool GameContext::init()
 			Terrain* fillTerrain = new Terrain(1,0,0);
 			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980);
 			gameMap->loadMap("skirmish_map");
+
 			list<Unit*> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);

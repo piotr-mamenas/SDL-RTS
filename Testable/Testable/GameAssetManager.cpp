@@ -1,17 +1,18 @@
 #include "GameAssetManager.h"
 
-#include <SDL.h>
-#include <SDL_image.h>
 #include <iostream>
 #include <list>
 #include <map>
 #include <string>
 #include <fstream>
 #include <string>
+
 #include "GameObject.h"
 #include "Terrain.h"
 #include "Unit.h"
 
+#include <SDL.h>
+#include <SDL_image.h>
 #include <nlohmann/json.hpp>
 
 using namespace std;
@@ -44,16 +45,17 @@ map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 	map<int, Sprite*> spriteMap;
 	try
 	{
+		//TODO: Issue with file load
 		ifstream spriteFile(fileName);
 		json sprites;
 		spriteFile >> sprites;
 
 		for (auto& sprite : sprites)
 		{
-			spriteId = sprite["id"].get<int>();
-			spriteWidth = sprite["width"].get<int>();
-			spriteHeight = sprite["height"].get<int>();
-			path = sprite["spriteSheetImage"].get<string>();
+			spriteId = sprite.at("id").get<int>();
+			spriteWidth = sprite.at("width").get<int>();
+			spriteHeight = sprite.at("height").get<int>();
+			path = sprite.at("spriteSheetImage").get<string>();
 
 			SDL_Texture* texture = _loadTexture(path);
 			Sprite* sprite = new Sprite(texture, spriteWidth, spriteHeight);

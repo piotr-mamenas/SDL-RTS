@@ -19,7 +19,7 @@ GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight)
 
 void GameMapEditor::loadMap(string mapName)
 {
-
+	//_editedMap->loadMap(mapName);
 }
 
 void GameMapEditor::saveMap()

@@ -7,14 +7,14 @@
 #include "Unit.h"
 #include "Terrain.h"
 #include "SerializationHelper.h"
-#include "ConfigurationManager.h"
+#include "RuleSetManager.h"
 
 const string DEFAULT_TERRAIN_FILE = "terrain.json";
 const string DEFAULT_UNITS_FILE = "units.json";
 
 using json = nlohmann::json;
 
-ConfigurationManager::ConfigurationManager(bool useDefaultConfiguration)
+RuleSetManager::RuleSetManager(bool useDefaultConfiguration)
 {
 	if (useDefaultConfiguration)
 	{
@@ -22,21 +22,21 @@ ConfigurationManager::ConfigurationManager(bool useDefaultConfiguration)
 	}
 }
 
-void ConfigurationManager::setUnitFile(string fileName)
+void RuleSetManager::setUnitFile(string fileName)
 {
 	SerializationHelper<Unit>* serializationHelper = new SerializationHelper<Unit>();
 	serializationHelper->serializeToList(fileName, "units", _unitTemplates);
 	delete serializationHelper;
 }
 
-void ConfigurationManager::setTerrainFile(string fileName)
+void RuleSetManager::setTerrainFile(string fileName)
 {
 	SerializationHelper<Terrain>* serializationHelper = new SerializationHelper<Terrain>();
 	serializationHelper->serializeToList(fileName, "terrain", _terrainTemplates);
 	delete serializationHelper;
 }
 
-void ConfigurationManager::_loadDefaultConfiguration()
+void RuleSetManager::_loadDefaultConfiguration()
 {
 	setUnitFile(DEFAULT_UNITS_FILE);
 	setTerrainFile(DEFAULT_TERRAIN_FILE);

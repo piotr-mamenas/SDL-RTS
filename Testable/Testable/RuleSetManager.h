@@ -1,5 +1,5 @@
-#ifndef CONFIGURATIONMANAGER_H
-#define CONFIGURATIONMANAGER_H
+#ifndef RULESETMANAGER_H
+#define RULESETMANAGER_H
 
 #include <list>
 #include <string>
@@ -9,14 +9,14 @@
 
 using namespace std;
 
-class ConfigurationManager
+class RuleSetManager
 {
 private:
 	list<Unit*> _unitTemplates;
 	list<Terrain*> _terrainTemplates;
 	void _loadDefaultConfiguration();
 public:
-	ConfigurationManager(bool useDefaultConfiguration);
+	RuleSetManager(bool useDefaultConfiguration);
 	void setUnitFile(string fileName);
 	void setTerrainFile(string fileName);
 };

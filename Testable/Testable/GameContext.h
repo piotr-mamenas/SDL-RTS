@@ -7,7 +7,7 @@
 
 #include "GraphicsEngine.h"
 #include "Player.h"
-#include "ConfigurationManager.h"
+#include "RuleSetManager.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ private:
 	SDL_Renderer* _gameRenderer = NULL;
 	GraphicsEngine* _graphicsEngine = NULL;
 	GameAssetManager* _gameAssetManager = NULL;
-	ConfigurationManager* _gameConfiguration = NULL;
+	RuleSetManager* _gameRuleSet = NULL;
 	Player* _currentPlayer = NULL;
 	list<Player*> _players;
 	

@@ -90,7 +90,7 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>Source Files\Environment\GameTerrain</Filter>
     </ClCompile>
-    <ClCompile Include="ConfigurationManager.cpp">
+    <ClCompile Include="RuleSetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,10 +131,10 @@
     <ClInclude Include="Terrain.h">
       <Filter>Header Files\Environment\GameTerrain</Filter>
     </ClInclude>
-    <ClInclude Include="ConfigurationManager.h">
+    <ClInclude Include="SerializationHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SerializationHelper.h">
+    <ClInclude Include="RuleSetManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -150,13 +150,13 @@
     <None Include="skirmish_map.json">
       <Filter>Resource Files\Maps</Filter>
     </None>
-    <None Include="sprites.json">
-      <Filter>Resource Files\Logic</Filter>
-    </None>
     <None Include="units.json">
       <Filter>Resource Files\Logic</Filter>
     </None>
     <None Include="terrain.json">
+      <Filter>Resource Files\Logic</Filter>
+    </None>
+    <None Include="sprites.json">
       <Filter>Resource Files\Logic</Filter>
     </None>
   </ItemGroup>
