@@ -50,7 +50,7 @@ map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 		json sprites;
 		spriteFile >> sprites;
 
-		for (auto& sprite : sprites)
+		for (auto& sprite : sprites.at("sprites"))
 		{
 			spriteId = sprite.at("id").get<int>();
 			spriteWidth = sprite.at("width").get<int>();

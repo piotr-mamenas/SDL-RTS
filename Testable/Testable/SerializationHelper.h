@@ -24,16 +24,13 @@ public:
 			json objectJson;
 			objectFile >> objectJson;
 
-			for (auto& element : objectJson)
+			for (auto& object : objectJson.at(objectName))
 			{
-				for (auto& object : element.at(objectName))
-				{
-					int objectId = object.at("id").get<int>();
-					T* objectTemplate = new T(objectId, 0, 0);
-					objectTemplate->deserializeFrom(object);
+				int objectId = object.at("id").get<int>();
+				T* objectTemplate = new T(objectId, 0, 0);
+				objectTemplate->deserializeFrom(object);
 
-					objectContainer.push_back(objectTemplate);
-				}
+				objectContainer.push_back(objectTemplate);
 			}
 		}
 		catch (json::parse_error& e)
