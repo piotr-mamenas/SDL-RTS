@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <list>
-#include <nlohmann\json.hpp>
 
 #include "GameObject.h"
+
+#include <nlohmann\json.hpp>
 
 using namespace std;
 using json = nlohmann::json;
@@ -20,7 +21,7 @@ protected:
 	int _blockingYEnd;
 
 public:
-	Terrain(int terrainId, int initialPositionX, int initialPositionY);
+	Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTemplate);
 	bool isBlocked(int positionX, int positionY, int width, int height);
 	void deserializeFrom(json json);
 };

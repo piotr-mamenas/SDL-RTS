@@ -1,10 +1,10 @@
 #ifndef BASEUNIT_H
 #define BASEUNIT_H
 
+#include <string>
+
 #include "Sprite.h"
 #include "GameObject.h"
-
-#include <string>
 
 #include <nlohmann\json.hpp>
 
@@ -21,7 +21,11 @@ protected:
 
 	bool _isAlive;
 public:
-	Unit(int unitId, int initialPositionX, int initialPositionY);
+	Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate);
+	int getMaxLife();
+	int getDamage();
+	string getName();
+
 	bool isAlive();
 	void handleEvent(int clickPositionX, int clickPositionY, int eventType);
 	void deserializeFrom(json json);

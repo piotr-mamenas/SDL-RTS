@@ -19,6 +19,8 @@ public:
 	RuleSetManager(bool useDefaultConfiguration);
 	void setUnitFile(string fileName);
 	void setTerrainFile(string fileName);
+    Unit* getUnitTemplate(int unitId);
+	Terrain* getTerrainTemplate(int terrainId);
 };
 
 #endif

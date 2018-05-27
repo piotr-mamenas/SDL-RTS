@@ -63,11 +63,11 @@ bool GameContext::init()
 			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
 			_gameRuleSet = new RuleSetManager(true);
 
-			Unit* infantry = new Unit(1, 50, 60);
-			Unit* infantry2 = new Unit(1, 12, 92);
-			Unit* infantry3 = new Unit(1, 30, 155);
-			Terrain* fillTerrain = new Terrain(1,0,0);
-			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980);
+			Unit* infantry = new Unit(50, 60,_gameRuleSet->getUnitTemplate(1));
+			Unit* infantry2 = new Unit(12, 92, _gameRuleSet->getUnitTemplate(1));
+			Unit* infantry3 = new Unit(30, 155, _gameRuleSet->getUnitTemplate(1));
+			Terrain* fillTerrain = new Terrain(0,0, _gameRuleSet->getTerrainTemplate(1));
+			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980, _gameRuleSet);
 			gameMap->loadMap("skirmish_map");
 
 			list<Unit*> units;

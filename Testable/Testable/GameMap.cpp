@@ -5,6 +5,7 @@
 #include "GameMap.h"
 #include "Terrain.h"
 #include "Unit.h"
+#include "RuleSetManager.h"
 
 #include <nlohmann/json.hpp>
 #include <SDL.h>
@@ -16,13 +17,14 @@ const string MAPFILE_FORMAT = "json";
 using namespace std;
 using json = nlohmann::json;
 
-GameMap::GameMap(int mapWidth, int mapHeight)
+GameMap::GameMap(int mapWidth, int mapHeight, RuleSetManager* ruleSet)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
+	_ruleSet = ruleSet;
 }
 
-GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight)
+GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetManager* ruleSet)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
@@ -49,7 +51,7 @@ void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
 	{
 		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
-			Terrain* terrainTile = new Terrain(1,cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight());
+			Terrain* terrainTile = new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1));
 			_mapTerrain.push_back(terrainTile);
 		}
 	}
@@ -110,7 +112,8 @@ void GameMap::loadMap(string mapName)
 				int terrainId = tile.at("terrainId").get<int>();
 				int positionX = tile.at("positionX").get<int>();
 				int positionY = tile.at("positionY").get<int>();
-				_mapTerrain.push_back(new Terrain(terrainId, positionX, positionY));
+				Terrain* terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
+				_mapTerrain.push_back(new Terrain(positionX, positionY, terrainTemplate));
 			}
 		}
 	}

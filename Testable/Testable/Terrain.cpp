@@ -1,12 +1,16 @@
 #include "Terrain.h"
+#include "GameObject.h"
 
 #include <nlohmann\json.hpp>
 
 using json = nlohmann::json;
 
-Terrain::Terrain(int terrainId, int initialPositionX, int initialPositionY)
-	: GameObject(terrainId, initialPositionX, initialPositionY)
+Terrain::Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTemplate) 
+	: GameObject(initialPositionX, initialPositionY)
 {
+	_id = terrainTemplate->getId();
+	_width = terrainTemplate->getWidth();
+	_height = terrainTemplate->getHeight();
 }
 
 bool Terrain::isBlocked(int positionX, int positionY, int width, int height)
@@ -43,6 +47,6 @@ void Terrain::deserializeFrom(json json)
 {
 	_id = json.at("id").get<int>();
 	_spriteId = json.at("spriteId").get<int>();
-	_width = json.at("width");
-	_height = json.at("height");
+	_width = json.at("width").get<int>();
+	_height = json.at("height").get<int>();
 }

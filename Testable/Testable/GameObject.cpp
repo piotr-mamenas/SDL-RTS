@@ -2,11 +2,15 @@
 
 using json = nlohmann::json;
 
-GameObject::GameObject(int objectId, int initialPositionX, int initialPositionY)
+GameObject::GameObject(int initialPositionX, int initialPositionY)
 {
-	_id = objectId;
 	_positionX = initialPositionX;
 	_positionY = initialPositionY;
+}
+
+int GameObject::getId()
+{
+	return _id;
 }
 
 int GameObject::getPositionX()

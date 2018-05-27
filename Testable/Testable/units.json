@@ -1,8 +1,9 @@
 {
   "units": [
     {
-      "id": 1, 
+      "id": 1,
       "spriteId": 2,
+      "unitName": "Infantry", 
       "maxLife": 40,
       "width": 16,
       "height": 16,

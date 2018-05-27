@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Units">
-      <UniqueIdentifier>{e05770c8-8c21-4235-981c-f021199d15e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Units">
-      <UniqueIdentifier>{3ee22841-7719-42d2-824f-50538f8427e9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Graphics">
       <UniqueIdentifier>{16e7d53b-3888-4d09-bacf-c6690dceb357}</UniqueIdentifier>
     </Filter>
@@ -40,14 +34,14 @@
     <Filter Include="Source Files\Environment">
       <UniqueIdentifier>{e873e0d5-d877-4f3c-8a41-e7025764325e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Environment\GameTerrain">
-      <UniqueIdentifier>{789c3090-7aca-4264-8cab-c7c13084df9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Environment\GameTerrain">
-      <UniqueIdentifier>{7ae2fcfa-b2e0-4a6c-86b2-6b52687b87e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Maps">
       <UniqueIdentifier>{5d2bd242-185e-476b-ae79-6ea99c5fba8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{dbbacf37-c17e-438b-a264-792fdc7f9aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{ecddeef1-ff51-4d94-97eb-a11e3e097c35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,17 +75,17 @@
     <ClCompile Include="GameMapEditor.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="RuleSetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>Source Files\Units</Filter>
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
-      <Filter>Source Files\Environment\GameTerrain</Filter>
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="RuleSetManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,20 +116,20 @@
     <ClInclude Include="GameMapEditor.h">
       <Filter>Header Files\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Header Files\Environment\GameTerrain</Filter>
-    </ClInclude>
     <ClInclude Include="SerializationHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RuleSetManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

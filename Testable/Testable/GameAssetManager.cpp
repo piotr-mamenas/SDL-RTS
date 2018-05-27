@@ -45,7 +45,6 @@ map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 	map<int, Sprite*> spriteMap;
 	try
 	{
-		//TODO: Issue with file load
 		ifstream spriteFile(fileName);
 		json sprites;
 		spriteFile >> sprites;

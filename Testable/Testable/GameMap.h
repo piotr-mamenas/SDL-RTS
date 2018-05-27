@@ -7,6 +7,7 @@
 
 #include "Terrain.h"
 #include "Unit.h"
+#include "RuleSetManager.h"
 
 #include <SDL.h>
 
@@ -22,9 +23,10 @@ private:
 	list<SDL_Rect*> _blockedArea;
 	int _mapWidth;
 	int _mapHeight;
+	RuleSetManager* _ruleSet;
 public:
-	GameMap(int mapWidth, int mapHeight);
-	GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight);
+	GameMap(int mapWidth, int mapHeight, RuleSetManager* ruleSet);
+	GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetManager* ruleSet);
 	void getUnits(SDL_Rect* containingBox);
 	list<Terrain*> getTerrain();
 	void addUnit(Unit* unit);

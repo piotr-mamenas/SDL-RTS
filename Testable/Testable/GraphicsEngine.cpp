@@ -132,7 +132,6 @@ void GraphicsEngine::_drawTexture(SDL_Texture* texture, SDL_Rect* clip, unsigned
 	SDL_Rect unitPosition;
 	unitPosition.x = positionX;
 	unitPosition.y = positionY;
-	//SDL_QueryTexture(texture, NULL, NULL, &unitPosition.w, &unitPosition.h);
 	unitPosition.w = clip->w;
 	unitPosition.h = clip->h;
 

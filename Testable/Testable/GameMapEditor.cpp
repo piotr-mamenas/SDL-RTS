@@ -5,16 +5,17 @@
 #include "Terrain.h"
 #include "GameTimer.h"
 #include "Player.h"
+#include "RuleSetManager.h"
 
 const int SCREEN_FPS = 60;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
-GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight)
+GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, RuleSetManager* ruleSet)
 {
 	_defaultMapWidth = defaultMapWidth;
 	_defaultMapHeight = defaultMapHeight;
 
-	_editedMap = new GameMap(_defaultMapWidth, _defaultMapHeight);
+	_editedMap = new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet);
 }
 
 void GameMapEditor::loadMap(string mapName)

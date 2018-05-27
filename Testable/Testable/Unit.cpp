@@ -1,16 +1,40 @@
+#include <iostream>
+#include <string>
+
 #include "Unit.h"
 #include "GameObject.h"
 
-#include <iostream>
-#include <string>
 #include <nlohmann\json.hpp>
 
 using json = nlohmann::json;
 
-Unit::Unit(int unitId, int initialPositionX, int initialPositionY)
-	: GameObject(unitId, initialPositionX, initialPositionY)
+Unit::Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate)
+	: GameObject(initialPositionX, initialPositionY)
 {
+	_id = unitTemplate->getId();
 	_isAlive = true;
+	_currentLife = unitTemplate->getMaxLife();
+	_maxLife = unitTemplate->getMaxLife();
+	_damage = unitTemplate->getDamage();
+	_unitName = unitTemplate->getName();
+	_width = unitTemplate->getWidth();
+	_height = unitTemplate->getHeight();
+
+}
+
+int Unit::getMaxLife()
+{
+	return _maxLife;
+}
+
+int Unit::getDamage()
+{
+	return _damage;
+}
+
+string Unit::getName()
+{
+	return _unitName;
 }
 
 void Unit::handleEvent(int clickPositionX, int clickPositionY, int eventType)
@@ -50,11 +74,12 @@ void Unit::deserializeFrom(json json)
 {
 	_id = json.at("id").get<int>();
 	_spriteId = json.at("spriteId").get<int>();
-	_currentLife = json.at("maxLife");
-	_maxLife = json.at("maxLife");
-	_width = json.at("width");
-	_height = json.at("height");
-	_damage = json.at("damage");
+	_currentLife = json.at("maxLife").get<int>();
+	_maxLife = json.at("maxLife").get<int>();
+	_unitName = json.at("unitName").get<string>();
+	_width = json.at("width").get<int>();
+	_height = json.at("height").get<int>();
+	_damage = json.at("damage").get<int>();
 }
 
 bool Unit::isAlive()

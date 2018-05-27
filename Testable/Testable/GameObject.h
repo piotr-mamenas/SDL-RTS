@@ -17,8 +17,9 @@ protected:
 	int _width;
 	int _height;
 
-	GameObject(int spriteId, int initialPositionX, int initialPositionY);
+	GameObject(int initialPositionX, int initialPositionY);
 public:
+	int getId();
 	int getSpriteId();
 	int getPositionX();
 	int getPositionY();

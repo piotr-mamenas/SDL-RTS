@@ -1,6 +1,7 @@
 #include <string>
 #include <fstream>
 #include <list>
+#include <algorithm>
 
 #include <nlohmann\json.hpp>
 
@@ -40,4 +41,28 @@ void RuleSetManager::_loadDefaultConfiguration()
 {
 	setUnitFile(DEFAULT_UNITS_FILE);
 	setTerrainFile(DEFAULT_TERRAIN_FILE);
+}
+
+Unit* RuleSetManager::getUnitTemplate(int unitId)
+{
+	for (auto &unit : _unitTemplates) 
+	{
+		if (unit->getId() == unitId)
+		{
+			return unit;
+		}
+	}
+	return NULL;
+}
+
+Terrain* RuleSetManager::getTerrainTemplate(int terrainId)
+{
+	for (auto &terrain : _terrainTemplates)
+	{
+		if (terrain->getId() == terrainId)
+		{
+			return terrain;
+		}
+	}
+	return NULL;
 }
