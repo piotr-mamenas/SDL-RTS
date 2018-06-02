@@ -22,8 +22,9 @@ protected:
 
 public:
 	Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTemplate);
+	Terrain(json terrainJson);
 	bool isBlocked(int positionX, int positionY, int width, int height);
-	void deserializeFrom(json json);
+	void deserializeFrom(json json) override;
 };
 
 #endif

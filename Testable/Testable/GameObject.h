@@ -18,6 +18,7 @@ protected:
 	int _height;
 
 	GameObject(int initialPositionX, int initialPositionY);
+	GameObject(json json);
 public:
 	int getId();
 	int getSpriteId();

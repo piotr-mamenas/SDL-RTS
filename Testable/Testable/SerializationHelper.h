@@ -23,13 +23,11 @@ public:
 		{
 			json objectJson;
 			objectFile >> objectJson;
-
-			for (auto& object : objectJson.at(objectName))
+			
+			json objects = objectJson.at(objectName);
+			for (auto object : objects)
 			{
-				int objectId = object.at("id").get<int>();
-				T* objectTemplate = new T(objectId, 0, 0);
-				objectTemplate->deserializeFrom(object);
-
+				T* objectTemplate = new T(object);
 				objectContainer.push_back(objectTemplate);
 			}
 		}

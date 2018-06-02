@@ -19,6 +19,11 @@ Unit::Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate)
 	_unitName = unitTemplate->getName();
 	_width = unitTemplate->getWidth();
 	_height = unitTemplate->getHeight();
+}
+
+Unit::Unit(json unitJson)
+	: GameObject(unitJson)
+{
 
 }
 

@@ -63,6 +63,7 @@ bool GameContext::init()
 			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
 			_gameRuleSet = new RuleSetManager(true);
 
+			_gameRuleSet->getUnitTemplate(1);
 			Unit* infantry = new Unit(50, 60,_gameRuleSet->getUnitTemplate(1));
 			Unit* infantry2 = new Unit(12, 92, _gameRuleSet->getUnitTemplate(1));
 			Unit* infantry3 = new Unit(30, 155, _gameRuleSet->getUnitTemplate(1));

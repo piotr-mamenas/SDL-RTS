@@ -22,12 +22,13 @@ protected:
 	bool _isAlive;
 public:
 	Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate);
+	Unit(json unitJson);
 	int getMaxLife();
 	int getDamage();
 	string getName();
 
 	bool isAlive();
 	void handleEvent(int clickPositionX, int clickPositionY, int eventType);
-	void deserializeFrom(json json);
+	void deserializeFrom(json json) override;
 };
 #endif

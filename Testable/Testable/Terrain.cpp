@@ -13,6 +13,12 @@ Terrain::Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTem
 	_height = terrainTemplate->getHeight();
 }
 
+Terrain::Terrain(json terrainJson)
+	: GameObject(terrainJson)
+{
+
+}
+
 bool Terrain::isBlocked(int positionX, int positionY, int width, int height)
 {
 	if (_isBlocking)
