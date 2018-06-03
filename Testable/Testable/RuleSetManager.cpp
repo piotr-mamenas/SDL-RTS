@@ -26,14 +26,14 @@ RuleSetManager::RuleSetManager(bool useDefaultConfiguration)
 void RuleSetManager::setUnitFile(string fileName)
 {
 	SerializationHelper<Unit>* serializationHelper = new SerializationHelper<Unit>();
-	serializationHelper->serializeToList(fileName, "units", _unitTemplates);
+	_unitTemplates = serializationHelper->serializeToList(fileName, "units");
 	delete serializationHelper;
 }
 
 void RuleSetManager::setTerrainFile(string fileName)
 {
 	SerializationHelper<Terrain>* serializationHelper = new SerializationHelper<Terrain>();
-	serializationHelper->serializeToList(fileName, "terrain", _terrainTemplates);
+	_terrainTemplates = serializationHelper->serializeToList(fileName, "terrain");
 	delete serializationHelper;
 }
 
@@ -45,7 +45,7 @@ void RuleSetManager::_loadDefaultConfiguration()
 
 Unit* RuleSetManager::getUnitTemplate(int unitId)
 {
-	for (auto &unit : _unitTemplates) 
+	for (auto unit : _unitTemplates) 
 	{
 		if (unit->getId() == unitId)
 		{
@@ -57,7 +57,7 @@ Unit* RuleSetManager::getUnitTemplate(int unitId)
 
 Terrain* RuleSetManager::getTerrainTemplate(int terrainId)
 {
-	for (auto &terrain : _terrainTemplates)
+	for (auto terrain : _terrainTemplates)
 	{
 		if (terrain->getId() == terrainId)
 		{

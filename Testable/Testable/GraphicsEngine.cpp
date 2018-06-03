@@ -90,13 +90,13 @@ void GraphicsEngine::_drawGameObject(GameObject* object)
 	unsigned int spriteId = object->getSpriteId();
 	unsigned int objectPositionX = object->getPositionX();
 	unsigned int objectPositionY = object->getPositionY();
-	unsigned int objectWith = object->getWidth();
+	unsigned int objectWidth = object->getWidth();
 	unsigned int objectHeight = object->getHeight();
 
 	Sprite* objectSprite = _gameAssetManager->getSprite(spriteId);
 	SDL_Rect* spriteClip = objectSprite->getClip(1);
 
-	if (_isInCamera(objectPositionX, objectPositionY, objectWith, objectHeight))
+	if (_isInCamera(objectPositionX, objectPositionY, objectWidth, objectHeight))
 	{
 		_drawTexture(objectSprite->getTexture(), spriteClip, objectPositionX - _currentPlayerCameraX, objectPositionY - _currentPlayerCameraY);
 	}

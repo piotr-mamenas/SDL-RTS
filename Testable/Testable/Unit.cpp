@@ -19,12 +19,13 @@ Unit::Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate)
 	_unitName = unitTemplate->getName();
 	_width = unitTemplate->getWidth();
 	_height = unitTemplate->getHeight();
+	_spriteId = unitTemplate->getSpriteId();
 }
 
 Unit::Unit(json unitJson)
 	: GameObject(unitJson)
 {
-
+	deserializeFrom(unitJson);
 }
 
 int Unit::getMaxLife()

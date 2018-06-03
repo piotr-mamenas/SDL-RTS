@@ -10,7 +10,6 @@ GameObject::GameObject(int initialPositionX, int initialPositionY)
 
 GameObject::GameObject(json json)
 {
-	deserializeFrom(json);
 }
 
 int GameObject::getId()

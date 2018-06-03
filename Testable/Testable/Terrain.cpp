@@ -11,12 +11,13 @@ Terrain::Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTem
 	_id = terrainTemplate->getId();
 	_width = terrainTemplate->getWidth();
 	_height = terrainTemplate->getHeight();
+	_spriteId = terrainTemplate->getSpriteId();
 }
 
 Terrain::Terrain(json terrainJson)
 	: GameObject(terrainJson)
 {
-
+	deserializeFrom(terrainJson);
 }
 
 bool Terrain::isBlocked(int positionX, int positionY, int width, int height)

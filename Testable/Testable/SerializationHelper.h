@@ -15,7 +15,7 @@ class SerializationHelper
 {
 private:
 public:
-	void serializeToList(string fileName, string objectName, list<T*> objectContainer)
+	list<T*> serializeToList(string fileName, string objectName)
 	{
 		ifstream objectFile(fileName);
 
@@ -25,11 +25,14 @@ public:
 			objectFile >> objectJson;
 			
 			json objects = objectJson.at(objectName);
+			list<T*> objectContainer;
+
 			for (auto object : objects)
 			{
 				T* objectTemplate = new T(object);
 				objectContainer.push_back(objectTemplate);
 			}
+			return objectContainer;
 		}
 		catch (json::parse_error& e)
 		{

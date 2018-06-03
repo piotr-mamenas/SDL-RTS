@@ -28,6 +28,7 @@ GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetM
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
+	_ruleSet = ruleSet;
 
 	if (mapWidth % MAX_TILE_SIZE != 0)
 	{
@@ -51,6 +52,8 @@ void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
 	{
 		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
+			//TODO: Naprawic
+
 			Terrain* terrainTile = new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1));
 			_mapTerrain.push_back(terrainTile);
 		}
@@ -105,8 +108,6 @@ void GameMap::loadMap(string mapName)
 
 		for (auto& element : map)
 		{
-			cout << element << endl;
-			cout << element.at("tiles");
 			for (auto& tile : element.at("tiles"))
 			{
 				int terrainId = tile.at("terrainId").get<int>();
