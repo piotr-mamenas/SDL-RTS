@@ -1,7 +1,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-using namespace std;
+#include <memory>
 
 #include "nlohmann\json.hpp"
 
@@ -18,7 +18,7 @@ protected:
 	int _height;
 
 	GameObject(int initialPositionX, int initialPositionY);
-	GameObject(json json);
+	GameObject(std::unique_ptr<json> json);
 public:
 	int getId();
 	int getSpriteId();
@@ -26,7 +26,7 @@ public:
 	int getPositionY();
 	int getWidth();
 	int getHeight();
-	virtual void deserializeFrom(json json) {};
+	virtual void deserializeFrom(std::unique_ptr<json> json) {};
 };
 
 #endif

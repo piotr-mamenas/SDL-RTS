@@ -1,13 +1,13 @@
 #ifndef SERIALIZATIONHELPER_H
 #define SERIALIZATIONHELPER_H
 
-#include <list>
+#include <vector>
+#include <memory>
 #include <string>
 
 #include "Unit.h"
 #include "Terrain.h"
 
-using namespace std;
 using json = nlohmann::json;
 
 template<typename T>
@@ -15,7 +15,7 @@ class SerializationHelper
 {
 private:
 public:
-	list<T*> serializeToList(string fileName, string objectName)
+	std::vector<std::unique_ptr<T>> serializeToList(string fileName, string objectName)
 	{
 		ifstream objectFile(fileName);
 
@@ -25,7 +25,7 @@ public:
 			objectFile >> objectJson;
 			
 			json objects = objectJson.at(objectName);
-			list<T*> objectContainer;
+			std::vector<std::unique_ptr<T>> objectContainer;
 
 			for (auto object : objects)
 			{

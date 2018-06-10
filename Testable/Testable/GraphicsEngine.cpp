@@ -9,13 +9,13 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-#include <list>
+#include <vector>
 #include <map>
 #include <stdexcept>
 
 using namespace std;
 
-GraphicsEngine::GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager, unsigned int resolutionX, unsigned int resolutionY)
+GraphicsEngine::GraphicsEngine(std::shared_ptr<SDL_Renderer> gameRenderer, std::shared_ptr<GameAssetManager> assetManager, unsigned int resolutionX, unsigned int resolutionY)
 {
 	_gameAssetManager = assetManager;
 	_gameRenderer = gameRenderer;
@@ -40,7 +40,7 @@ void GraphicsEngine::_setCamera(unsigned int cameraX, unsigned int cameraY)
 	_currentPlayerCameraY = cameraY;
 }
 
-void GraphicsEngine::refreshScene(GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
+void GraphicsEngine::refreshScene(std::unique_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
@@ -51,7 +51,7 @@ void GraphicsEngine::refreshScene(GameMap* gameMap, unsigned int cameraX, unsign
 	SDL_RenderPresent(_gameRenderer);
 }
 
-void GraphicsEngine::refreshScene(list<Unit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY)
+void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std::unique_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);

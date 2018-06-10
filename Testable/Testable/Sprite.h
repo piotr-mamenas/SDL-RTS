@@ -2,25 +2,24 @@
 #define SPRITE_H
 
 #include <map>
+#include <memory>
 
 #include <SDL.h>
-
-using namespace std;
 
 class Sprite
 {
 private:
 	int _spriteSheetWidth;
 	int _spriteSheetHeight;
-	SDL_Texture* _spriteTexture;
-	map<int,SDL_Rect> _clips;
+	std::shared_ptr<SDL_Texture> _spriteTexture;
+	std::map<int,std::unique_ptr<SDL_Rect>> _clips;
 
 public:
-	Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight);
-	SDL_Texture* getTexture();
+	Sprite(std::shared_ptr<SDL_Texture> spriteTexture, int spriteWidth, int spriteHeight);
+	std::unique_ptr<SDL_Texture> getTexture();
 	int getSpriteSheetWidth();
 	int getSpriteSheetHeight();
-	SDL_Rect* getClip(int clipId);
+	std::unique_ptr<SDL_Rect> getClip(int clipId);
 };
 
 #endif

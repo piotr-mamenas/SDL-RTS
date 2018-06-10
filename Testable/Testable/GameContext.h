@@ -3,24 +3,23 @@
 
 #include <SDL.h>
 #include <iostream>
-#include <list>
+#include <vector>
+#include <memory>
 
 #include "GraphicsEngine.h"
 #include "Player.h"
 #include "RuleSetManager.h"
 
-using namespace std;
-
 class GameContext
 {
 private:
-	SDL_Window* _gameWindow = NULL;
-	SDL_Renderer* _gameRenderer = NULL;
-	GraphicsEngine* _graphicsEngine = NULL;
-	GameAssetManager* _gameAssetManager = NULL;
-	RuleSetManager* _gameRuleSet = NULL;
-	Player* _currentPlayer = NULL;
-	list<Player*> _players;
+	std::unique_ptr<SDL_Window> _gameWindow;
+	std::unique_ptr<SDL_Renderer> _gameRenderer;
+	std::unique_ptr<GraphicsEngine> _graphicsEngine;
+	std::unique_ptr<GameAssetManager> _gameAssetManager = NULL;
+	std::unique_ptr<RuleSetManager> _gameRuleSet = NULL;
+	std::unique_ptr<Player> _currentPlayer = NULL;
+	std::vector<std::unique_ptr<Player>> _players;
 	
 	int _screenWidth;
 	int _screenHeight;

@@ -12,19 +12,18 @@
 
 #define MAX_TILE_SIZE 90
 
-const string MAPFILE_FORMAT = "json";
+const std::string MAPFILE_FORMAT = "json";
 
-using namespace std;
 using json = nlohmann::json;
 
-GameMap::GameMap(int mapWidth, int mapHeight, RuleSetManager* ruleSet)
+GameMap::GameMap(int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
 	_ruleSet = ruleSet;
 }
 
-GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetManager* ruleSet)
+GameMap::GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
@@ -32,18 +31,18 @@ GameMap::GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetM
 
 	if (mapWidth % MAX_TILE_SIZE != 0)
 	{
-		throw new logic_error("Map Size X not divisable by allowed Tile Size X");
+		throw new std::logic_error("Map Size X not divisable by allowed Tile Size X");
 	}
 
 	if (mapHeight % MAX_TILE_SIZE != 0)
 	{
-		throw new logic_error("Map Size Y not divisable by allowed Tile Size Y");
+		throw new std::logic_error("Map Size Y not divisable by allowed Tile Size Y");
 	}
 
 	_fillMapWithTerrain(templateTerrain);
 }
 
-void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
+void GameMap::_fillMapWithTerrain(std::unique_ptr<Terrain> templateTerrain)
 {
 	int tileMaxHorizontal = (_mapWidth) / (templateTerrain->getWidth());
 	int tileMaxVertical = (_mapHeight) / (templateTerrain->getHeight());
@@ -52,35 +51,33 @@ void GameMap::_fillMapWithTerrain(Terrain* templateTerrain)
 	{
 		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
-			//TODO: Naprawic
-
-			Terrain* terrainTile = new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1));
+			std::unique_ptr<Terrain> terrainTile(new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1)));
 			_mapTerrain.push_back(terrainTile);
 		}
 	}
 }
 
-list<Terrain*> GameMap::getTerrain()
+std::vector<std::unique_ptr<Terrain>> GameMap::getTerrain()
 {
 	return _mapTerrain;
 }
 
-void GameMap::getUnits(SDL_Rect* containingBox)
+void GameMap::getUnits(std::unique_ptr<SDL_Rect> containingBox)
 {
 
 }
 
-void GameMap::addUnit(Unit* unit)
+void GameMap::addUnit(std::unique_ptr<Unit> unit)
 {
 
 }
 
-void GameMap::placeTile(Terrain* tile)
+void GameMap::placeTile(std::unique_ptr<Terrain> tile)
 {
 	
 }
 
-void GameMap::placeObject(Terrain* object)
+void GameMap::placeObject(std::unique_ptr<Terrain> object)
 {
 
 }
@@ -95,11 +92,11 @@ int GameMap::getMapHeight()
 	return _mapHeight;
 }
 
-void GameMap::loadMap(string mapName)
+void GameMap::loadMap(std::string mapName)
 {
-	string mapFilename = mapName + string(".") + MAPFILE_FORMAT;
-	cout << mapFilename << endl;
-	ifstream mapFile(mapFilename);
+	std::string mapFilename = mapName + std::string(".") + MAPFILE_FORMAT;
+	std::cout << mapFilename << std::endl;
+	std::ifstream mapFile(mapFilename);
 
 	try
 	{
@@ -113,8 +110,8 @@ void GameMap::loadMap(string mapName)
 				int terrainId = tile.at("terrainId").get<int>();
 				int positionX = tile.at("positionX").get<int>();
 				int positionY = tile.at("positionY").get<int>();
-				Terrain* terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
-				_mapTerrain.push_back(new Terrain(positionX, positionY, terrainTemplate));
+				std::unique_ptr<Terrain> terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
+				_mapTerrain.push_back(std::make_unique(new Terrain(positionX, positionY, terrainTemplate)));
 			}
 		}
 	}

@@ -1,7 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <list>
+#include <vector>
+#include <memory>
 #include <string>
 
 #include <SDL.h>
@@ -9,17 +10,16 @@
 #include "Unit.h"
 #include "GameMap.h"
 
-using namespace std;
-
 class Player
 {
 private:
 	void _handleScrolling(int mousePositionX, int mousePositionY);
 	void _resetScrolling();
-	string _color;
-	list<Unit*> _units;
-	list<Player*> _hostilePlayers;
-	GameMap* _gameMap;
+	std::unique_ptr<std::string> _color;
+	std::unique_ptr<std::vector<std::unique_ptr<Unit>>> _units;
+	std::vector<std::unique_ptr<Player>> _hostilePlayers;
+	std::unique_ptr<GameMap> _gameMap;
+
 	int _cameraX;
 	int _cameraY;
 	int _screenResolutionX;
@@ -31,19 +31,19 @@ private:
 	bool _scrollingUp;
 	bool _scrollingDown;
 public:
-	Player(string color, list<Unit*> startingUnits, int screenResolutionX, int screenResolutionY);
-	Player(string color, int screenResolutionX, int screenResolutionY);
-	void addUnit(Unit* unit);
-	list<Unit*> getUnits();
+	Player(std::unique_ptr<string> color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY);
+	Player(std::unique_ptr<string> color, int screenResolutionX, int screenResolutionY);
+	void addUnit(std::unique_ptr<Unit> unit);
+	std::vector<std::unique_ptr<Unit>> getUnits();
 
 	void setCamera(int cameraX, int cameraY);
 	int getCameraX();
 	int getCameraY();
-	void handleInteraction(SDL_Event e, list<Unit*> units);
+	void handleInteraction(std::unique_ptr<SDL_Event> e, std::vector<std::unique_ptr<Unit>> units);
 	void scrollCamera();
 
-	void startNewGame(GameMap* gameMap);
-	void setPlayerHostile(Player* player);
+	void startNewGame(std::unique_ptr<GameMap> gameMap);
+	void setPlayerHostile(std::unique_ptr<Player> player);
 };
 
 #endif

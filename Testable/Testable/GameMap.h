@@ -1,9 +1,9 @@
 #ifndef GAMEMAP_H
 #define GAMEMAP_H
 
-#include <iostream>
-#include <list>
+#include <vector>
 #include <string>
+#include <memory>
 
 #include "Terrain.h"
 #include "Unit.h"
@@ -11,28 +11,23 @@
 
 #include <SDL.h>
 
-using namespace std;
-
 class GameMap
 {
 private:
-	void _fillMapWithTerrain(Terrain* terrain);
-	list<Terrain*> _mapTerrain;
-	list<Terrain*> _mapObjects;
-	list<Unit*> _preplacedMapUnits;
-	list<SDL_Rect*> _blockedArea;
+	void _fillMapWithTerrain(std::unique_ptr<Terrain> terrain);
+	std::vector<std::unique_ptr<Terrain>> _mapTerrain;
+	std::vector<std::unique_ptr<Terrain>> _mapObjects;
+	std::vector<std::unique_ptr<Unit>> _preplacedMapUnits;
+	std::vector<std::unique_ptr<SDL_Rect>> _blockedArea;
 	int _mapWidth;
 	int _mapHeight;
-	RuleSetManager* _ruleSet;
+	std::shared_ptr<RuleSetManager> _ruleSet;
 public:
-	GameMap(int mapWidth, int mapHeight, RuleSetManager* ruleSet);
-	GameMap(Terrain* templateTerrain, int mapWidth, int mapHeight, RuleSetManager* ruleSet);
-	void getUnits(SDL_Rect* containingBox);
-	list<Terrain*> getTerrain();
-	void addUnit(Unit* unit);
-	void placeTile(Terrain* tile);
-	void placeObject(Terrain* object);
-	void loadMap(string mapName);
+	GameMap(int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
+	GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
+	void getUnits(std::unique_ptr<SDL_Rect> containingBox);
+	std::vector<std::unique_ptr<Terrain>> getTerrain();
+	void loadMap(std::unique_ptr<std::unique_ptr<std::string>> mapName);
 	int getMapWidth();
 	int getMapHeight();
 };

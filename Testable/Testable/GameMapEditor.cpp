@@ -10,7 +10,7 @@
 const int SCREEN_FPS = 60;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
-GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, RuleSetManager* ruleSet)
+GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::unique_ptr<RuleSetManager> ruleSet)
 {
 	_defaultMapWidth = defaultMapWidth;
 	_defaultMapHeight = defaultMapHeight;
@@ -18,7 +18,7 @@ GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, RuleSetM
 	_editedMap = new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet);
 }
 
-void GameMapEditor::loadMap(string mapName)
+void GameMapEditor::loadMap(std::string mapName)
 {
 	//_editedMap->loadMap(mapName);
 }
@@ -28,9 +28,9 @@ void GameMapEditor::saveMap()
 
 }
 
-void GameMapEditor::start(GraphicsEngine* graphicsEngine, int screenWidth, int screenHeight)
+void GameMapEditor::start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight)
 {
-	Player* mapEditor = new Player("000000", screenWidth, screenHeight);
+	std::unique_ptr<Player> mapEditor = std::make_unique(new Player("000000", screenWidth, screenHeight));
 
 	SDL_Event e;
 	bool quit = false;

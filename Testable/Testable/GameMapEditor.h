@@ -1,29 +1,26 @@
 #ifndef GAMEMAPEDITOR_H
 #define GAMEMAPEDITOR_H
 
-#include <iostream>
-#include <list>
 #include <string>
+#include <memory>
 
 #include "GameMap.h"
 #include "GraphicsEngine.h"
 #include "RuleSetManager.h"
 
-using namespace std;
-
 class GameMapEditor
 {
 private:
-	GameMap* _editedMap;
-	RuleSetManager* _ruleSet;
+	std::unique_ptr<GameMap> _editedMap;
+	std::unique_ptr<RuleSetManager> _ruleSet;
 	int _defaultMapWidth;
 	int _defaultMapHeight;
 	int _selectedBrushId;
 public:
-	GameMapEditor(int defaultMapWidth, int defaultMapHeight, RuleSetManager* ruleSet);
-	void loadMap(string mapName);
+	GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::unique_ptr<RuleSetManager> ruleSet);
+	void loadMap(std::unique_ptr<std::string> mapName);
 	void saveMap();
-	void start(GraphicsEngine* graphicsEngine, int screenWidth, int screenHeight);
+	void start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight);
 };
 
 #endif

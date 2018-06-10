@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-Unit::Unit(int initialPositionX, int initialPositionY, Unit* unitTemplate)
+Unit::Unit(int initialPositionX, int initialPositionY, std::unique_ptr<Unit> unitTemplate)
 	: GameObject(initialPositionX, initialPositionY)
 {
 	_id = unitTemplate->getId();

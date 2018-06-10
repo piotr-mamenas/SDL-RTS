@@ -7,32 +7,30 @@
 #include "GameMap.h"
 
 #include <SDL.h>
-#include <list>
-
-using namespace std;
+#include <memory>
+#include <vector>
 
 class GraphicsEngine
 {
 private:
-	void _drawTexture(SDL_Texture* texture, SDL_Rect* clip, unsigned int positionX, unsigned int positionY);
-	void _drawUnits(list<Unit*> units);
-	void _drawGameObject(GameObject* object);
-	void _drawGameMap(GameMap* gameMap);
+	void _drawTexture(std::unique_ptr<SDL_Texture> texture, std::unique_ptr<SDL_Rect> clip, unsigned int positionX, unsigned int positionY);
+	void _drawUnits(std::vector<std::unique_ptr<Unit>> units);
+	void _drawGameObject(std::unique_ptr<GameObject> object);
+	void _drawGameMap(std::unique_ptr<GameMap> gameMap);
 	void _setCamera(unsigned int cameraX, unsigned int cameraY);
 	bool _isInCamera(unsigned int positionX, unsigned int positionY, unsigned int width, unsigned int height);
-	SDL_Renderer* _gameRenderer;
-	GameAssetManager* _gameAssetManager;
+	std::unique_ptr<SDL_Renderer> _gameRenderer;
+	std::unique_ptr<GameAssetManager> _gameAssetManager;
 
 	unsigned int _currentPlayerCameraX;
 	unsigned int _currentPlayerCameraY;
 	unsigned int _windowResolutionX;
 	unsigned int _windowResolutionY;
-
 public:
-	GraphicsEngine(SDL_Renderer* gameRenderer, GameAssetManager* assetManager, unsigned int resolutionX, unsigned int resolutionY);
+	GraphicsEngine(std::unique_ptr<SDL_Renderer> gameRenderer, std::unique_ptr<GameAssetManager> assetManager, unsigned int resolutionX, unsigned int resolutionY);
 	~GraphicsEngine();
-	void refreshScene(list<Unit*> units, GameMap* gameMap, unsigned int cameraX, unsigned int cameraY);
-	void refreshScene(GameMap* gameMap, unsigned int cameraX, unsigned int cameraY);
+	void refreshScene(std::vector<std::unique_ptr<Unit>> units, std::unique_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY);
+	void refreshScene(std::unique_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY);
 };
 
 #endif

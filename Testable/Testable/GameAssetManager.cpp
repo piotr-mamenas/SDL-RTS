@@ -1,7 +1,7 @@
 #include "GameAssetManager.h"
 
 #include <iostream>
-#include <list>
+#include <vector>
 #include <map>
 #include <string>
 #include <fstream>
@@ -15,10 +15,9 @@
 #include <SDL_image.h>
 #include <nlohmann/json.hpp>
 
-using namespace std;
 using json = nlohmann::json;
 
-GameAssetManager::GameAssetManager(SDL_Renderer* gameRenderer)
+GameAssetManager::GameAssetManager(std::shared_ptr<SDL_Renderer> gameRenderer)
 {
 	_gameRenderer = gameRenderer;
 
@@ -35,18 +34,18 @@ void GameAssetManager::_loadGameResources()
 	_sprites = _loadSprite("sprites.json");
 }
 
-map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
+std::map<int, std::unique_ptr<Sprite>> GameAssetManager::_loadSprite(std::string fileName)
 {
 	int spriteId;
 	int spriteWidth;
 	int spriteHeight;
-	string path;
+	std::string path;
 
-	map<int, Sprite*> spriteMap;
+	std::map<int, std::unique_ptr<Sprite>> spriteMap;
 	try
 	{
-		ifstream spriteFile(fileName);
-		json sprites;
+		std::ifstream spriteFile(fileName);
+		std::json sprites;
 		spriteFile >> sprites;
 
 		for (auto& sprite : sprites.at("sprites"))
@@ -54,11 +53,11 @@ map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 			spriteId = sprite.at("id").get<int>();
 			spriteWidth = sprite.at("width").get<int>();
 			spriteHeight = sprite.at("height").get<int>();
-			path = sprite.at("spriteSheetImage").get<string>();
+			path = sprite.at("spriteSheetImage").get<std::string>();
 
-			SDL_Texture* texture = _loadTexture(path);
-			Sprite* sprite = new Sprite(texture, spriteWidth, spriteHeight);
-			spriteMap.insert(pair<int, Sprite*>(spriteId, sprite));
+			std::unique_ptr<SDL_Texture> texture = _loadTexture(path);
+			std::unique_ptr<Sprite> sprite = std::make_unique(new Sprite(texture, spriteWidth, spriteHeight));
+			spriteMap.insert(std::pair<int, std::unique_ptr<Sprite>>(spriteId, sprite));
 		}
 		return spriteMap;
 	}
@@ -72,11 +71,11 @@ map<int, Sprite*> GameAssetManager::_loadSprite(string fileName)
 	}
 }
 
-SDL_Texture* GameAssetManager::_loadTexture(string path)
+std::unique_ptr<SDL_Texture> GameAssetManager::_loadTexture(std::string path)
 {
-	SDL_Texture* loadedTexture = NULL;
+	std::unique_ptr<SDL_Texture> loadedTexture;
 
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	std::unique_ptr<SDL_Surface> loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == NULL)
 	{
 		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
@@ -99,19 +98,19 @@ void GameAssetManager::_releaseGameResources()
 	_releaseMap(_sprites);
 }
 
-void GameAssetManager::_releaseMap(std::map<int, Sprite*> spriteMap)
+void GameAssetManager::_releaseMap(std::map<int, std::unique_ptr<Sprite>> spriteMap)
 {
-	std::map<int, Sprite*>::iterator spriteIterator;
+	std::map<int, std::unique_ptr<Sprite>>::iterator spriteIterator;
 	for (spriteIterator = spriteMap.begin(); spriteIterator != spriteMap.end(); spriteIterator++)
 	{
-		Sprite* sprite = spriteIterator->second;
+		std::unique_ptr<Sprite> sprite = spriteIterator->second;
 		SDL_DestroyTexture(sprite -> getTexture());
 	}
 }
 
-Sprite* GameAssetManager::getSprite(int spriteId)
+std::unique_ptr<Sprite> GameAssetManager::getSprite(int spriteId)
 {
-	map<int, Sprite*>::iterator spriteIterator = _sprites.find(spriteId);
+	std::map<int, std::unique_ptr<Sprite>>::iterator spriteIterator = _sprites.find(spriteId);
 	if (spriteIterator != _sprites.end())
 	{
 		return spriteIterator->second;

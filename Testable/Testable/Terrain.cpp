@@ -5,7 +5,7 @@
 
 using json = nlohmann::json;
 
-Terrain::Terrain(int initialPositionX, int initialPositionY, Terrain* terrainTemplate) 
+Terrain::Terrain(int initialPositionX, int initialPositionY, std::unique_ptr<Terrain> terrainTemplate) 
 	: GameObject(initialPositionX, initialPositionY)
 {
 	_id = terrainTemplate->getId();
