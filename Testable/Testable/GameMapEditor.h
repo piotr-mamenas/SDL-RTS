@@ -11,7 +11,7 @@
 class GameMapEditor
 {
 private:
-	std::unique_ptr<GameMap> _editedMap;
+	std::shared_ptr<GameMap> _editedMap;
 	std::shared_ptr<RuleSetManager> _ruleSet;
 	int _defaultMapWidth;
 	int _defaultMapHeight;

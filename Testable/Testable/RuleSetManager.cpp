@@ -41,9 +41,9 @@ void RuleSetManager::_loadDefaultConfiguration()
 	setTerrainFile(DEFAULT_TERRAIN_FILE);
 }
 
-std::unique_ptr<Unit> RuleSetManager::getUnitTemplate(int unitId)
+std::shared_ptr<Unit> RuleSetManager::getUnitTemplate(int unitId)
 {
-	for (auto unit : _unitTemplates) 
+	for (auto const& unit : _unitTemplates) 
 	{
 		if (unit->getId() == unitId)
 		{
@@ -53,9 +53,9 @@ std::unique_ptr<Unit> RuleSetManager::getUnitTemplate(int unitId)
 	throw std::invalid_argument("Could not find unit " + unitId);
 }
 
-std::unique_ptr<Terrain> RuleSetManager::getTerrainTemplate(int terrainId)
+std::shared_ptr<Terrain> RuleSetManager::getTerrainTemplate(int terrainId)
 {
-	for (auto terrain : _terrainTemplates)
+	for (auto const& terrain : _terrainTemplates)
 	{
 		if (terrain->getId() == terrainId)
 		{

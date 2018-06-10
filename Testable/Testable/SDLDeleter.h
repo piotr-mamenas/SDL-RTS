@@ -7,7 +7,6 @@ namespace sdl2 {
 		void operator()(SDL_Texture* texturePtr) { if (texturePtr) SDL_DestroyTexture(texturePtr); }
 		void operator()(SDL_Renderer* rendererPtr) { if (rendererPtr) SDL_DestroyRenderer(rendererPtr); }
 		void operator()(SDL_Window* windowPtr) { if (windowPtr) SDL_DestroyWindow(windowPtr); }
-		void operator()(SDL_RWops* rwOpsPtr) { if (rwOpsPtr) SDL_RWclose(rwOpsPtr); }
 	};
 
 	template<class T, class D = std::default_delete<T>>
@@ -25,11 +24,9 @@ namespace sdl2 {
 	using TexturePtr = std::unique_ptr<SDL_Texture, SDLDeleter>;
 	using RendererPtr = std::unique_ptr<SDL_Texture, SDLDeleter>;
 	using WindowPtr = std::unique_ptr<SDL_Window, SDLDeleter>;
-	using RWopsPtr = std::unique_ptr<SDL_RWops, SDLDeleter>;
 
 	using SurfaceSharedPtr = sdl2_shared_ptr<SDL_Surface, SDLDeleter>;
 	using TextureSharedPtr = sdl2_shared_ptr<SDL_Texture, SDLDeleter>;
-	using RendererSharedPtr = sdl2_shared_ptr<SDL_Texture, SDLDeleter>;
+	using RendererSharedPtr = sdl2_shared_ptr<SDL_Renderer, SDLDeleter>;
 	using WindowSharedPtr = sdl2_shared_ptr<SDL_Window, SDLDeleter>;
-	using RWopsSharedPtr = sdl2_shared_ptr<SDL_RWops, SDLDeleter>;
 }

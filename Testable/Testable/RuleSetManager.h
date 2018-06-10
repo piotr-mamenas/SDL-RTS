@@ -11,15 +11,15 @@
 class RuleSetManager
 {
 private:
-	std::vector<std::unique_ptr<Unit>> _unitTemplates;
-	std::vector<std::unique_ptr<Terrain>> _terrainTemplates;
+	std::vector<std::shared_ptr<Unit>> _unitTemplates;
+	std::vector<std::shared_ptr<Terrain>> _terrainTemplates;
 	void _loadDefaultConfiguration();
 public:
 	RuleSetManager(bool useDefaultConfiguration);
 	void setUnitFile(std::string fileName);
 	void setTerrainFile(std::string fileName);
-    std::unique_ptr<Unit> getUnitTemplate(int unitId);
-	std::unique_ptr<Terrain> getTerrainTemplate(int terrainId);
+    std::shared_ptr<Unit> getUnitTemplate(int unitId);
+	std::shared_ptr<Terrain> getTerrainTemplate(int terrainId);
 };
 
 #endif

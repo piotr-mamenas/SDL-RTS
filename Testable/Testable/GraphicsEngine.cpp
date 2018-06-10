@@ -43,12 +43,12 @@ void GraphicsEngine::_setCamera(unsigned int cameraX, unsigned int cameraY)
 void GraphicsEngine::refreshScene(std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
-	SDL_SetRenderDrawColor(_gameRenderer, 0, 0, 0, 250);
-	SDL_RenderClear(_gameRenderer);
+	SDL_SetRenderDrawColor(_gameRenderer.get(), 0, 0, 0, 250);
+	SDL_RenderClear(_gameRenderer.get());
 
 	_drawGameMap(gameMap);
 	
-	SDL_RenderPresent(_gameRenderer);
+	SDL_RenderPresent(_gameRenderer.get());
 }
 
 void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
@@ -61,12 +61,12 @@ void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std:
 	_drawGameMap(gameMap);
 	_drawUnits(units);
 
-	SDL_RenderPresent(_gameRenderer);
+	SDL_RenderPresent(_gameRenderer.get());
 }
 
 void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
 {
-	for (std::unique_ptr<Unit> unit : units)
+	for (auto const& unit : units)
 	{
 		bool unitAlive = unit -> isAlive();
 		if (unitAlive)
@@ -79,7 +79,7 @@ void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
 void GraphicsEngine::_drawGameMap(std::shared_ptr<GameMap> gameMap)
 {
 	std::vector<std::unique_ptr<Terrain>> mapTerrain = gameMap -> getTerrain();
-	for (std::unique_ptr<Terrain> terrain : mapTerrain)
+	for (auto const& terrain : mapTerrain)
 	{
 		_drawGameObject(terrain);
 	}
@@ -93,8 +93,8 @@ void GraphicsEngine::_drawGameObject(std::unique_ptr<GameObject> object)
 	unsigned int objectWidth = object->getWidth();
 	unsigned int objectHeight = object->getHeight();
 
-	std::unique_ptr<Sprite> objectSprite = _gameAssetManager->getSprite(spriteId);
-	std::unique_ptr<SDL_Rect> spriteClip = objectSprite->getClip(1);
+	std::shared_ptr<Sprite> objectSprite = _gameAssetManager->getSprite(spriteId);
+	SDL_Rect spriteClip = objectSprite->getClip(1);
 
 	if (_isInCamera(objectPositionX, objectPositionY, objectWidth, objectHeight))
 	{
@@ -127,13 +127,13 @@ bool GraphicsEngine::_isInCamera(unsigned int positionX, unsigned int positionY,
 	return true;
 }
 
-void GraphicsEngine::_drawTexture(sdl2::TexturePtr texture, std::unique_ptr<SDL_Rect> clip, unsigned int positionX, unsigned int positionY)
+void GraphicsEngine::_drawTexture(sdl2::TextureSharedPtr texture, SDL_Rect clip, unsigned int positionX, unsigned int positionY)
 {
 	SDL_Rect unitPosition;
 	unitPosition.x = positionX;
 	unitPosition.y = positionY;
-	unitPosition.w = clip->w;
-	unitPosition.h = clip->h;
+	unitPosition.w = clip.w;
+	unitPosition.h = clip.h;
 
-	SDL_RenderCopy(_gameRenderer, texture, clip, &unitPosition);
+	SDL_RenderCopy(_gameRenderer.get(), texture.get(), &clip, &unitPosition);
 }

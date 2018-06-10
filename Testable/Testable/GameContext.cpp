@@ -52,7 +52,7 @@ bool GameContext::init()
 		}
 		else
 		{
-			_gameRenderer = sdl2::RendererSharedPtr(SDL_CreateRenderer(_gameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+			_gameRenderer = sdl2::RendererSharedPtr(SDL_CreateRenderer(_gameWindow.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 			if (_gameRenderer == NULL)
 			{
 				std::cout << "Renderer could not be created! SDL_Error: " << SDL_GetError();

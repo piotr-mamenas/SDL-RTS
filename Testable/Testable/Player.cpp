@@ -123,7 +123,7 @@ void Player::handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> u
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 	{
-		for (auto unit : units)
+		for (auto const& unit : units)
 		{
 			unit->handleEvent(_mousePositionX, _mousePositionY, e.type);
 		}

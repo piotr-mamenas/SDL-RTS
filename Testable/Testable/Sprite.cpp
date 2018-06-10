@@ -40,7 +40,7 @@ Sprite::Sprite(sdl2::TextureSharedPtr spriteTexture, int spriteWidth, int sprite
 	}
 }
 
-sdl2::TexturePtr Sprite::getTexture()
+sdl2::TextureSharedPtr Sprite::getTexture()
 {
 	return _spriteTexture;
 }
@@ -55,12 +55,11 @@ int Sprite::getSpriteSheetHeight()
 	return _spriteSheetHeight;
 }
 
-std::unique_ptr<SDL_Rect> Sprite::getClip(int clipId)
+SDL_Rect Sprite::getClip(int clipId)
 {
 	std::map<int, SDL_Rect>::iterator clipIterator = _clips.find(clipId);
 	if (clipIterator != _clips.end())
 	{
-		return &clipIterator->second;
+		return clipIterator->second;
 	}
-	return NULL;
 }

@@ -1,8 +1,6 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include <memory>
-
 #include "nlohmann\json.hpp"
 
 using json = nlohmann::json;

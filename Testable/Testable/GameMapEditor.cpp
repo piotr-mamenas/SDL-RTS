@@ -18,7 +18,7 @@ GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::sha
 	_defaultMapWidth = defaultMapWidth;
 	_defaultMapHeight = defaultMapHeight;
 
-	_editedMap = std::make_unique(new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet));
+	_editedMap = std::make_shared<GameMap>(new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet));
 }
 
 void GameMapEditor::loadMap(std::string mapName)
@@ -33,7 +33,7 @@ void GameMapEditor::saveMap()
 
 void GameMapEditor::start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight)
 {
-	std::unique_ptr<Player> mapEditor = std::make_unique(new Player("000000", screenWidth, screenHeight));
+	std::unique_ptr<Player> mapEditor = std::make_unique<Player>(new Player("000000", screenWidth, screenHeight));
 
 	SDL_Event e;
 	bool quit = false;

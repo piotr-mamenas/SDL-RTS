@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <iostream>
 
 #include "Unit.h"
 #include "Terrain.h"
@@ -15,7 +16,7 @@ class SerializationHelper
 {
 private:
 public:
-	std::vector<std::unique_ptr<T>> serializeToList(std::string fileName, std::string objectName)
+	std::vector<std::shared_ptr<T>> serializeToList(std::string fileName, std::string objectName)
 	{
 		std::ifstream objectFile(fileName);
 
@@ -25,7 +26,7 @@ public:
 			objectFile >> objectJson;
 			
 			json objects = objectJson.at(objectName);
-			std::vector<std::unique_ptr<T>> objectContainer;
+			std::vector<std::shared_ptr<T>> objectContainer;
 
 			for (auto object : objects)
 			{

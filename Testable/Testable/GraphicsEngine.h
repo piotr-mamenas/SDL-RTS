@@ -15,7 +15,7 @@
 class GraphicsEngine
 {
 private:
-	void _drawTexture(sdl2::TexturePtr texture, std::unique_ptr<SDL_Rect> clip, unsigned int positionX, unsigned int positionY);
+	void _drawTexture(sdl2::TextureSharedPtr texture, SDL_Rect clip, unsigned int positionX, unsigned int positionY);
 	void _drawUnits(std::vector<std::unique_ptr<Unit>> units);
 	void _drawGameObject(std::unique_ptr<GameObject> object);
 	void _drawGameMap(std::shared_ptr<GameMap> gameMap);
