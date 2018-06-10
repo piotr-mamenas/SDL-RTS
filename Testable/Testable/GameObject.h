@@ -18,7 +18,7 @@ protected:
 	int _height;
 
 	GameObject(int initialPositionX, int initialPositionY);
-	GameObject(std::unique_ptr<json> json);
+	GameObject(json json);
 public:
 	int getId();
 	int getSpriteId();
@@ -26,7 +26,7 @@ public:
 	int getPositionY();
 	int getWidth();
 	int getHeight();
-	virtual void deserializeFrom(std::unique_ptr<json> json) {};
+	virtual void deserializeFrom(json json) {};
 };
 
 #endif

@@ -13,12 +13,12 @@
 class GameContext
 {
 private:
-	std::unique_ptr<SDL_Window> _gameWindow;
-	std::unique_ptr<SDL_Renderer> _gameRenderer;
-	std::unique_ptr<GraphicsEngine> _graphicsEngine;
-	std::unique_ptr<GameAssetManager> _gameAssetManager = NULL;
-	std::unique_ptr<RuleSetManager> _gameRuleSet = NULL;
-	std::unique_ptr<Player> _currentPlayer = NULL;
+	std::shared_ptr<SDL_Window> _gameWindow;
+	std::shared_ptr<SDL_Renderer> _gameRenderer;
+	std::shared_ptr<GraphicsEngine> _graphicsEngine;
+	std::shared_ptr<GameAssetManager> _gameAssetManager;
+	std::shared_ptr<RuleSetManager> _gameRuleSet;
+	std::shared_ptr<Player> _currentPlayer;
 	std::vector<std::unique_ptr<Player>> _players;
 	
 	int _screenWidth;

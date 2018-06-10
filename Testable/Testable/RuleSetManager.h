@@ -16,8 +16,8 @@ private:
 	void _loadDefaultConfiguration();
 public:
 	RuleSetManager(bool useDefaultConfiguration);
-	void setUnitFile(std::unique_ptr<std::string> fileName);
-	void setTerrainFile(std::unique_ptr<std::string> fileName);
+	void setUnitFile(std::string fileName);
+	void setTerrainFile(std::string fileName);
     std::unique_ptr<Unit> getUnitTemplate(int unitId);
 	std::unique_ptr<Terrain> getTerrainTemplate(int terrainId);
 };

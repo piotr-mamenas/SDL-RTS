@@ -12,13 +12,13 @@ class GameMapEditor
 {
 private:
 	std::unique_ptr<GameMap> _editedMap;
-	std::unique_ptr<RuleSetManager> _ruleSet;
+	std::shared_ptr<RuleSetManager> _ruleSet;
 	int _defaultMapWidth;
 	int _defaultMapHeight;
 	int _selectedBrushId;
 public:
-	GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::unique_ptr<RuleSetManager> ruleSet);
-	void loadMap(std::unique_ptr<std::string> mapName);
+	GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::shared_ptr<RuleSetManager> ruleSet);
+	void loadMap(std::string mapName);
 	void saveMap();
 	void start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight);
 };

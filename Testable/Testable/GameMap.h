@@ -27,7 +27,7 @@ public:
 	GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
 	void getUnits(std::unique_ptr<SDL_Rect> containingBox);
 	std::vector<std::unique_ptr<Terrain>> getTerrain();
-	void loadMap(std::unique_ptr<std::unique_ptr<std::string>> mapName);
+	void loadMap(std::string mapName);
 	int getMapWidth();
 	int getMapHeight();
 };

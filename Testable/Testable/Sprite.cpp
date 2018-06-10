@@ -6,9 +6,7 @@
 
 #include <SDL.h>
 
-using namespace std;
-
-Sprite::Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight)
+Sprite::Sprite(std::shared_ptr<SDL_Texture> spriteTexture, int spriteWidth, int spriteHeight)
 {
 	int clipCounter = 0;
 	_spriteTexture = spriteTexture;
@@ -17,12 +15,12 @@ Sprite::Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight)
 	
 	if (_spriteSheetWidth % spriteWidth != 0)
 	{
-		throw invalid_argument("Loaded SpriteSheet Width is not divisable by Sprite Width");
+		throw std::invalid_argument("Loaded SpriteSheet Width is not divisable by Sprite Width");
 	}
 
 	if (_spriteSheetHeight % spriteHeight != 0)
 	{
-		throw invalid_argument("Loaded SpriteSheet Height is not divisable by Sprite Height");
+		throw std::invalid_argument("Loaded SpriteSheet Height is not divisable by Sprite Height");
 	}
 
 	for (int cntY = 0; cntY < (_spriteSheetHeight / spriteHeight); cntY++)
@@ -37,12 +35,12 @@ Sprite::Sprite(SDL_Texture* spriteTexture, int spriteWidth, int spriteHeight)
 			spriteClip.x = cntX * spriteWidth;
 			spriteClip.y = cntY * spriteHeight;
 
-			_clips.insert(pair<int, SDL_Rect>(clipCounter, spriteClip));
+			_clips.insert(std::pair<int, SDL_Rect>(clipCounter, spriteClip));
 		}
 	}
 }
 
-SDL_Texture* Sprite::getTexture()
+std::unique_ptr<SDL_Texture> Sprite::getTexture()
 {
 	return _spriteTexture;
 }
@@ -57,9 +55,9 @@ int Sprite::getSpriteSheetHeight()
 	return _spriteSheetHeight;
 }
 
-SDL_Rect* Sprite::getClip(int clipId)
+std::unique_ptr<SDL_Rect> Sprite::getClip(int clipId)
 {
-	map<int, SDL_Rect>::iterator clipIterator = _clips.find(clipId);
+	std::map<int, SDL_Rect>::iterator clipIterator = _clips.find(clipId);
 	if (clipIterator != _clips.end())
 	{
 		return &clipIterator->second;

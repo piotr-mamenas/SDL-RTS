@@ -20,9 +20,9 @@ protected:
 
 public:
 	Terrain(int initialPositionX, int initialPositionY, std::unique_ptr<Terrain> terrainTemplate);
-	Terrain(std::unique_ptr<json> terrainJson);
+	Terrain(json terrainJson);
 	bool isBlocked(int positionX, int positionY, int width, int height);
-	void deserializeFrom(std::unique_ptr<json> json) override;
+	void deserializeFrom(json json) override;
 };
 
 #endif

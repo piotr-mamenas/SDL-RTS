@@ -64,9 +64,9 @@ void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std:
 	SDL_RenderPresent(_gameRenderer);
 }
 
-void GraphicsEngine::_drawUnits(list<Unit*> units)
+void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
 {
-	for (Unit* unit : units)
+	for (std::unique_ptr<Unit> unit : units)
 	{
 		bool unitAlive = unit -> isAlive();
 		if (unitAlive)
@@ -76,16 +76,16 @@ void GraphicsEngine::_drawUnits(list<Unit*> units)
 	}
 }
 
-void GraphicsEngine::_drawGameMap(GameMap* gameMap)
+void GraphicsEngine::_drawGameMap(std::unique_ptr<GameMap> gameMap)
 {
-	list<Terrain*> mapTerrain = gameMap -> getTerrain();
-	for (Terrain* terrain : mapTerrain)
+	std::vector<std::unique_ptr<Terrain>> mapTerrain = gameMap -> getTerrain();
+	for (std::unique_ptr<Terrain> terrain : mapTerrain)
 	{
 		_drawGameObject(terrain);
 	}
 }
 
-void GraphicsEngine::_drawGameObject(GameObject* object)
+void GraphicsEngine::_drawGameObject(std::unique_ptr<GameObject> object)
 {
 	unsigned int spriteId = object->getSpriteId();
 	unsigned int objectPositionX = object->getPositionX();
@@ -93,8 +93,8 @@ void GraphicsEngine::_drawGameObject(GameObject* object)
 	unsigned int objectWidth = object->getWidth();
 	unsigned int objectHeight = object->getHeight();
 
-	Sprite* objectSprite = _gameAssetManager->getSprite(spriteId);
-	SDL_Rect* spriteClip = objectSprite->getClip(1);
+	std::unique_ptr<Sprite> objectSprite = _gameAssetManager->getSprite(spriteId);
+	std::unique_ptr<SDL_Rect> spriteClip = objectSprite->getClip(1);
 
 	if (_isInCamera(objectPositionX, objectPositionY, objectWidth, objectHeight))
 	{
@@ -127,7 +127,7 @@ bool GraphicsEngine::_isInCamera(unsigned int positionX, unsigned int positionY,
 	return true;
 }
 
-void GraphicsEngine::_drawTexture(SDL_Texture* texture, SDL_Rect* clip, unsigned int positionX, unsigned int positionY)
+void GraphicsEngine::_drawTexture(std::unique_ptr<SDL_Texture> texture, std::unique_ptr<SDL_Rect> clip, unsigned int positionX, unsigned int positionY)
 {
 	SDL_Rect unitPosition;
 	unitPosition.x = positionX;

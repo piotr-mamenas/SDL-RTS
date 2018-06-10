@@ -16,18 +16,18 @@ protected:
 	int _currentLife;
 	int _damage;
 	int _maxLife;
-	std::unique_ptr<string> _unitName;
+	std::string _unitName;
 
 	bool _isAlive;
 public:
 	Unit(int initialPositionX, int initialPositionY, std::unique_ptr<Unit> unitTemplate);
-	Unit(std::unique_ptr<json> unitJson);
+	Unit(json unitJson);
 	int getMaxLife();
 	int getDamage();
-	std::unique_ptr<string> getName();
+	std::unique_ptr<std::string> getName();
 
 	bool isAlive();
 	void handleEvent(int clickPositionX, int clickPositionY, int eventType);
-	void deserializeFrom(std::unique_ptr<json> json) override;
+	void deserializeFrom(json json) override;
 };
 #endif

@@ -15,10 +15,10 @@ class Player
 private:
 	void _handleScrolling(int mousePositionX, int mousePositionY);
 	void _resetScrolling();
-	std::unique_ptr<std::string> _color;
-	std::unique_ptr<std::vector<std::unique_ptr<Unit>>> _units;
+	std::string _color;
+	std::vector<std::unique_ptr<Unit>> _units;
 	std::vector<std::unique_ptr<Player>> _hostilePlayers;
-	std::unique_ptr<GameMap> _gameMap;
+	std::shared_ptr<GameMap> _gameMap;
 
 	int _cameraX;
 	int _cameraY;
@@ -31,8 +31,8 @@ private:
 	bool _scrollingUp;
 	bool _scrollingDown;
 public:
-	Player(std::unique_ptr<string> color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY);
-	Player(std::unique_ptr<string> color, int screenResolutionX, int screenResolutionY);
+	Player(std::string color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY);
+	Player(std::string color, int screenResolutionX, int screenResolutionY);
 	void addUnit(std::unique_ptr<Unit> unit);
 	std::vector<std::unique_ptr<Unit>> getUnits();
 

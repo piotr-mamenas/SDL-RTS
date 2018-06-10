@@ -15,9 +15,9 @@ class SerializationHelper
 {
 private:
 public:
-	std::vector<std::unique_ptr<T>> serializeToList(string fileName, string objectName)
+	std::vector<std::unique_ptr<T>> serializeToList(std::string fileName, std::string objectName)
 	{
-		ifstream objectFile(fileName);
+		std::ifstream objectFile(fileName);
 
 		try
 		{
