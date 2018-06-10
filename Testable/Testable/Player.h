@@ -39,10 +39,10 @@ public:
 	void setCamera(int cameraX, int cameraY);
 	int getCameraX();
 	int getCameraY();
-	void handleInteraction(std::unique_ptr<SDL_Event> e, std::vector<std::unique_ptr<Unit>> units);
+	void handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> units);
 	void scrollCamera();
 
-	void startNewGame(std::unique_ptr<GameMap> gameMap);
+	void startNewGame(std::shared_ptr<GameMap> gameMap);
 	void setPlayerHostile(std::unique_ptr<Player> player);
 };
 

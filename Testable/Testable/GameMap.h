@@ -14,7 +14,7 @@
 class GameMap
 {
 private:
-	void _fillMapWithTerrain(std::unique_ptr<Terrain> terrain);
+	void _fillMapWithTerrain(std::shared_ptr<Terrain> terrain);
 	std::vector<std::unique_ptr<Terrain>> _mapTerrain;
 	std::vector<std::unique_ptr<Terrain>> _mapObjects;
 	std::vector<std::unique_ptr<Unit>> _preplacedMapUnits;
@@ -24,7 +24,7 @@ private:
 	std::shared_ptr<RuleSetManager> _ruleSet;
 public:
 	GameMap(int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
-	GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
+	GameMap(std::shared_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet);
 	void getUnits(std::unique_ptr<SDL_Rect> containingBox);
 	std::vector<std::unique_ptr<Terrain>> getTerrain();
 	void loadMap(std::string mapName);

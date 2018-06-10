@@ -1,6 +1,7 @@
 #include <iostream>
-#include <list>
+#include <vector>
 #include <string>
+#include <memory>
 #include <SDL.h>
 
 #include "Unit.h"
@@ -28,7 +29,6 @@ bool GameContext::init()
 {
 	bool success = true;
 	bool isMapEditorMode = false;
-	_gameWindow = NULL;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -38,47 +38,47 @@ bool GameContext::init()
 	{
 		if (_isWindowMode) 
 		{
-			_gameWindow = std::make_shared(SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN));
+			_gameWindow = sdl2::WindowSharedPtr(SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN));
 		}
 		else
 		{
-			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_FULLSCREEN);
+			_gameWindow = sdl2::WindowSharedPtr(SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_FULLSCREEN));
 		}
 		
 		if (_gameWindow == NULL)
 		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			std::cout << "Window could not be created! SDL_Error: " << SDL_GetError();
 			success = false;
 		}
 		else
 		{
-			_gameRenderer = SDL_CreateRenderer(_gameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			_gameRenderer = sdl2::RendererSharedPtr(SDL_CreateRenderer(_gameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 			if (_gameRenderer == NULL)
 			{
-				printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
+				std::cout << "Renderer could not be created! SDL_Error: " << SDL_GetError();
 				success = false;
 			}
 
-			_gameAssetManager = new GameAssetManager(_gameRenderer);
-			_graphicsEngine = new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight);
-			_gameRuleSet = new RuleSetManager(true);
+			_gameAssetManager = std::make_shared<GameAssetManager>(new GameAssetManager(_gameRenderer));
+			_graphicsEngine = std::make_shared<GraphicsEngine>(new GraphicsEngine(_gameRenderer, _gameAssetManager, _screenWidth, _screenHeight));
+			_gameRuleSet = std::make_shared<RuleSetManager>(new RuleSetManager(true));
 
 			_gameRuleSet->getUnitTemplate(1);
-			Unit* infantry = new Unit(50, 60,_gameRuleSet->getUnitTemplate(1));
-			Unit* infantry2 = new Unit(12, 92, _gameRuleSet->getUnitTemplate(1));
-			Unit* infantry3 = new Unit(30, 155, _gameRuleSet->getUnitTemplate(1));
-			Terrain* fillTerrain = new Terrain(0,0, _gameRuleSet->getTerrainTemplate(1));
-			GameMap* gameMap = new GameMap(fillTerrain, 2700, 1980, _gameRuleSet);
+			std::unique_ptr<Unit> infantry = std::make_unique<Unit>(new Unit(50, 60,_gameRuleSet->getUnitTemplate(1)));
+			std::unique_ptr<Unit> infantry2 = std::make_unique<Unit>(new Unit(12, 92, _gameRuleSet->getUnitTemplate(1)));
+			std::unique_ptr<Unit> infantry3 = std::make_unique<Unit>(new Unit(30, 155, _gameRuleSet->getUnitTemplate(1)));
+			std::shared_ptr<Terrain> fillTerrain = std::make_unique<Terrain>(new Terrain(0,0, _gameRuleSet->getTerrainTemplate(1)));
+			std::shared_ptr<GameMap> gameMap = std::make_shared<GameMap>(new GameMap(fillTerrain, 2700, 1980, _gameRuleSet));
 			gameMap->loadMap("skirmish_map");
 
-			list<Unit*> units;
+			std::vector<std::unique_ptr<Unit>> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);
 			units.push_back(infantry3);
 
-			string playerOneRGBColor = "FF0000";
-			_currentPlayer = new Player(playerOneRGBColor, units, _screenWidth, _screenHeight);
-			_currentPlayer->startNewGame(gameMap);
+			std::string playerOneRGBColor = "FF0000";
+			_currentPlayer = std::make_shared<Player>(new Player(playerOneRGBColor, units, _screenWidth, _screenHeight));
+			_currentPlayer-> startNewGame(gameMap);
 			_currentPlayer->setCamera(0, 0);
 			SDL_Event e;
 			bool quit = false;
@@ -115,13 +115,5 @@ bool GameContext::init()
 
 void GameContext::close()
 {
-	delete _gameAssetManager;
-	delete _graphicsEngine;
-
-	SDL_DestroyRenderer(_gameRenderer);
-	SDL_DestroyWindow(_gameWindow);
-	_gameRenderer = NULL;
-	_gameWindow = NULL;
-
 	SDL_Quit();
 }

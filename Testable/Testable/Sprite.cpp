@@ -6,12 +6,12 @@
 
 #include <SDL.h>
 
-Sprite::Sprite(std::shared_ptr<SDL_Texture> spriteTexture, int spriteWidth, int spriteHeight)
+Sprite::Sprite(sdl2::TextureSharedPtr spriteTexture, int spriteWidth, int spriteHeight)
 {
 	int clipCounter = 0;
 	_spriteTexture = spriteTexture;
 
-	SDL_QueryTexture(_spriteTexture, NULL, NULL, &_spriteSheetWidth, &_spriteSheetHeight);
+	SDL_QueryTexture(_spriteTexture.get(), NULL, NULL, &_spriteSheetWidth, &_spriteSheetHeight);
 	
 	if (_spriteSheetWidth % spriteWidth != 0)
 	{
@@ -40,7 +40,7 @@ Sprite::Sprite(std::shared_ptr<SDL_Texture> spriteTexture, int spriteWidth, int 
 	}
 }
 
-std::unique_ptr<SDL_Texture> Sprite::getTexture()
+sdl2::TexturePtr Sprite::getTexture()
 {
 	return _spriteTexture;
 }

@@ -45,7 +45,7 @@ std::map<int, std::unique_ptr<Sprite>> GameAssetManager::_loadSprite(std::string
 	try
 	{
 		std::ifstream spriteFile(fileName);
-		std::json sprites;
+		json sprites;
 		spriteFile >> sprites;
 
 		for (auto& sprite : sprites.at("sprites"))
@@ -55,8 +55,8 @@ std::map<int, std::unique_ptr<Sprite>> GameAssetManager::_loadSprite(std::string
 			spriteHeight = sprite.at("height").get<int>();
 			path = sprite.at("spriteSheetImage").get<std::string>();
 
-			std::unique_ptr<SDL_Texture> texture = _loadTexture(path);
-			std::unique_ptr<Sprite> sprite = std::make_unique(new Sprite(texture, spriteWidth, spriteHeight));
+			SDL_Texture texture = _loadTexture(path);
+			std::unique_ptr<Sprite> sprite = std::make_unique<Sprite>(new Sprite(texture, spriteWidth, spriteHeight));
 			spriteMap.insert(std::pair<int, std::unique_ptr<Sprite>>(spriteId, sprite));
 		}
 		return spriteMap;

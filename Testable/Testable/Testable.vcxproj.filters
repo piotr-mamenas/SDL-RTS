@@ -43,6 +43,9 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{ecddeef1-ff51-4d94-97eb-a11e3e097c35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SDL">
+      <UniqueIdentifier>{0196abdf-9188-4363-9b92-49f25ab2f3df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLDeleter.h">
+      <Filter>Header Files\SDL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

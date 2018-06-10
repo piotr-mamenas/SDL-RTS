@@ -5,18 +5,19 @@
 #include <memory>
 
 #include <SDL.h>
+#include "SDLDeleter.h"
 
 class Sprite
 {
 private:
 	int _spriteSheetWidth;
 	int _spriteSheetHeight;
-	std::shared_ptr<SDL_Texture> _spriteTexture;
+	sdl2::TextureSharedPtr _spriteTexture;
 	std::map<int,std::unique_ptr<SDL_Rect>> _clips;
 
 public:
-	Sprite(std::shared_ptr<SDL_Texture> spriteTexture, int spriteWidth, int spriteHeight);
-	std::unique_ptr<SDL_Texture> getTexture();
+	Sprite(sdl2::TextureSharedPtr spriteTexture, int spriteWidth, int spriteHeight);
+	sdl2::TexturePtr getTexture();
 	int getSpriteSheetWidth();
 	int getSpriteSheetHeight();
 	std::unique_ptr<SDL_Rect> getClip(int clipId);

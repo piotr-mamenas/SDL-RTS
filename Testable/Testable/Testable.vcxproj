@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RuleSetManager.h" />
+    <ClInclude Include="SDLDeleter.h" />
     <ClInclude Include="SerializationHelper.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="GameAssetManager.h" />

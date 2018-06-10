@@ -9,12 +9,13 @@
 #include "GraphicsEngine.h"
 #include "Player.h"
 #include "RuleSetManager.h"
+#include "SDLDeleter.h"
 
 class GameContext
 {
 private:
-	std::shared_ptr<SDL_Window> _gameWindow;
-	std::shared_ptr<SDL_Renderer> _gameRenderer;
+	sdl2::WindowSharedPtr _gameWindow;
+	sdl2::RendererSharedPtr _gameRenderer;
 	std::shared_ptr<GraphicsEngine> _graphicsEngine;
 	std::shared_ptr<GameAssetManager> _gameAssetManager;
 	std::shared_ptr<RuleSetManager> _gameRuleSet;
