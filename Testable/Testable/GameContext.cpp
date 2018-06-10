@@ -38,7 +38,7 @@ bool GameContext::init()
 	{
 		if (_isWindowMode) 
 		{
-			_gameWindow = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN);
+			_gameWindow = std::make_shared(SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _screenWidth, _screenHeight, SDL_WINDOW_SHOWN));
 		}
 		else
 		{

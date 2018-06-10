@@ -1,5 +1,5 @@
 #include <iostream>
-#include <list>
+#include <vector>
 #include <string>
 #include <algorithm>
 
@@ -12,7 +12,7 @@
 #define SCROLLBOX_SIZE_IN_PX 30
 #define SCROLL_SPEED 8
 
-Player::Player(string color, list<Unit*> startingUnits, int screenResolutionX, int screenResolutionY)
+Player::Player(std::string color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY)
 {
 	_units = startingUnits;
 	_color = color;
@@ -20,23 +20,23 @@ Player::Player(string color, list<Unit*> startingUnits, int screenResolutionX, i
 	_screenResolutionY = screenResolutionY;
 }
 
-Player::Player(string color, int screenResolutionX, int screenResolutionY)
+Player::Player(std::string color, int screenResolutionX, int screenResolutionY)
 {
 	_color = color;
 	_screenResolutionX;
 	_screenResolutionY;
 }
-void Player::addUnit(Unit* unit)
+void Player::addUnit(std::unique_ptr<Unit> unit)
 {
 	_units.push_back(unit);
 }
 
-list<Unit*> Player::getUnits()
+std::vector<std::unique_ptr<Unit>> Player::getUnits()
 {
 	return _units;
 }
 
-void Player::startNewGame(GameMap* gameMap)
+void Player::startNewGame(std::shared_ptr<GameMap> gameMap)
 {
 	_gameMap = gameMap;
 }
@@ -117,20 +117,20 @@ void Player::_handleScrolling(int mousePositionX, int mousePositionY)
 	}
 }
 
-void Player::handleInteraction(SDL_Event e, list<Unit*> units)
+void Player::handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> units)
 {
 	SDL_GetMouseState(&_mousePositionX, &_mousePositionY);
 
 	if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP)
 	{
-		for (Unit* unit : units)
+		for (auto unit : units)
 		{
 			unit->handleEvent(_mousePositionX, _mousePositionY, e.type);
 		}
 	}
 }
 
-void Player::setPlayerHostile(Player* player)
+void Player::setPlayerHostile(std::unique_ptr<Player> player)
 {
 	bool isPlayerAlreadyHostile = find(_hostilePlayers.begin(), _hostilePlayers.end(), player) != _hostilePlayers.end();
 

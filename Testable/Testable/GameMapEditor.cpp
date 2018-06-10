@@ -1,3 +1,6 @@
+#include <memory>
+#include <string>
+
 #include <SDL.h>
 
 #include "GameMapEditor.h"
@@ -10,12 +13,12 @@
 const int SCREEN_FPS = 60;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
-GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::unique_ptr<RuleSetManager> ruleSet)
+GameMapEditor::GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::shared_ptr<RuleSetManager> ruleSet)
 {
 	_defaultMapWidth = defaultMapWidth;
 	_defaultMapHeight = defaultMapHeight;
 
-	_editedMap = new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet);
+	_editedMap = std::make_unique(new GameMap(_defaultMapWidth, _defaultMapHeight, ruleSet));
 }
 
 void GameMapEditor::loadMap(std::string mapName)

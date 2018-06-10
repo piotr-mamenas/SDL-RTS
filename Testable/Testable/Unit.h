@@ -20,11 +20,11 @@ protected:
 
 	bool _isAlive;
 public:
-	Unit(int initialPositionX, int initialPositionY, std::unique_ptr<Unit> unitTemplate);
+	Unit(int initialPositionX, int initialPositionY, std::shared_ptr<Unit> unitTemplate);
 	Unit(json unitJson);
 	int getMaxLife();
 	int getDamage();
-	std::unique_ptr<std::string> getName();
+	std::string getName();
 
 	bool isAlive();
 	void handleEvent(int clickPositionX, int clickPositionY, int eventType);

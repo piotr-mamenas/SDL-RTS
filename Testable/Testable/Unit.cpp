@@ -8,7 +8,7 @@
 
 using json = nlohmann::json;
 
-Unit::Unit(int initialPositionX, int initialPositionY, std::unique_ptr<Unit> unitTemplate)
+Unit::Unit(int initialPositionX, int initialPositionY, std::shared_ptr<Unit> unitTemplate)
 	: GameObject(initialPositionX, initialPositionY)
 {
 	_id = unitTemplate->getId();
@@ -38,7 +38,7 @@ int Unit::getDamage()
 	return _damage;
 }
 
-string Unit::getName()
+std::string Unit::getName()
 {
 	return _unitName;
 }
@@ -82,7 +82,7 @@ void Unit::deserializeFrom(json json)
 	_spriteId = json.at("spriteId").get<int>();
 	_currentLife = json.at("maxLife").get<int>();
 	_maxLife = json.at("maxLife").get<int>();
-	_unitName = json.at("unitName").get<string>();
+	_unitName = json.at("unitName").get<std::string>();
 	_width = json.at("width").get<int>();
 	_height = json.at("height").get<int>();
 	_damage = json.at("damage").get<int>();

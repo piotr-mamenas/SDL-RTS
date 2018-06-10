@@ -23,7 +23,7 @@ GameMap::GameMap(int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ru
 	_ruleSet = ruleSet;
 }
 
-GameMap::GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet)
+GameMap::GameMap(std::shared_ptr<Terrain> templateTerrain, int mapWidth, int mapHeight, std::shared_ptr<RuleSetManager> ruleSet)
 {
 	_mapWidth = mapWidth;
 	_mapHeight = mapHeight;
@@ -42,7 +42,7 @@ GameMap::GameMap(std::unique_ptr<Terrain> templateTerrain, int mapWidth, int map
 	_fillMapWithTerrain(templateTerrain);
 }
 
-void GameMap::_fillMapWithTerrain(std::unique_ptr<Terrain> templateTerrain)
+void GameMap::_fillMapWithTerrain(std::shared_ptr<Terrain> templateTerrain)
 {
 	int tileMaxHorizontal = (_mapWidth) / (templateTerrain->getWidth());
 	int tileMaxVertical = (_mapHeight) / (templateTerrain->getHeight());
@@ -51,7 +51,7 @@ void GameMap::_fillMapWithTerrain(std::unique_ptr<Terrain> templateTerrain)
 	{
 		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
-			std::unique_ptr<Terrain> terrainTile(new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1)));
+			std::unique_ptr<Terrain> terrainTile = std::make_unique<Terrain>(new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1)));
 			_mapTerrain.push_back(terrainTile);
 		}
 	}
@@ -63,21 +63,6 @@ std::vector<std::unique_ptr<Terrain>> GameMap::getTerrain()
 }
 
 void GameMap::getUnits(std::unique_ptr<SDL_Rect> containingBox)
-{
-
-}
-
-void GameMap::addUnit(std::unique_ptr<Unit> unit)
-{
-
-}
-
-void GameMap::placeTile(std::unique_ptr<Terrain> tile)
-{
-	
-}
-
-void GameMap::placeObject(std::unique_ptr<Terrain> object)
 {
 
 }
@@ -110,8 +95,8 @@ void GameMap::loadMap(std::string mapName)
 				int terrainId = tile.at("terrainId").get<int>();
 				int positionX = tile.at("positionX").get<int>();
 				int positionY = tile.at("positionY").get<int>();
-				std::unique_ptr<Terrain> terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
-				_mapTerrain.push_back(std::make_unique(new Terrain(positionX, positionY, terrainTemplate)));
+				std::shared_ptr<Terrain> terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
+				_mapTerrain.push_back(std::make_unique<Terrain>(new Terrain(positionX, positionY, terrainTemplate)));
 			}
 		}
 	}
