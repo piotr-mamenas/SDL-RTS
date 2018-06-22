@@ -12,6 +12,7 @@
 #include <vector>
 #include <map>
 #include <stdexcept>
+#include <memory>
 
 using namespace std;
 
@@ -71,7 +72,7 @@ void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
 		bool unitAlive = unit -> isAlive();
 		if (unitAlive)
 		{
-			_drawGameObject(unit);
+			_drawGameObject(unit.get());
 		}
 	}
 }
@@ -81,11 +82,11 @@ void GraphicsEngine::_drawGameMap(std::shared_ptr<GameMap> gameMap)
 	std::vector<std::unique_ptr<Terrain>> mapTerrain = gameMap -> getTerrain();
 	for (auto const& terrain : mapTerrain)
 	{
-		_drawGameObject(terrain);
+		_drawGameObject(terrain.get());
 	}
 }
 
-void GraphicsEngine::_drawGameObject(std::unique_ptr<GameObject> object)
+void GraphicsEngine::_drawGameObject(GameObject* object)
 {
 	unsigned int spriteId = object->getSpriteId();
 	unsigned int objectPositionX = object->getPositionX();

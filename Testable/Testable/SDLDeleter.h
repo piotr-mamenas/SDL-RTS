@@ -1,3 +1,6 @@
+#ifndef SDLDELETER_H
+#define SDLDELETER_H
+
 #include <memory>
 #include <SDL.h>
 
@@ -30,3 +33,4 @@ namespace sdl2 {
 	using RendererSharedPtr = sdl2_shared_ptr<SDL_Renderer, SDLDeleter>;
 	using WindowSharedPtr = sdl2_shared_ptr<SDL_Window, SDLDeleter>;
 }
+#endif

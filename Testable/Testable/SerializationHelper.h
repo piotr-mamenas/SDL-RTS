@@ -30,7 +30,7 @@ public:
 
 			for (auto object : objects)
 			{
-				T* objectTemplate = new T(object);
+				auto objectTemplate = std::make_shared<T>(new T(object));
 				objectContainer.push_back(objectTemplate);
 			}
 			return objectContainer;
