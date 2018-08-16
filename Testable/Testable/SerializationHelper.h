@@ -31,7 +31,7 @@ public:
 			for (auto object : objects)
 			{
 				auto objectTemplate = std::make_shared<T>(new T(object));
-				objectContainer.push_back(objectTemplate);
+				objectContainer.push_back(std::move(objectTemplate));
 			}
 			return objectContainer;
 		}

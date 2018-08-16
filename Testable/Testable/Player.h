@@ -16,8 +16,8 @@ private:
 	void _handleScrolling(int mousePositionX, int mousePositionY);
 	void _resetScrolling();
 	std::string _color;
-	std::vector<std::unique_ptr<Unit>> _units;
-	std::vector<std::unique_ptr<Player>> _hostilePlayers;
+	std::vector<std::shared_ptr<Unit>> _units;
+	std::vector<std::shared_ptr<Player>> _hostilePlayers;
 	std::shared_ptr<GameMap> _gameMap;
 
 	int _cameraX;
@@ -31,19 +31,19 @@ private:
 	bool _scrollingUp;
 	bool _scrollingDown;
 public:
-	Player(std::string color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY);
+	Player(std::string color, std::vector<std::shared_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY);
 	Player(std::string color, int screenResolutionX, int screenResolutionY);
-	void addUnit(std::unique_ptr<Unit> unit);
-	std::vector<std::unique_ptr<Unit>> getUnits();
+	void addUnit(std::shared_ptr<Unit> unit);
+	std::vector<std::shared_ptr<Unit>> getUnits();
 
 	void setCamera(int cameraX, int cameraY);
 	int getCameraX();
 	int getCameraY();
-	void handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> units);
+	void handleInteraction(SDL_Event e, std::vector<std::shared_ptr<Unit>> units);
 	void scrollCamera();
 
 	void startNewGame(std::shared_ptr<GameMap> gameMap);
-	void setPlayerHostile(std::unique_ptr<Player> player);
+	void setPlayerHostile(std::shared_ptr<Player> player);
 };
 
 #endif

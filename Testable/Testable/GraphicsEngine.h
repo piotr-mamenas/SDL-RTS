@@ -16,7 +16,7 @@ class GraphicsEngine
 {
 private:
 	void _drawTexture(sdl2::TextureSharedPtr texture, SDL_Rect clip, unsigned int positionX, unsigned int positionY);
-	void _drawUnits(std::vector<std::unique_ptr<Unit>> units);
+	void _drawUnits(std::vector<std::shared_ptr<Unit>> units);
 	void _drawGameObject(GameObject* object);
 	void _drawGameMap(std::shared_ptr<GameMap> gameMap);
 	void _setCamera(unsigned int cameraX, unsigned int cameraY);
@@ -31,7 +31,7 @@ private:
 public:
 	GraphicsEngine(sdl2::RendererSharedPtr gameRenderer, std::shared_ptr<GameAssetManager> assetManager, unsigned int resolutionX, unsigned int resolutionY);
 	~GraphicsEngine();
-	void refreshScene(std::vector<std::unique_ptr<Unit>> units, std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY);
+	void refreshScene(std::vector<std::shared_ptr<Unit>> units, std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY);
 	void refreshScene(std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY);
 };
 

@@ -10,8 +10,8 @@
 class GameScenario
 {
 private:
-	std::vector<std::unique_ptr<Player>> _players;
-	std::unique_ptr<GameMap> _gameMap;
+	std::vector<std::shared_ptr<Player>> _players;
+	std::shared_ptr<GameMap> _gameMap;
 
 public:
 	GameScenario();

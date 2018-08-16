@@ -12,7 +12,7 @@
 #define SCROLLBOX_SIZE_IN_PX 30
 #define SCROLL_SPEED 8
 
-Player::Player(std::string color, std::vector<std::unique_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY)
+Player::Player(std::string color, std::vector<std::shared_ptr<Unit>> startingUnits, int screenResolutionX, int screenResolutionY)
 {
 	_units = startingUnits;
 	_color = color;
@@ -26,12 +26,12 @@ Player::Player(std::string color, int screenResolutionX, int screenResolutionY)
 	_screenResolutionX;
 	_screenResolutionY;
 }
-void Player::addUnit(std::unique_ptr<Unit> unit)
+void Player::addUnit(std::shared_ptr<Unit> unit)
 {
 	_units.push_back(unit);
 }
 
-std::vector<std::unique_ptr<Unit>> Player::getUnits()
+std::vector<std::shared_ptr<Unit>> Player::getUnits()
 {
 	return _units;
 }
@@ -117,7 +117,7 @@ void Player::_handleScrolling(int mousePositionX, int mousePositionY)
 	}
 }
 
-void Player::handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> units)
+void Player::handleInteraction(SDL_Event e, std::vector<std::shared_ptr<Unit>> units)
 {
 	SDL_GetMouseState(&_mousePositionX, &_mousePositionY);
 
@@ -130,7 +130,7 @@ void Player::handleInteraction(SDL_Event e, std::vector<std::unique_ptr<Unit>> u
 	}
 }
 
-void Player::setPlayerHostile(std::unique_ptr<Player> player)
+void Player::setPlayerHostile(std::shared_ptr<Player> player)
 {
 	bool isPlayerAlreadyHostile = find(_hostilePlayers.begin(), _hostilePlayers.end(), player) != _hostilePlayers.end();
 

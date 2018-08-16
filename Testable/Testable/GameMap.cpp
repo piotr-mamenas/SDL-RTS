@@ -51,18 +51,18 @@ void GameMap::_fillMapWithTerrain(std::shared_ptr<Terrain> templateTerrain)
 	{
 		for (int cntY = 0; cntY < tileMaxVertical; cntY++)
 		{
-			std::unique_ptr<Terrain> terrainTile = std::make_unique<Terrain>(new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1)));
+			std::shared_ptr<Terrain> terrainTile = std::make_shared<Terrain>(new Terrain(cntX*templateTerrain->getWidth(), cntY*templateTerrain->getHeight(), _ruleSet->getTerrainTemplate(1)));
 			_mapTerrain.push_back(terrainTile);
 		}
 	}
 }
 
-std::vector<std::unique_ptr<Terrain>> GameMap::getTerrain()
+std::vector<std::shared_ptr<Terrain>> GameMap::getTerrain()
 {
 	return _mapTerrain;
 }
 
-void GameMap::getUnits(std::unique_ptr<SDL_Rect> containingBox)
+void GameMap::getUnits(std::shared_ptr<SDL_Rect> containingBox)
 {
 
 }
@@ -96,7 +96,7 @@ void GameMap::loadMap(std::string mapName)
 				int positionX = tile.at("positionX").get<int>();
 				int positionY = tile.at("positionY").get<int>();
 				std::shared_ptr<Terrain> terrainTemplate = _ruleSet->getTerrainTemplate(terrainId);
-				_mapTerrain.push_back(std::make_unique<Terrain>(new Terrain(positionX, positionY, terrainTemplate)));
+				_mapTerrain.push_back(std::make_shared<Terrain>(new Terrain(positionX, positionY, terrainTemplate)));
 			}
 		}
 	}

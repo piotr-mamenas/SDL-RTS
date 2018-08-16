@@ -31,9 +31,9 @@ void GameMapEditor::saveMap()
 
 }
 
-void GameMapEditor::start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight)
+void GameMapEditor::start(std::shared_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight)
 {
-	std::unique_ptr<Player> mapEditor = std::make_unique<Player>(new Player("000000", screenWidth, screenHeight));
+	std::shared_ptr<Player> mapEditor = std::make_shared<Player>(new Player("000000", screenWidth, screenHeight));
 
 	SDL_Event e;
 	bool quit = false;

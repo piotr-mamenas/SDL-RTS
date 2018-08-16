@@ -20,7 +20,7 @@ private:
 	std::shared_ptr<GameAssetManager> _gameAssetManager;
 	std::shared_ptr<RuleSetManager> _gameRuleSet;
 	std::shared_ptr<Player> _currentPlayer;
-	std::vector<std::unique_ptr<Player>> _players;
+	std::vector<std::shared_ptr<Player>> _players;
 	
 	int _screenWidth;
 	int _screenHeight;

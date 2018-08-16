@@ -23,10 +23,10 @@ namespace sdl2 {
 		}
 	};
 
-	using SurfacePtr = std::unique_ptr<SDL_Surface, SDLDeleter>;
-	using TexturePtr = std::unique_ptr<SDL_Texture, SDLDeleter>;
-	using RendererPtr = std::unique_ptr<SDL_Texture, SDLDeleter>;
-	using WindowPtr = std::unique_ptr<SDL_Window, SDLDeleter>;
+	using SurfacePtr = std::shared_ptr<SDL_Surface>;
+	using TexturePtr = std::shared_ptr<SDL_Texture>;
+	using RendererPtr = std::shared_ptr<SDL_Texture>;
+	using WindowPtr = std::shared_ptr<SDL_Window>;
 
 	using SurfaceSharedPtr = sdl2_shared_ptr<SDL_Surface, SDLDeleter>;
 	using TextureSharedPtr = sdl2_shared_ptr<SDL_Texture, SDLDeleter>;

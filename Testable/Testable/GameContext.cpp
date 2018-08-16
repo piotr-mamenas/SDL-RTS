@@ -64,14 +64,14 @@ bool GameContext::init()
 			_gameRuleSet = std::make_shared<RuleSetManager>(new RuleSetManager(true));
 
 			_gameRuleSet->getUnitTemplate(1);
-			std::unique_ptr<Unit> infantry = std::make_unique<Unit>(new Unit(50, 60,_gameRuleSet->getUnitTemplate(1)));
-			std::unique_ptr<Unit> infantry2 = std::make_unique<Unit>(new Unit(12, 92, _gameRuleSet->getUnitTemplate(1)));
-			std::unique_ptr<Unit> infantry3 = std::make_unique<Unit>(new Unit(30, 155, _gameRuleSet->getUnitTemplate(1)));
-			std::shared_ptr<Terrain> fillTerrain = std::make_unique<Terrain>(new Terrain(0,0, _gameRuleSet->getTerrainTemplate(1)));
+			std::shared_ptr<Unit> infantry = std::make_shared<Unit>(new Unit(50, 60,_gameRuleSet->getUnitTemplate(1)));
+			std::shared_ptr<Unit> infantry2 = std::make_shared<Unit>(new Unit(12, 92, _gameRuleSet->getUnitTemplate(1)));
+			std::shared_ptr<Unit> infantry3 = std::make_shared<Unit>(new Unit(30, 155, _gameRuleSet->getUnitTemplate(1)));
+			std::shared_ptr<Terrain> fillTerrain = std::make_shared<Terrain>(new Terrain(0,0, _gameRuleSet->getTerrainTemplate(1)));
 			std::shared_ptr<GameMap> gameMap = std::make_shared<GameMap>(new GameMap(fillTerrain, 2700, 1980, _gameRuleSet));
 			gameMap->loadMap("skirmish_map");
 
-			std::vector<std::unique_ptr<Unit>> units;
+			std::vector<std::shared_ptr<Unit>> units;
 			units.push_back(infantry);
 			units.push_back(infantry2);
 			units.push_back(infantry3);

@@ -52,7 +52,7 @@ void GraphicsEngine::refreshScene(std::shared_ptr<GameMap> gameMap, unsigned int
 	SDL_RenderPresent(_gameRenderer.get());
 }
 
-void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
+void GraphicsEngine::refreshScene(std::vector<std::shared_ptr<Unit>> units, std::shared_ptr<GameMap> gameMap, unsigned int cameraX, unsigned int cameraY)
 {
 	_setCamera(cameraX, cameraY);
 	SDL_SetRenderDrawColor(_gameRenderer.get(), 0, 0, 0, 250);
@@ -65,7 +65,7 @@ void GraphicsEngine::refreshScene(std::vector<std::unique_ptr<Unit>> units, std:
 	SDL_RenderPresent(_gameRenderer.get());
 }
 
-void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
+void GraphicsEngine::_drawUnits(std::vector<std::shared_ptr<Unit>> units)
 {
 	for (auto const& unit : units)
 	{
@@ -79,7 +79,7 @@ void GraphicsEngine::_drawUnits(std::vector<std::unique_ptr<Unit>> units)
 
 void GraphicsEngine::_drawGameMap(std::shared_ptr<GameMap> gameMap)
 {
-	std::vector<std::unique_ptr<Terrain>> mapTerrain = gameMap -> getTerrain();
+	std::vector<std::shared_ptr<Terrain>> mapTerrain = gameMap -> getTerrain();
 	for (auto const& terrain : mapTerrain)
 	{
 		_drawGameObject(terrain.get());

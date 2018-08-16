@@ -25,13 +25,13 @@ RuleSetManager::RuleSetManager(bool useDefaultConfiguration)
 
 void RuleSetManager::setUnitFile(std::string fileName)
 {
-	std::unique_ptr<SerializationHelper<Unit>> serializationHelper = std::make_unique<SerializationHelper<Unit>>(new SerializationHelper<Unit>());
+	std::shared_ptr<SerializationHelper<Unit>> serializationHelper = std::make_shared<SerializationHelper<Unit>>(new SerializationHelper<Unit>());
 	_unitTemplates = serializationHelper->serializeToList(fileName, "units");
 }
 
 void RuleSetManager::setTerrainFile(std::string fileName)
 {
-	std::unique_ptr<SerializationHelper<Terrain>> serializationHelper = std::make_unique<SerializationHelper<Terrain>>(new SerializationHelper<Terrain>());
+	std::shared_ptr<SerializationHelper<Terrain>> serializationHelper = std::make_shared<SerializationHelper<Terrain>>(new SerializationHelper<Terrain>());
 	_terrainTemplates = serializationHelper->serializeToList(fileName, "terrain");
 }
 

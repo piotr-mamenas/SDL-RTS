@@ -20,7 +20,7 @@ public:
 	GameMapEditor(int defaultMapWidth, int defaultMapHeight, std::shared_ptr<RuleSetManager> ruleSet);
 	void loadMap(std::string mapName);
 	void saveMap();
-	void start(std::unique_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight);
+	void start(std::shared_ptr<GraphicsEngine> graphicsEngine, int screenWidth, int screenHeight);
 };
 
 #endif
